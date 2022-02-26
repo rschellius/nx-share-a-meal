@@ -1,0 +1,56 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/dashboard">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Movies</li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col">
+    <h1>Movies</h1>
+  </div>
+  <div class="col-auto">
+    <!--  -->
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="collapse.toggle()"
+      [attr.aria-expanded]="!filtersAreaIsCollapsed"
+      aria-controls="collapseExample"
+    >
+      <ng-container *ngIf="filtersAreaIsCollapsed">Show Filters</ng-container>
+      <ng-container *ngIf="!filtersAreaIsCollapsed">Hide Filters</ng-container>
+    </button>
+    <!--  -->
+  </div>
+</div>
+<!-- Collapsable filter options -->
+<div #collapse="ngbCollapse" [(ngbCollapse)]="filtersAreaIsCollapsed">
+  <div class="card">
+    <div class="card-body">
+      <app-filter></app-filter>
+    </div>
+  </div>
+</div>
+<!--  -->
+
+<div *ngIf="movies; then thenBlock; else elseBlock"></div>
+<ng-template #thenBlock>
+  <!-- Content to render when condition is true. -->
+  <div id="moviesgrid" class="row">
+    <div *ngFor="let movie of movies" class="col-md-4 col-sm-6 py-4">
+      <!-- Card -->
+      <app-movie-card
+        [movie]="movie"
+        (delete)="delete($event)"
+      ></app-movie-card>
+      <!-- Card end -->
+    </div>
+  </div>
+</ng-template>
+<ng-template #elseBlock>
+  <!-- Content to render when condition is false. -->
+  <div class="row">
+    <app-spinner></app-spinner>
+  </div>
+</ng-template>

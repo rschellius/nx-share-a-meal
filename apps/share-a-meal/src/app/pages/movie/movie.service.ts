@@ -1,0 +1,14 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { EntityService } from 'src/app/shared/common/entity.service';
+import { environment } from 'src/environments/environment';
+import { Movie } from './movie.model';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class MovieService extends EntityService<Movie> {
+  constructor(http: HttpClient) {
+    super(http, environment.SERVER_API_URL, 'movies');
+  }
+}

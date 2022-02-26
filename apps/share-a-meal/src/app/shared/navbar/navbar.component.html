@@ -1,0 +1,139 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div class="container">
+    <a
+      class="navbar-brand"
+      routerLink="/"
+      [routerLinkActive]="['active']"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >{{ title }}</a
+    >
+    <button
+      class="navbar-toggler hidden-sm-up"
+      type="button"
+      (click)="isNavbarCollapsed = !isNavbarCollapsed"
+      data-target="#navbarsDefault"
+      aria-controls="navbarsDefault"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      [ngbCollapse]="isNavbarCollapsed"
+      class="collapse navbar-collapse"
+      id="navbarsDefault"
+    >
+      <ul class="navbar-nav mr-auto">
+        <!-- Movies -->
+        <li class="nav-item dropdown">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-link" id="dropdownMenu1" ngbDropdownToggle>
+              Movies
+            </button>
+            <div
+              ngbDropdownMenu
+              class="dropdown-menu"
+              aria-labelledby="dropdownMenu1"
+            >
+              <button
+                class="dropdown-item"
+                routerLink="/movies"
+                [routerLinkActive]="['active']"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                Movies
+              </button>
+              <button
+                class="dropdown-item"
+                routerLink="/movies/new"
+                [disabled]="!(loggedInUser$ | async)"
+                [routerLinkActive]="['active']"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                Add a movie
+              </button>
+            </div>
+          </div>
+        </li>
+        <!-- Users -->
+        <li *ngIf="loggedInUser$ | async" class="nav-item dropdown">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-link" id="dropdownMenu1" ngbDropdownToggle>
+              Users
+            </button>
+            <div
+              ngbDropdownMenu
+              class="dropdown-menu"
+              aria-labelledby="dropdownMenu1"
+            >
+              <button
+                class="dropdown-item"
+                routerLink="/users"
+                [routerLinkActive]="['active']"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                Users
+              </button>
+            </div>
+          </div>
+        </li>
+        <!-- About -->
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/about"
+            [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >About</a
+          >
+        </li>
+      </ul>
+
+      <!-- If no user has logged in: -->
+      <ul *ngIf="!(loggedInUser$ | async)" class="navbar-nav">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/register"
+            [routerLinkActive]="['active']"
+            >Register</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/login"
+            [routerLinkActive]="['active']"
+            >Login</a
+          >
+        </li>
+      </ul>
+
+      <!-- If we have a logged in user: -->
+      <ul *ngIf="loggedInUser$ | async as user" class="navbar-nav">
+        <li class="nav-item">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-link" id="userFullName" ngbDropdownToggle>
+              {{ user.name.firstName }} {{ user.name.lastName }}
+            </button>
+            <div
+              ngbDropdownMenu
+              class="dropdown-menu"
+              aria-labelledby="userFullName"
+            >
+              <button
+                class="dropdown-item"
+                routerLink="/profile"
+                [routerLinkActive]="['active']"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                User Profile
+              </button>
+              <button class="dropdown-item" (click)="logout()">Logout</button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

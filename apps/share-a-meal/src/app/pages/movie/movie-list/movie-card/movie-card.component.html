@@ -1,0 +1,48 @@
+<div class="card mb-4 shadow-lg">
+  <div class="card-img-wrapper">
+    <img
+      src="assets/images/thonon.jpg"
+      class="card-img-top movie-card-img"
+      aria-label="Placeholder: Thumbnail"
+      alt=""
+    />
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <h5 id="movie-title" class="card-title">{{ movie?.name }}</h5>
+      </div>
+      <div class="col">
+        <span *ngIf="movie.inTheatres" class="badge bg-warning text-dark"
+          >Nu te zien!</span
+        >
+      </div>
+    </div>
+
+    <p class="card-text">
+      {{ movie?.studio?.name }} ({{ movie?.releaseYear }})<br />
+      Categorie: {{ movie?.ageCategory }} <br />
+    </p>
+    <p>
+      Van
+      <strong
+        >{{ movie?.user.name.firstName }}
+        {{ movie?.user.name.lastName }}</strong
+      >
+    </p>
+
+    <div class="row">
+      <div class="col-auto">
+        <button
+          type="button"
+          routerLink="{{ movie._id }}"
+          class="btn btn-sm btn-success"
+        >
+          Details
+        </button>
+      </div>
+    </div>
+
+    <div class="btn-group"></div>
+  </div>
+</div>

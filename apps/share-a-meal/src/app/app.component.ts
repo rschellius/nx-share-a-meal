@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Message } from '@nx-share-a-meal/api-interfaces';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'nx-share-a-meal-root',
+  selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
-  hello$ = this.http.get<Message>('/api/hello');
-  constructor(private http: HttpClient) {}
+export class AppComponent implements OnInit {
+  title = 'angular-demo';
+
+  constructor() {}
+
+  ngOnInit() {
+    console.log('AppComponent geladen');
+  }
 }

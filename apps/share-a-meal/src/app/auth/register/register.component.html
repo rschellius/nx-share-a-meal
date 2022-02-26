@@ -1,0 +1,148 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-10 col-md-8 col-lg-6 my-5">
+      <div class="card card-auth shadow-lg p-3 px-md-5 py-md-4">
+        <h2>Register</h2>
+        <form
+          class="form-signin"
+          [formGroup]="registerForm"
+          (ngSubmit)="onSubmit()"
+        >
+          <!--
+          firstName
+         -->
+          <div class="form-row">
+            <div class="col-5">
+              <label for="inputFirstName">Firstname</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="firstname"
+                placeholder="Firstname"
+                id="inputFirstName"
+                [ngClass]="{
+                  'is-invalid':
+                    registerForm.get('firstname')?.invalid &&
+                    registerForm.get('firstname')?.touched
+                }"
+              />
+              <span
+                *ngIf="
+                  !registerForm.get('firstname')?.valid &&
+                  registerForm.get('firstname')?.touched
+                "
+                class="invalid-feedback"
+              >
+                <p id="firstName-invalid">Name is invalid.</p>
+              </span>
+            </div>
+            <!--
+          lastName
+         -->
+            <div class="col">
+              <label for="inputLastName">Lastname</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Lastname"
+                formControlName="lastname"
+                id="inputLastName"
+                [ngClass]="{
+                  'is-invalid':
+                    registerForm.get('lastname')?.invalid &&
+                    registerForm.get('lastname')?.touched
+                }"
+              />
+              <span
+                *ngIf="
+                  !registerForm.get('lastname')?.valid &&
+                  registerForm.get('lastname')?.touched
+                "
+                class="invalid-feedback"
+              >
+                <p id="lastName-invalid">Lastname is invalid.</p>
+              </span>
+            </div>
+          </div>
+          <!--
+          email
+         -->
+          <div class="form-group">
+            <label for="inputEmail">Email address</label>
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Email address"
+              formControlName="email"
+              id="inputEmail"
+              aria-describedby="emailHelp"
+              [ngClass]="{
+                'is-invalid':
+                  registerForm.get('email')?.invalid &&
+                  registerForm.get('email')?.touched
+              }"
+            />
+            <small id="emailHelp" class="form-text text-muted"
+              >We'll never share your email with anyone else.</small
+            >
+            <span
+              *ngIf="
+                !registerForm.get('email')?.valid &&
+                registerForm.get('email')?.touched
+              "
+              class="invalid-feedback"
+            >
+              <p id="email-invalid">Email is invalid.</p>
+            </span>
+          </div>
+          <!--
+          password
+         -->
+          <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              formControlName="password"
+              id="inputPassword"
+              [ngClass]="{
+                'is-invalid':
+                  registerForm.get('password')?.invalid &&
+                  registerForm.get('password')?.touched
+              }"
+            />
+            <span
+              *ngIf="
+                !registerForm.get('password')?.valid &&
+                registerForm.get('password')?.touched
+              "
+              class="invalid-feedback"
+            >
+              <p id="password-invalid">Enter a valid password</p>
+            </span>
+          </div>
+
+          <div class="form-group">
+            <button
+              id="submitbutton"
+              class="btn btn-lg btn-primary btn-block"
+              type="submit"
+              [disabled]="!registerForm.valid"
+            >
+              Sign in
+            </button>
+          </div>
+
+          <p>
+            <a routerLink="/">Homepage</a> |
+            <a routerLink="/login">Login</a>
+          </p>
+
+          <div class="form-group">
+            <app-alert></app-alert>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
