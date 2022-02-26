@@ -1,16 +1,16 @@
-import { Entity } from 'src/app/shared/common/entity.model';
+import { Entity } from '../../shared/common/entity.model'
 
 export class User extends Entity {
   name!: {
-    firstName: string;
-    lastName: string;
-  };
-  emailAdress!: string;
-  token?: string;
+    firstName: string
+    lastName: string
+  }
+  emailAdress!: string
+  token?: string
 
   constructor(values: any = {}) {
-    super(values);
+    super(values)
     // Assign all values to this objects properties
-    Object.assign(this, values);
+    Object.assign(this, values)
   }
 }

@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { tap } from 'rxjs/operators';
-import { MoviefilterService } from './movie-filter.service';
+import { Component, OnInit } from '@angular/core'
+import { FormArray, FormControl, FormGroup } from '@angular/forms'
+import { tap } from 'rxjs/operators'
+import { MoviefilterService } from './movie-filter.service'
 
 export interface MovieFilters {
-  filterText: string;
-  inTheatres: boolean;
+  filterText: string
+  inTheatres: boolean
   ageCategory: {
-    all: boolean;
-    children: boolean;
-    adults: boolean;
-  };
+    all: boolean
+    children: boolean
+    adults: boolean
+  }
 }
 
 export const initialFilters: MovieFilters = {
@@ -19,16 +19,16 @@ export const initialFilters: MovieFilters = {
   ageCategory: {
     all: false,
     children: false,
-    adults: false,
-  },
-};
+    adults: false
+  }
+}
 
 @Component({
-  selector: 'app-filter',
-  templateUrl: './movie-filter.component.html',
+  selector: 'nx-share-a-meal-filter',
+  templateUrl: './movie-filter.component.html'
 })
 export class MovieFilterComponent implements OnInit {
-  filterForm!: FormGroup;
+  filterForm!: FormGroup
 
   // @Input() filter: any;
 
@@ -45,24 +45,24 @@ export class MovieFilterComponent implements OnInit {
       ageCategory: new FormGroup({
         all: new FormControl(undefined),
         children: new FormControl(undefined),
-        adults: new FormControl(undefined),
+        adults: new FormControl(undefined)
       }),
       ageCategories: new FormArray([]),
-      inTheatres: new FormControl(undefined),
-    });
+      inTheatres: new FormControl(undefined)
+    })
   }
 
   get ageCategories() {
-    return this.filterForm.controls['ageCategories'] as FormArray;
+    return this.filterForm.controls['ageCategories'] as FormArray
   }
 
   onAgeCategoriesChanged(event: any, value: string): void {
     if (event.srcElement.checked) {
-      console.log('Yes, gechecked');
-      this.ageCategories.push(new FormControl(value));
+      console.log('Yes, gechecked')
+      this.ageCategories.push(new FormControl(value))
     } else {
-      this.ageCategories.removeAt(this.ageCategories.value.indexOf(value));
-      console.log('Pop, er af');
+      this.ageCategories.removeAt(this.ageCategories.value.indexOf(value))
+      console.log('Pop, er af')
     }
   }
 
@@ -70,6 +70,6 @@ export class MovieFilterComponent implements OnInit {
     // 'Oude', hier minder geschikte manier met EventEmitter
     // this.filterValues.emit(this.filterForm.value);
 
-    this.movieFilterService.filterValues$.next(this.filterForm.value);
+    this.movieFilterService.filterValues$.next(this.filterForm.value)
   }
 }

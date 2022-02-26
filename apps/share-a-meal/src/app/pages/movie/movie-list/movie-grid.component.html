@@ -28,7 +28,7 @@
 <div #collapse="ngbCollapse" [(ngbCollapse)]="filtersAreaIsCollapsed">
   <div class="card">
     <div class="card-body">
-      <app-filter></app-filter>
+      <nx-share-a-meal-filter></nx-share-a-meal-filter>
     </div>
   </div>
 </div>
@@ -40,10 +40,10 @@
   <div id="moviesgrid" class="row">
     <div *ngFor="let movie of movies" class="col-md-4 col-sm-6 py-4">
       <!-- Card -->
-      <app-movie-card
+      <nx-share-a-meal-movie-card
         [movie]="movie"
         (delete)="delete($event)"
-      ></app-movie-card>
+      ></nx-share-a-meal-movie-card>
       <!-- Card end -->
     </div>
   </div>
@@ -51,6 +51,6 @@
 <ng-template #elseBlock>
   <!-- Content to render when condition is false. -->
   <div class="row">
-    <app-spinner></app-spinner>
+    <nx-share-a-meal-spinner></nx-share-a-meal-spinner>
   </div>
 </ng-template>

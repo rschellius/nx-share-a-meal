@@ -1,20 +1,20 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { Component, Directive, Input, HostListener } from '@angular/core';
-import { LayoutComponent } from './layout.component';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing'
+import { Component, Directive, Input, HostListener } from '@angular/core'
+import { LayoutComponent } from './layout.component'
 
 //
 // Since the component.component.html template uses some component selectors,
 // we need to stub these in the test.
 //
-@Component({ selector: 'app-footer', template: '' })
+@Component({ selector: 'nx-share-a-meal-footer', template: '' })
 class FooterStubComponent {}
 
-@Component({ selector: 'app-navbar', template: '' })
+@Component({ selector: 'nx-share-a-meal-navbar', template: '' })
 class NavbarStubComponent {
-  @Input() title!: string;
+  @Input() title!: string
 }
 
-@Component({ selector: 'app-alert', template: '' })
+@Component({ selector: 'nx-share-a-meal-alert', template: '' })
 class AlertStubComponent {}
 
 // tslint:disable-next-line: component-selector
@@ -23,15 +23,15 @@ class RouterOutletStubComponent {}
 
 @Directive({
   // tslint:disable-next-line: directive-selector
-  selector: '[routerLink]',
+  selector: '[routerLink]'
 })
 export class RouterLinkStubDirective {
-  @Input('routerLink') linkParams: any;
-  navigatedTo: any = null;
+  @Input('routerLink') linkParams: any
+  navigatedTo: any = null
 
   @HostListener('click')
   onClick(): void {
-    this.navigatedTo = this.linkParams;
+    this.navigatedTo = this.linkParams
   }
 }
 
@@ -39,8 +39,8 @@ export class RouterLinkStubDirective {
 // The test suite for LayoutComponent.
 //
 describe('LayoutComponent', () => {
-  let fixture: ComponentFixture<LayoutComponent>;
-  let component: LayoutComponent;
+  let fixture: ComponentFixture<LayoutComponent>
+  let component: LayoutComponent
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -50,25 +50,25 @@ describe('LayoutComponent', () => {
         FooterStubComponent,
         NavbarStubComponent,
         RouterOutletStubComponent,
-        RouterLinkStubDirective,
-      ],
-    }).compileComponents();
+        RouterLinkStubDirective
+      ]
+    }).compileComponents()
 
-    fixture = TestBed.createComponent(LayoutComponent);
-    component = fixture.componentInstance;
-  });
+    fixture = TestBed.createComponent(LayoutComponent)
+    component = fixture.componentInstance
+  })
 
   afterEach(() => {
-    fixture.destroy();
-  });
+    fixture.destroy()
+  })
 
   it('should create the component', () => {
-    fixture.detectChanges();
-    expect(component).toBeTruthy();
-  });
+    fixture.detectChanges()
+    expect(component).toBeTruthy()
+  })
 
   it(`should have as title 'Angular'`, () => {
-    fixture.detectChanges();
-    expect(component.apptitle).toEqual('Angular');
-  });
-});
+    fixture.detectChanges()
+    expect(component.apptitle).toEqual('Angular')
+  })
+})

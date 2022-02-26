@@ -6,7 +6,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/share-a-meal",
         "index": "apps/share-a-meal/src/index.html",
@@ -17,7 +19,10 @@
           "apps/share-a-meal/src/favicon.ico",
           "apps/share-a-meal/src/assets"
         ],
-        "styles": ["apps/share-a-meal/src/styles.css"],
+        "styles": [
+          "node_modules/bootstrap/dist/css/bootstrap.min.css",
+          "apps/share-a-meal/src/styles.css"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -85,7 +90,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/share-a-meal"],
+      "outputs": [
+        "coverage/apps/share-a-meal"
+      ],
       "options": {
         "jestConfig": "apps/share-a-meal/jest.config.js",
         "passWithNoTests": true

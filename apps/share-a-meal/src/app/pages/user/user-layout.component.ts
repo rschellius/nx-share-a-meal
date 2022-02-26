@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
 @Component({
-  selector: 'app-user-layout',
+  selector: 'nx-share-a-meal-user-layout',
   template: `
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -12,12 +12,12 @@ import { Component } from '@angular/core';
 
     <div class="row">
       <div class="col">
-        <app-user-list></app-user-list>
+        <nx-share-a-meal-user-list></nx-share-a-meal-user-list>
       </div>
       <div class="col">
         <router-outlet></router-outlet>
       </div>
     </div>
-  `,
+  `
 })
 export class UserLayoutComponent {}

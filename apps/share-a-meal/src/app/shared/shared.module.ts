@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { SpinnerComponent } from 'src/app/shared/spinner/spinner.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
-import { AlertComponent } from './alert/alert.component';
-import { ModalConfirmYesNoComponent } from './modal/modal.confirm-yes-no.component';
-import { ModalLeaveYesNoComponent } from './modal/modal.leave-yes-no.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { RouterModule } from '@angular/router'
+import { SpinnerComponent } from './spinner/spinner.component'
+import { NavbarComponent } from './navbar/navbar.component'
+import { FooterComponent } from './footer/footer.component'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { HttpClientModule } from '@angular/common/http'
+import { AlertComponent } from './alert/alert.component'
+import { ModalConfirmYesNoComponent } from './modal/modal.confirm-yes-no.component'
+import { ModalLeaveYesNoComponent } from './modal/modal.leave-yes-no.component'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SpinnerComponent,
     AlertComponent,
     ModalConfirmYesNoComponent,
-    ModalLeaveYesNoComponent,
+    ModalLeaveYesNoComponent
   ],
   imports: [
     CommonModule,
@@ -26,8 +26,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgbModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
-  exports: [SpinnerComponent, NavbarComponent, FooterComponent, AlertComponent],
+  exports: [SpinnerComponent, NavbarComponent, FooterComponent, AlertComponent]
 })
 export class SharedModule {}

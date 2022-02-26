@@ -75,8 +75,10 @@
           </p>
 
           <div class="form-group">
-            <app-spinner *ngIf="submitted"></app-spinner>
-            <app-alert></app-alert>
+            <nx-share-a-meal-spinner
+              *ngIf="submitted"
+            ></nx-share-a-meal-spinner>
+            <nx-share-a-meal-alert></nx-share-a-meal-alert>
           </div>
         </form>
       </div>

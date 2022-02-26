@@ -46,7 +46,7 @@
               <button
                 class="dropdown-item"
                 routerLink="/movies/new"
-                [disabled]="!(loggedInUser$ | async)"
+                [disabled]="(loggedInUser$ | async) === undefined"
                 [routerLinkActive]="['active']"
                 [routerLinkActiveOptions]="{ exact: true }"
               >
@@ -90,7 +90,7 @@
       </ul>
 
       <!-- If no user has logged in: -->
-      <ul *ngIf="!(loggedInUser$ | async)" class="navbar-nav">
+      <ul *ngIf="(loggedInUser$ | async) === undefined" class="navbar-nav">
         <li class="nav-item">
           <a
             class="nav-link"

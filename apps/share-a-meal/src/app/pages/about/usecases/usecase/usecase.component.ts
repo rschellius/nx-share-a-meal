@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { UseCase } from '../../usecase.model';
+import { Component, OnInit, Input } from '@angular/core'
+import { UseCase } from '../../usecase.model'
 
 @Component({
-  selector: 'app-usecase',
+  selector: 'nx-share-a-meal-usecase',
   template: `
     <table class="table table-sm table-bordered">
       <tbody>
@@ -38,14 +38,14 @@ import { UseCase } from '../../usecase.model';
         </tr>
       </tbody>
     </table>
-  `,
+  `
 })
 export class UsecaseComponent implements OnInit {
-  @Input() useCase!: UseCase;
+  @Input() useCase!: UseCase
 
   constructor() {}
 
   ngOnInit(): void {
-    console.log('UsecaseComponent onInit');
+    console.log('UsecaseComponent onInit')
   }
 }

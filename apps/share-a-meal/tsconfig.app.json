@@ -2,7 +2,9 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "types": [],
+    "types": ["node"],
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "target": "ES2017"
   },
   "files": ["src/main.ts", "src/polyfills.ts"],

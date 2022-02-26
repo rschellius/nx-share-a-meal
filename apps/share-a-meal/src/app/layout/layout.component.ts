@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
 @Component({
-  selector: 'app-layout',
+  selector: 'nx-share-a-meal-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.css'],
+  styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent {
-  apptitle = 'Angular';
+  apptitle = 'Angular'
 }

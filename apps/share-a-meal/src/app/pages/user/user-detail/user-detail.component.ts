@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { User } from '../user.model';
-import { UserService } from '../user.service';
-import { switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core'
+import { ActivatedRoute, ParamMap } from '@angular/router'
+import { User } from '../user.model'
+import { UserService } from '../user.service'
+import { switchMap } from 'rxjs/operators'
+import { Observable } from 'rxjs'
 
 @Component({
-  selector: 'app-user-detail',
+  selector: 'nx-share-a-meal-user-detail',
   templateUrl: './user-detail.component.html',
-  styleUrls: ['./user-detail.component.css'],
+  styleUrls: ['./user-detail.component.css']
 })
 export class UserDetailComponent implements OnInit {
-  user$!: Observable<User>;
+  user$!: Observable<User>
 
   constructor(
     private userService: UserService,
@@ -21,6 +21,6 @@ export class UserDetailComponent implements OnInit {
   ngOnInit(): void {
     this.user$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => this.userService.read(params.get('id')))
-    );
+    )
   }
 }

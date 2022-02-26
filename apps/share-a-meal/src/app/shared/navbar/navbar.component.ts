@@ -1,25 +1,25 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/auth/auth.service';
-import { User } from 'src/app/pages/user/user.model';
+import { Component, Input, OnInit } from '@angular/core'
+import { Observable } from 'rxjs'
+import { AuthService } from '../../auth/auth.service'
+import { User } from '../../pages/user/user.model'
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'nx-share-a-meal-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
+  styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  @Input() title!: string;
-  isNavbarCollapsed = true;
-  loggedInUser$!: Observable<User | undefined>;
+  @Input() title!: string
+  isNavbarCollapsed = true
+  loggedInUser$!: Observable<User | undefined>
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.loggedInUser$ = this.authService.currentUser$;
+    this.loggedInUser$ = this.authService.currentUser$
   }
 
   logout(): void {
-    this.authService.logout();
+    this.authService.logout()
   }
 }
