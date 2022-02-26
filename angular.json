@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "projects": {
+    "api": "apps/api",
+    "api-interfaces": "libs/api-interfaces",
+    "share-a-meal": "apps/share-a-meal",
+    "share-a-meal-e2e": "apps/share-a-meal-e2e"
+  }
+}
