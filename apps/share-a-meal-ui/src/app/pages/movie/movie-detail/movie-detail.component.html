@@ -39,7 +39,7 @@
   <div class="row">
     <div class="col-auto">
       <button
-        *ngIf="authService.userMayEdit(movie.user._id) | async"
+        *ngIf="authService.userMayEdit(movie.user.id) | async"
         routerLink="edit"
         type="button"
         class="btn btn-warning"
@@ -49,7 +49,7 @@
     </div>
     <div class="col-auto">
       <button
-        *ngIf="authService.userMayEdit(movie.user._id) | async"
+        *ngIf="authService.userMayEdit(movie.user.id) | async"
         type="button"
         class="btn btn-danger"
       >

@@ -28,7 +28,7 @@ export class MovieEditComponent implements OnInit, OnDestroy {
   movie!: Movie
   ageCategory!: AgeCategory
   studios!: Studio[] | null
-  user_id!: string | undefined
+  userid!: number | undefined
   httpOptions: any
   debug = false
 
@@ -71,7 +71,7 @@ export class MovieEditComponent implements OnInit, OnDestroy {
           // De selectbox heeft echter alleen een id nodig. Via deze map pas ik dat aan.
           return {
             ...movie,
-            studio: movie?.studio?._id
+            studio: movie?.studio?.id
           }
         })
       )
@@ -89,7 +89,7 @@ export class MovieEditComponent implements OnInit, OnDestroy {
     this.subscriptionOptions = this.authService.currentUser$.subscribe(
       (user: User | undefined) => {
         if (user) {
-          this.user_id = user._id
+          this.userid = user.id
           this.httpOptions = {
             headers: new HttpHeaders({
               'Content-Type': 'application/json',
@@ -123,7 +123,7 @@ export class MovieEditComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     console.log('onSubmit', this.movie)
 
-    if (this.movie._id) {
+    if (this.movie.id) {
       // A movie with id must have been saved before, so it must be an update.
       console.log('update movie')
       this.movieService
@@ -144,7 +144,7 @@ export class MovieEditComponent implements OnInit, OnDestroy {
     } else {
       // A movie without id has not been saved to the database before.
       console.log('create movie')
-      this.movie.user = this.user_id?.toString()
+      this.movie.user = this.userid?.toString()
       this.movieService
         .create(this.movie, this.httpOptions)
         .pipe(

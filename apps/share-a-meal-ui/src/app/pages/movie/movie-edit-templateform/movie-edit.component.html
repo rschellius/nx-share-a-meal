@@ -7,10 +7,10 @@
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="/dashboard">Home</a></li>
       <li class="breadcrumb-item"><a routerLink="/movies">Movies</a></li>
-      <li *ngIf="movie._id" class="breadcrumb-item active" aria-current="page">
+      <li *ngIf="movie.id" class="breadcrumb-item active" aria-current="page">
         {{ movie.name }}
       </li>
-      <li *ngIf="!movie._id" class="breadcrumb-item active" aria-current="page">
+      <li *ngIf="!movie.id" class="breadcrumb-item active" aria-current="page">
         New
       </li>
     </ol>
@@ -86,7 +86,7 @@
               </ng-container>
               <!--  -->
               <ng-container *ngFor="let studio of studios">
-                <option [value]="studio._id">
+                <option [value]="studio.id">
                   {{ studio.name }}
                 </option>
               </ng-container>

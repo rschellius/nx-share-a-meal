@@ -11,9 +11,9 @@
   </thead>
   <tbody>
     <tr *ngFor="let movie of movies$ | async">
-      <th scope="row">{{ movie._id }}</th>
+      <th scope="row">{{ movie.id }}</th>
       <td>
-        <a routerLink="{{ movie._id }}">{{ movie.name }}</a>
+        <a routerLink="{{ movie.id }}">{{ movie.name }}</a>
       </td>
       <td>{{ movie.releaseyear }}</td>
       <td>{{ movie.studio }}</td>

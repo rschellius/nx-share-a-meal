@@ -23,7 +23,7 @@
       class="collapse navbar-collapse"
       id="navbarsDefault"
     >
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <!-- Movies -->
         <li class="nav-item dropdown">
           <div ngbDropdown class="d-inline-block">
@@ -114,7 +114,7 @@
         <li class="nav-item">
           <div ngbDropdown class="d-inline-block">
             <button class="btn btn-link" id="userFullName" ngbDropdownToggle>
-              {{ user.name.firstName }} {{ user.name.lastName }}
+              {{ user.firstName }} {{ user.lastName }}
             </button>
             <div
               ngbDropdownMenu

@@ -1,12 +1,7 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'samui-user-edit',
-  templateUrl: './user-edit.component.html',
-  styleUrls: ['./user-edit.component.css']
+  templateUrl: './user-edit.component.html'
 })
-export class UserEditComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class UserEditComponent {}

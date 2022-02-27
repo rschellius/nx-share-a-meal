@@ -12,8 +12,8 @@
     <tr *ngFor="let user of users$ | async; let i = index">
       <th scope="row">{{ i }}</th>
       <td>
-        <a routerLink="{{ user._id }}">
-          {{ user.name.firstName }} {{ user.name.lastName }}
+        <a routerLink="{{ user.id }}">
+          {{ user.firstName }} {{ user.lastName }}
         </a>
       </td>
       <td>{{ user.emailAdress }}</td>

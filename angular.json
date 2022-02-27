@@ -148,7 +148,10 @@
               "apps/share-a-meal-ui/src/favicon.ico",
               "apps/share-a-meal-ui/src/assets"
             ],
-            "styles": ["apps/share-a-meal-ui/src/styles.css"],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "apps/share-a-meal-ui/src/styles.css"
+            ],
             "scripts": []
           },
           "configurations": {

@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { LoggedInAuthGuard, SaveEditedWorkGuard } from './auth/auth.guards'
 import { CommonModule } from '@angular/common'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { httpInterceptorProviders } from './auth/auth.interceptor'
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
     SharedModule,
     NgbModule
   ],
-  providers: [LoggedInAuthGuard, SaveEditedWorkGuard],
+  providers: [LoggedInAuthGuard, SaveEditedWorkGuard, httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -9,6 +9,6 @@ import { User } from './user.model'
 })
 export class UserService extends EntityService<User> {
   constructor(http: HttpClient) {
-    super(http, environment.SERVER_API_URL, 'users')
+    super(http, environment.SERVER_API_URL, 'user')
   }
 }

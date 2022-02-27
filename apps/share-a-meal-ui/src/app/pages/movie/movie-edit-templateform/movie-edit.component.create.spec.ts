@@ -30,13 +30,13 @@ export class RouterLinkStubDirective {
 
 // Global mock objects
 const expectedUserData: User = {
-  _id: '619bdb5e3b174a700c923de8',
+  id: '619bdb5e3b174a700c923de8',
   name: { firstName: 'Firstname', lastName: 'Lastname' },
   emailAdress: 'user@host.com',
   token: 'valid.jwt.token'
 }
 
-const studios: Studio[] = [{ _id: '1', name: 'Paramount', userid: 1 }]
+const studios: Studio[] = [{ id: '1', name: 'Paramount', userid: 1 }]
 
 /**
  *

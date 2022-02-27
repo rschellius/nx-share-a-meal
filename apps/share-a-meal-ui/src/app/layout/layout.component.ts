@@ -5,5 +5,5 @@ import { Component, OnInit } from '@angular/core'
   templateUrl: './layout.component.html'
 })
 export class LayoutComponent {
-  apptitle = 'Angular'
+  apptitle = 'Share-a-Meal'
 }
