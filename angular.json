@@ -5,8 +5,226 @@
     "api-interfaces": "libs/api-interfaces",
     "dao": "libs/dao",
     "feature": "libs/feature",
+    "movies-ui": {
+      "projectType": "application",
+      "root": "apps/movies-ui",
+      "sourceRoot": "apps/movies-ui/src",
+      "prefix": "nx-share-a-meal",
+      "targets": {
+        "build": {
+          "executor": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/movies-ui",
+            "index": "apps/movies-ui/src/index.html",
+            "main": "apps/movies-ui/src/main.ts",
+            "polyfills": "apps/movies-ui/src/polyfills.ts",
+            "tsConfig": "apps/movies-ui/tsconfig.app.json",
+            "assets": [
+              "apps/movies-ui/src/favicon.ico",
+              "apps/movies-ui/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "apps/movies-ui/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/movies-ui/src/environments/environment.ts",
+                  "with": "apps/movies-ui/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "executor": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "movies-ui:build:production"
+            },
+            "development": {
+              "browserTarget": "movies-ui:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "executor": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "movies-ui:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/movies-ui/src/**/*.ts",
+              "apps/movies-ui/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/movies-ui"],
+          "options": {
+            "jestConfig": "apps/movies-ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "movies-ui-e2e": {
+      "root": "apps/movies-ui-e2e",
+      "sourceRoot": "apps/movies-ui-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/movies-ui-e2e/cypress.json",
+            "devServerTarget": "movies-ui:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "movies-ui:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/movies-ui-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["movies-ui"]
+    },
     "share-a-meal": "apps/share-a-meal",
     "share-a-meal-e2e": "apps/share-a-meal-e2e",
+    "share-a-meal-ui": {
+      "projectType": "application",
+      "root": "apps/share-a-meal-ui",
+      "sourceRoot": "apps/share-a-meal-ui/src",
+      "prefix": "nx-share-a-meal",
+      "targets": {
+        "build": {
+          "executor": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/share-a-meal-ui",
+            "index": "apps/share-a-meal-ui/src/index.html",
+            "main": "apps/share-a-meal-ui/src/main.ts",
+            "polyfills": "apps/share-a-meal-ui/src/polyfills.ts",
+            "tsConfig": "apps/share-a-meal-ui/tsconfig.app.json",
+            "assets": [
+              "apps/share-a-meal-ui/src/favicon.ico",
+              "apps/share-a-meal-ui/src/assets"
+            ],
+            "styles": ["apps/share-a-meal-ui/src/styles.css"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/share-a-meal-ui/src/environments/environment.ts",
+                  "with": "apps/share-a-meal-ui/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "executor": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "share-a-meal-ui:build:production"
+            },
+            "development": {
+              "browserTarget": "share-a-meal-ui:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "executor": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "share-a-meal-ui:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/share-a-meal-ui/src/**/*.ts",
+              "apps/share-a-meal-ui/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/share-a-meal-ui"],
+          "options": {
+            "jestConfig": "apps/share-a-meal-ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "share-a-meal-ui-e2e": "apps/share-a-meal-ui-e2e",
     "ui": "libs/ui",
     "util": "libs/util"
   }

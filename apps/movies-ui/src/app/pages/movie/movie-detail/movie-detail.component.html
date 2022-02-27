@@ -1,0 +1,60 @@
+<div *ngIf="!(movie$ | async)">
+  <movies-ui-spinner></movies-ui-spinner>
+</div>
+
+<div *ngIf="movie$ | async as movie">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/dashboard">Home</a></li>
+      <li class="breadcrumb-item"><a routerLink="/movies">Movies</a></li>
+      <li class="breadcrumb-item active" aria-current="page">
+        {{ movie.name }}
+      </li>
+    </ol>
+  </nav>
+
+  <div class="row">
+    <div class="col-auto mr-auto">
+      <h1>{{ movie.name }}</h1>
+      <p>{{ movie.studio?.name }}, {{ movie.releaseYear }}</p>
+      <p>
+        Categorie: {{ movie.ageCategory }} <br />
+        <span *ngIf="movie.inTheatres">Nu in de bioscoop</span>
+      </p>
+      <p>
+        Aangemaakt door {{ movie.user?.name?.firstName }}
+        {{ movie.user?.name?.lastName }}
+      </p>
+    </div>
+    <div class="col-5 mr-auto">
+      <img
+        src="assets/images/thonon.jpg"
+        class="card-img-top movie-card-img"
+        aria-label="Placeholder: Thumbnail"
+        alt=""
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-auto">
+      <button
+        *ngIf="authService.userMayEdit(movie.user._id) | async"
+        routerLink="edit"
+        type="button"
+        class="btn btn-warning"
+      >
+        Edit
+      </button>
+    </div>
+    <div class="col-auto">
+      <button
+        *ngIf="authService.userMayEdit(movie.user._id) | async"
+        type="button"
+        class="btn btn-danger"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+</div>

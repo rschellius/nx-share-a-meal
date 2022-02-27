@@ -1,0 +1,99 @@
+{
+  "projectType": "application",
+  "root": "apps/movies-ui",
+  "sourceRoot": "apps/movies-ui/src",
+  "prefix": "movies-ui",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/movies-ui",
+        "index": "apps/movies-ui/src/index.html",
+        "main": "apps/movies-ui/src/main.ts",
+        "polyfills": "apps/movies-ui/src/polyfills.ts",
+        "tsConfig": "apps/movies-ui/tsconfig.app.json",
+        "assets": [
+          "apps/movies-ui/src/favicon.ico",
+          "apps/movies-ui/src/assets"
+        ],
+        "styles": [
+          "node_modules/bootstrap/dist/css/bootstrap.min.css",
+          "apps/movies-ui/src/styles.css"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/movies-ui/src/environments/environment.ts",
+              "with": "apps/movies-ui/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "movies-ui:build:production"
+        },
+        "development": {
+          "browserTarget": "movies-ui:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/movies-ui/proxy.conf.json"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "movies-ui:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/movies-ui/src/**/*.ts",
+          "apps/movies-ui/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/movies-ui"],
+      "options": {
+        "jestConfig": "apps/movies-ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

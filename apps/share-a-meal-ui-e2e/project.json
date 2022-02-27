@@ -1,0 +1,28 @@
+{
+  "root": "apps/share-a-meal-ui-e2e",
+  "sourceRoot": "apps/share-a-meal-ui-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/share-a-meal-ui-e2e/cypress.json",
+        "devServerTarget": "share-a-meal-ui:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "share-a-meal-ui:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/share-a-meal-ui-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["share-a-meal-ui"]
+}
