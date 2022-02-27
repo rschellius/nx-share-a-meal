@@ -129,8 +129,6 @@
       "tags": [],
       "implicitDependencies": ["movies-ui"]
     },
-    "share-a-meal": "apps/share-a-meal",
-    "share-a-meal-e2e": "apps/share-a-meal-e2e",
     "share-a-meal-ui": {
       "projectType": "application",
       "root": "apps/share-a-meal-ui",

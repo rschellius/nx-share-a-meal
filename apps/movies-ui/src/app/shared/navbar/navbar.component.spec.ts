@@ -17,9 +17,9 @@ describe('NavbarComponent', () => {
       'AuthService',
       [
         /* 'login', 'register' */
-      ],
+      ]
       // Zie movie-edit.component.spec.ts voor gebruik van currentUser$ observable.
-      ['currentUser$']
+      // ['currentUser$']
     )
     await TestBed.configureTestingModule({
       declarations: [NavbarComponent],

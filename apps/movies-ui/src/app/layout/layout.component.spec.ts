@@ -1,4 +1,6 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing'
+/* eslint-disable @angular-eslint/directive-selector */
+/* eslint-disable @angular-eslint/component-selector */
+import { TestBed, ComponentFixture } from '@angular/core/testing'
 import { Component, Directive, Input, HostListener } from '@angular/core'
 import { LayoutComponent } from './layout.component'
 
@@ -17,12 +19,10 @@ class NavbarStubComponent {
 @Component({ selector: 'movies-ui-alert', template: '' })
 class AlertStubComponent {}
 
-// tslint:disable-next-line: component-selector
 @Component({ selector: 'router-outlet', template: '' })
 class RouterOutletStubComponent {}
 
 @Directive({
-  // tslint:disable-next-line: directive-selector
   selector: '[routerLink]'
 })
 export class RouterLinkStubDirective {

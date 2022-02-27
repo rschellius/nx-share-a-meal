@@ -150,7 +150,7 @@ describe('MovieEditComponent', () => {
     fixture
       .whenStable()
       .then(() => {
-        let sub: Subscription = authServiceSpy.currentUser$.subscribe(
+        const sub: Subscription = authServiceSpy.currentUser$.subscribe(
           (user: User | null) => {
             expect(user?.token).toEqual(expectedUserData.token)
           }
