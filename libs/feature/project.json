@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/feature",
+  "sourceRoot": "libs/feature/src",
+  "prefix": "nx-share-a-meal",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/feature"],
+      "options": {
+        "jestConfig": "libs/feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/feature/src/**/*.ts",
+          "libs/feature/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

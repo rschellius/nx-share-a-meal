@@ -3,7 +3,11 @@
   "projects": {
     "api": "apps/api",
     "api-interfaces": "libs/api-interfaces",
+    "dao": "libs/dao",
+    "feature": "libs/feature",
     "share-a-meal": "apps/share-a-meal",
-    "share-a-meal-e2e": "apps/share-a-meal-e2e"
+    "share-a-meal-e2e": "apps/share-a-meal-e2e",
+    "ui": "libs/ui",
+    "util": "libs/util"
   }
 }
