@@ -12,6 +12,8 @@ export class CreateUserDto implements IUser {
   @IsNotEmpty()
   readonly password: string
 
+  token: string
+
   @IsNotEmpty()
   @IsEmail()
   readonly emailAdress: string

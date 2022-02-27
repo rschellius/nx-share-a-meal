@@ -47,6 +47,8 @@ export class User implements IUser {
   })
   isActive: boolean
 
+  token: string
+
   @ApiProperty({
     example: 'j.doe@server.com',
     description: 'The emailAdress of the user'

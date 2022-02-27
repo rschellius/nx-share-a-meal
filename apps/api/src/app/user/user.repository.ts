@@ -4,7 +4,7 @@ import { CreateUserDto } from './user.dto'
 import { HttpException, HttpStatus, Logger } from '@nestjs/common'
 
 @EntityRepository(User)
-export class UserRepository extends Repository<IUser> {
+export class UserRepository extends Repository<User> {
   // Logging
   private readonly logger = new Logger(UserRepository.name)
 
@@ -13,12 +13,12 @@ export class UserRepository extends Repository<IUser> {
     return await this.find({ relations: ['user'] })
   }
 
-  // public async findById(id: number): Promise<IUser> {
+  // public async findById(id: number): Promise<User> {
   //   this.logger.log('findById id=' + id)
   //   return await this.findOne(id)
   // }
 
-  public createUser(createUserDto: CreateUserDto): Promise<IUser> {
+  public createUser(createUserDto: CreateUserDto): Promise<User> {
     return this.findOne({ emailAdress: createUserDto.emailAdress }).then(
       (user) => {
         if (user) {
@@ -44,7 +44,7 @@ export class UserRepository extends Repository<IUser> {
   // public async editUser(
   //   id: number,
   //   updateUserDto: UpdateUserDto
-  // ): Promise<IUser> {
+  // ): Promise<User> {
   //   this.logger.log('editUser id=' + id)
   //   let user = await this.findOne(id)
   //   user = { ...user, ...updateUserDto }

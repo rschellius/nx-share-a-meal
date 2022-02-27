@@ -13,11 +13,12 @@ describe('Users Controller', () => {
     password: 'secret',
     emailAdress: 'user@server.com',
     phoneNumber: '06-12345678',
+    roles: []
   }
 
   const mockUser = {
     ...createUserDto,
-    id: 1,
+    id: 1
   }
 
   beforeEach(async () => {
@@ -31,23 +32,23 @@ describe('Users Controller', () => {
               {
                 name: 'User #1',
                 breed: 'Bread #1',
-                age: 4,
+                age: 4
               },
               {
                 name: 'User #2',
                 breed: 'Breed #2',
-                age: 3,
+                age: 3
               },
               {
                 name: 'User #3',
                 breed: 'Breed #3',
-                age: 2,
-              },
+                age: 2
+              }
             ]),
-            create: jest.fn().mockResolvedValue(createUserDto),
-          },
-        },
-      ],
+            create: jest.fn().mockResolvedValue(createUserDto)
+          }
+        }
+      ]
     }).compile()
 
     controller = module.get<UserController>(UserController)
@@ -70,18 +71,18 @@ describe('Users Controller', () => {
         {
           name: 'User #1',
           breed: 'Bread #1',
-          age: 4,
+          age: 4
         },
         {
           name: 'User #2',
           breed: 'Breed #2',
-          age: 3,
+          age: 3
         },
         {
           name: 'User #3',
           breed: 'Breed #3',
-          age: 2,
-        },
+          age: 2
+        }
       ])
       expect(service.findAll).toHaveBeenCalled()
     })
