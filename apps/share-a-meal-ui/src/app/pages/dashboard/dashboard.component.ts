@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { environment } from '../../../environments/environment'
 
 @Component({
-  selector: 'nx-share-a-meal-dashboard',
+  selector: 'samui-dashboard',
   templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {

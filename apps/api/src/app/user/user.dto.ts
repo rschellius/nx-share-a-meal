@@ -1,7 +1,8 @@
 import { PartialType } from '@nestjs/mapped-types'
+import { IUser, UserRole } from '@nx-share-a-meal/api-interfaces'
 import { IsEmail, IsNotEmpty } from 'class-validator'
 
-export class CreateUserDto {
+export class CreateUserDto implements IUser {
   @IsNotEmpty()
   readonly firstName: string
 
@@ -20,6 +21,9 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   readonly isActive: boolean
+
+  @IsNotEmpty()
+  readonly roles: UserRole[]
 }
 
 // To create a type with the same fields, but with each one optional

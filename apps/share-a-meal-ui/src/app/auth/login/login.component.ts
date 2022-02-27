@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs'
 import { User } from '../../pages/user/user.model'
 
 @Component({
-  selector: 'nx-share-a-meal-login',
+  selector: 'samui-login',
   templateUrl: './login.component.html',
   styleUrls: ['../auth.css']
 })

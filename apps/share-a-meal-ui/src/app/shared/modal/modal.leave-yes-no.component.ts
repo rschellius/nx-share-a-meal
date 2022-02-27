@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
-  selector: 'nx-share-a-meal-modal-leave-yes-no',
+  selector: 'samui-modal-leave-yes-no',
   template: `
     <div class="modal-header">
       <h4 class="modal-title" id="modal-title">Confirmation</h4>

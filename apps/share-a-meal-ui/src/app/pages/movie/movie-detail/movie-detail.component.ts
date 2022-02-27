@@ -7,7 +7,7 @@ import { Movie } from '../movie.model'
 import { MovieService } from '../movie.service'
 
 @Component({
-  selector: 'nx-share-a-meal-movie-detail',
+  selector: 'samui-movie-detail',
   templateUrl: './movie-detail.component.html'
 })
 export class MovieDetailComponent implements OnInit {

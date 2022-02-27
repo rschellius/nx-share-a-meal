@@ -6,15 +6,15 @@ import { LayoutComponent } from './layout.component'
 // Since the component.component.html template uses some component selectors,
 // we need to stub these in the test.
 //
-@Component({ selector: 'nx-share-a-meal-footer', template: '' })
+@Component({ selector: 'samui-footer', template: '' })
 class FooterStubComponent {}
 
-@Component({ selector: 'nx-share-a-meal-navbar', template: '' })
+@Component({ selector: 'samui-navbar', template: '' })
 class NavbarStubComponent {
   @Input() title!: string
 }
 
-@Component({ selector: 'nx-share-a-meal-alert', template: '' })
+@Component({ selector: 'samui-alert', template: '' })
 class AlertStubComponent {}
 
 // tslint:disable-next-line: component-selector

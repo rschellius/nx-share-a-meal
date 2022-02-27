@@ -4,7 +4,7 @@ import { Component } from '@angular/core'
  * Zie https://loading.io/css/
  */
 @Component({
-  selector: 'nx-share-a-meal-spinner',
+  selector: 'samui-spinner',
   template: `
     <div class="lds-ellipsis">
       <div></div>

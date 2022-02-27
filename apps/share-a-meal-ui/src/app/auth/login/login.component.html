@@ -75,10 +75,8 @@
           </p>
 
           <div class="form-group">
-            <nx-share-a-meal-spinner
-              *ngIf="submitted"
-            ></nx-share-a-meal-spinner>
-            <nx-share-a-meal-alert></nx-share-a-meal-alert>
+            <samui-spinner *ngIf="submitted"></samui-spinner>
+            <samui-alert></samui-alert>
           </div>
         </form>
       </div>

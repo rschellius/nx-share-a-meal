@@ -24,7 +24,7 @@ export const initialFilters: MovieFilters = {
 }
 
 @Component({
-  selector: 'nx-share-a-meal-filter',
+  selector: 'samui-filter',
   templateUrl: './movie-filter.component.html'
 })
 export class MovieFilterComponent implements OnInit {

@@ -6,7 +6,7 @@ import { switchMap } from 'rxjs/operators'
 import { Observable } from 'rxjs'
 
 @Component({
-  selector: 'nx-share-a-meal-user-detail',
+  selector: 'samui-user-detail',
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.css']
 })

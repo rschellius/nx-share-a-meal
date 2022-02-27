@@ -4,7 +4,7 @@ import { AuthService } from '../../auth/auth.service'
 import { User } from '../../pages/user/user.model'
 
 @Component({
-  selector: 'nx-share-a-meal-navbar',
+  selector: 'samui-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })

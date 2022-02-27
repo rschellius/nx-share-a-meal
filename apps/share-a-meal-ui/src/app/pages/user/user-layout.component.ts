@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 
 @Component({
-  selector: 'nx-share-a-meal-user-layout',
+  selector: 'samui-user-layout',
   template: `
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -12,7 +12,7 @@ import { Component } from '@angular/core'
 
     <div class="row">
       <div class="col">
-        <nx-share-a-meal-user-list></nx-share-a-meal-user-list>
+        <samui-user-list></samui-user-list>
       </div>
       <div class="col">
         <router-outlet></router-outlet>

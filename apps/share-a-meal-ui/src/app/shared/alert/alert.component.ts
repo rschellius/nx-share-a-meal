@@ -3,7 +3,7 @@ import { AlertService, Alert } from './alert.service'
 import { Subscription } from 'rxjs'
 
 @Component({
-  selector: 'nx-share-a-meal-alert',
+  selector: 'samui-alert',
   templateUrl: './alert.component.html'
 })
 export class AlertComponent implements OnInit, OnDestroy {

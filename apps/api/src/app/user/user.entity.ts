@@ -3,20 +3,14 @@ import { Exclude, instanceToPlain } from 'class-transformer'
 import { IsEmail } from 'class-validator'
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
 import { Meal } from '../meal/meal.entity'
-
-export enum UserRole {
-  ADMIN = 'admin',
-  EDITOR = 'editor',
-  GUEST = 'guest'
-}
+import { IUser, UserRole } from '@nx-share-a-meal/api-interfaces'
 
 @Entity()
-// @Unique(['emailAdress'])
 /**
  * https://stackoverflow.com/a/59140504
  * export class User extends BaseAbstractEntity implements IUser {
  */
-export class User {
+export class User implements IUser {
   @ApiProperty({
     example: 0,
     description: 'The database ID of the user'

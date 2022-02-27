@@ -5,7 +5,7 @@ import { Router } from '@angular/router'
 import { Subscription } from 'rxjs'
 
 @Component({
-  selector: 'nx-share-a-meal-register',
+  selector: 'samui-register',
   templateUrl: './register.component.html',
   styleUrls: ['../auth.css']
 })

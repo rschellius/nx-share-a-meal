@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { LayoutComponent } from './layout/layout.component';
-import { UsecasesComponent } from './pages/about/usecases/usecases.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { NgModule } from '@angular/core'
+import { Routes, RouterModule } from '@angular/router'
+import { LoginComponent } from './auth/login/login.component'
+import { RegisterComponent } from './auth/register/register.component'
+import { LayoutComponent } from './layout/layout.component'
+import { AboutComponent } from './pages/about/about.component'
+import { DashboardComponent } from './pages/dashboard/dashboard.component'
 
 const routes: Routes = [
   {
@@ -13,7 +13,7 @@ const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
       { path: 'dashboard', pathMatch: 'full', component: DashboardComponent },
-      { path: 'about', pathMatch: 'full', component: UsecasesComponent },
+      { path: 'about', pathMatch: 'full', component: AboutComponent },
       {
         path: 'users',
         loadChildren: () =>
@@ -22,9 +22,9 @@ const routes: Routes = [
           ).then(
             (m) => m.UserModule,
             () => {
-              throw { loadChunkError: true };
+              throw { loadChunkError: true }
             }
-          ),
+          )
       },
       {
         path: 'movies',
@@ -34,19 +34,19 @@ const routes: Routes = [
           ).then(
             (m) => m.MovieModule,
             () => {
-              throw { loadChunkError: true };
+              throw { loadChunkError: true }
             }
-          ),
-      },
-    ],
+          )
+      }
+    ]
   },
   { path: 'login', pathMatch: 'full', component: LoginComponent },
   { path: 'register', pathMatch: 'full', component: RegisterComponent },
-  { path: '**', pathMatch: 'full', redirectTo: 'dashboard' },
-];
+  { path: '**', pathMatch: 'full', redirectTo: 'dashboard' }
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

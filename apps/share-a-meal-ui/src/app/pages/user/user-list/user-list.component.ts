@@ -4,7 +4,7 @@ import { User } from '../user.model'
 import { UserService } from '../user.service'
 
 @Component({
-  selector: 'nx-share-a-meal-user-list',
+  selector: 'samui-user-list',
   templateUrl: './user-list.component.html'
 })
 export class UserListComponent implements OnInit {

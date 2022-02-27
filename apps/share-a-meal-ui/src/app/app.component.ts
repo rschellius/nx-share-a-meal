@@ -1,10 +1,11 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 
 @Component({
-  selector: 'nx-share-a-meal-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'samui-root',
+  templateUrl: './app.component.html'
 })
-export class AppComponent {
-  title = 'share-a-meal-ui'
+export class AppComponent implements OnInit {
+  ngOnInit() {
+    console.log('AppComponent geladen')
+  }
 }

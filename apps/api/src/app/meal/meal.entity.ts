@@ -10,15 +10,10 @@ import {
   UpdateDateColumn
 } from 'typeorm'
 import { User } from '../user/user.entity'
-
-export enum Allergenes {
-  GLUTEN = 'gluten',
-  LACTOSE = 'lactose',
-  NUTS = 'noten'
-}
+import { IMeal, Allergenes } from '@nx-share-a-meal/api-interfaces'
 
 @Entity()
-export class Meal {
+export class Meal implements IMeal {
   @ApiProperty({
     example: 0,
     description: 'The database ID of the meal'

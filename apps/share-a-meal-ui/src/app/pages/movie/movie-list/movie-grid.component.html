@@ -28,7 +28,7 @@
 <div #collapse="ngbCollapse" [(ngbCollapse)]="filtersAreaIsCollapsed">
   <div class="card">
     <div class="card-body">
-      <nx-share-a-meal-filter></nx-share-a-meal-filter>
+      <samui-filter></samui-filter>
     </div>
   </div>
 </div>
@@ -40,10 +40,10 @@
   <div id="moviesgrid" class="row">
     <div *ngFor="let movie of movies" class="col-md-4 col-sm-6 py-4">
       <!-- Card -->
-      <nx-share-a-meal-movie-card
+      <samui-movie-card
         [movie]="movie"
         (delete)="delete($event)"
-      ></nx-share-a-meal-movie-card>
+      ></samui-movie-card>
       <!-- Card end -->
     </div>
   </div>
@@ -51,6 +51,6 @@
 <ng-template #elseBlock>
   <!-- Content to render when condition is false. -->
   <div class="row">
-    <nx-share-a-meal-spinner></nx-share-a-meal-spinner>
+    <samui-spinner></samui-spinner>
   </div>
 </ng-template>

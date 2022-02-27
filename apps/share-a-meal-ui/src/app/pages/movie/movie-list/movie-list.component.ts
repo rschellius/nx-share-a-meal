@@ -22,7 +22,7 @@ import { Movie } from '../movie.model'
 import { MovieService } from '../movie.service'
 
 @Component({
-  selector: 'nx-share-a-meal-movie-list',
+  selector: 'samui-movie-list',
   templateUrl: './movie-grid.component.html',
   styleUrls: ['./movie-list.component.css']
 })

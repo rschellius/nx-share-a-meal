@@ -12,7 +12,7 @@ import { User } from '../../user/user.model'
 import { Studio } from '../../studio/studio.model'
 import { FormsModule } from '@angular/forms'
 
-@Component({ selector: 'nx-share-a-meal-spinner', template: '' })
+@Component({ selector: 'samui-spinner', template: '' })
 class AppSpinnerStubComponent {}
 
 @Directive({

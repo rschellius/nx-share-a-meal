@@ -3,7 +3,7 @@ import { AuthService } from '../../../../auth/auth.service'
 import { Movie } from '../../movie.model'
 
 @Component({
-  selector: 'nx-share-a-meal-movie-card',
+  selector: 'samui-movie-card',
   templateUrl: './movie-card.component.html'
 })
 export class MovieCardComponent {

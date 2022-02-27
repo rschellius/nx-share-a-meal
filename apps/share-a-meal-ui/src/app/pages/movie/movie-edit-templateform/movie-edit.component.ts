@@ -20,7 +20,7 @@ import { Studio } from '../../studio/studio.model'
 import { User } from '../../user/user.model'
 
 @Component({
-  selector: 'nx-share-a-meal-movie-edit',
+  selector: 'samui-movie-edit',
   templateUrl: './movie-edit.component.html'
 })
 export class MovieEditComponent implements OnInit, OnDestroy {

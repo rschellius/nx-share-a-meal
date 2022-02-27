@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 
 @Component({
-  selector: 'nx-share-a-meal-layout',
-  templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.css']
+  selector: 'samui-layout',
+  templateUrl: './layout.component.html'
 })
 export class LayoutComponent {
   apptitle = 'Angular'
