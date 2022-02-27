@@ -21,7 +21,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "nx-share-a-meal",
+            "prefix": "cswp",
             "style": "kebab-case"
           }
         ]

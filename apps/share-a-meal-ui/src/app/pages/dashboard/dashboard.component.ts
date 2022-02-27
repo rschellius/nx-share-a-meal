@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { environment } from '../../../environments/environment'
 
 @Component({
-  selector: 'samui-dashboard',
+  selector: 'cswp-dashboard',
   templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {

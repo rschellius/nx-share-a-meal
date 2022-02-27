@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs'
 import { User } from '../../pages/user/user.model'
 
 @Component({
-  selector: 'samui-login',
+  selector: 'cswp-login',
   templateUrl: './login.component.html',
   styleUrls: ['../auth.css']
 })
@@ -53,7 +53,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         .subscribe((user) => {
           if (user) {
             console.log('Logged in')
-            console.log(user)
             this.router.navigate(['/'])
           }
           this.submitted = false

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 
 @Component({
-  selector: 'samui-about-usecases',
+  selector: 'cswp-about-usecases',
   templateUrl: './about.component.html'
 })
 export class AboutComponent {}

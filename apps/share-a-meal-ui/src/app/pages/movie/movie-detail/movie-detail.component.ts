@@ -7,7 +7,7 @@ import { Movie } from '../movie.model'
 import { MovieService } from '../movie.service'
 
 @Component({
-  selector: 'samui-movie-detail',
+  selector: 'cswp-movie-detail',
   templateUrl: './movie-detail.component.html'
 })
 export class MovieDetailComponent implements OnInit {

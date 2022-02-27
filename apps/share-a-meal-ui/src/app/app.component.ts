@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 
 @Component({
-  selector: 'samui-root',
+  selector: 'cswp-root',
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {

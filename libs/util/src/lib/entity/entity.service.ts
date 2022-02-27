@@ -2,7 +2,7 @@ import { Entity } from './entity.model'
 import { Observable, throwError } from 'rxjs'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { map, catchError, tap, mergeMap, take } from 'rxjs/operators'
-import { Alert } from '../alert/alert.service'
+import { Alert } from '../../../../../apps/share-a-meal-ui/src/app/shared/alert/alert.service'
 
 /**
  * See https://angular.io/guide/http#requesting-data-from-a-server
@@ -66,7 +66,8 @@ export class EntityService<T extends Entity> {
     const endpoint = `${this.url}${this.endpoint}/${id}`
     console.log(`read ${endpoint}`)
     return this.http.get<T[]>(endpoint, { ...options, ...httpOptions }).pipe(
-      // tap(console.log),
+      tap(console.log),
+      map((response: any) => response.result),
       catchError(this.handleError)
     )
   }
@@ -80,7 +81,7 @@ export class EntityService<T extends Entity> {
     const endpoint = `${this.url}${this.endpoint}/${item.id}`
     console.log(`update ${endpoint}`)
     return this.http.put(endpoint, item, { ...options, ...httpOptions }).pipe(
-      // map((response: any) => response.result),
+      map((response: any) => response.result),
       catchError(this.handleError)
     )
   }

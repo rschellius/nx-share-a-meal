@@ -4,7 +4,7 @@ import { Component } from '@angular/core'
  * Zie https://loading.io/css/
  */
 @Component({
-  selector: 'samui-spinner',
+  selector: 'cswp-spinner',
   template: `
     <div class="lds-ellipsis">
       <div></div>

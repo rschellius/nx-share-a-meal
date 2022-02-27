@@ -4,7 +4,7 @@ import { AuthService } from '../../auth/auth.service'
 import { User } from '../../pages/user/user.model'
 
 @Component({
-  selector: 'samui-navbar',
+  selector: 'cswp-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })

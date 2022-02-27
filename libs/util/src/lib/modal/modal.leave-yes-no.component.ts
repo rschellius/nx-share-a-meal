@@ -2,16 +2,14 @@ import { Component, OnInit } from '@angular/core'
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
-  selector: 'samui-modal-confirm-yes-no',
+  selector: 'cswp-modal-leave-yes-no',
   template: `
     <div class="modal-header">
       <h4 class="modal-title" id="modal-title">Confirmation</h4>
     </div>
     <div class="modal-body">
-      <p>Are you sure you want to delete this item?</p>
-      <p>
-        <span class="text-danger">This operation can not be undone.</span>
-      </p>
+      <p>You have made edits on this page that were not saved.</p>
+      <p>Are you sure you want to leave this page?</p>
     </div>
     <div class="modal-footer">
       <button
@@ -31,8 +29,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
     </div>
   `
 })
-export class ModalConfirmYesNoComponent implements OnInit {
+export class ModalLeaveYesNoComponent {
   constructor(public modal: NgbActiveModal) {}
-
-  ngOnInit(): void {}
 }

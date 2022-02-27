@@ -1,0 +1,22 @@
+<h1>Users</h1>
+<p>The users in this system.</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users$ | async; let i = index">
+      <th scope="row">{{ i }}</th>
+      <td>
+        <a routerLink="{{ user.id }}">
+          {{ user.firstName }} {{ user.lastName }}
+        </a>
+      </td>
+      <td>{{ user.emailAdress }}</td>
+    </tr>
+  </tbody>
+</table>

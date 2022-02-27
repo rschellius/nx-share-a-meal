@@ -3,7 +3,7 @@ import { AlertService, Alert } from './alert.service'
 import { Subscription } from 'rxjs'
 
 @Component({
-  selector: 'samui-alert',
+  selector: 'cswp-alert',
   templateUrl: './alert.component.html'
 })
 export class AlertComponent implements OnInit, OnDestroy {

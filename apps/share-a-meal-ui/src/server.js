@@ -1,13 +1,13 @@
-const express = require("express");
-const path = require("path");
-const http = require("http");
-const compression = require("compression");
+const express = require('express')
+const path = require('path')
+const http = require('http')
+const compression = require('compression')
 
-const app = express();
+const app = express()
 
 // Compress static assets to enhance performance.
 // Decrease the download size of your app through gzip compression:
-app.use(compression());
+app.use(compression())
 
 //
 // appname is the name of the "defaultProject" value that was set in the angular.json file.
@@ -16,31 +16,46 @@ app.use(compression());
 //
 // Replace the name below to match your own "defaultProject" value!
 //
-const appname = "angular-demo";
+const appname = 'share-a-meal-ui'
 
 // Set express options
 const options = {
   setHeaders: (res, path, stat) => {
-    res.set("Content-Security-Policy", "default-src 'unsafe-inline';");
-  },
-};
+    res.set('Content-Security-Policy', "default-src 'unsafe-inline';")
+  }
+}
 
 // Point static path to dist
-app.use(express.static(path.join(__dirname, "..", "dist", appname)));
+app.use(
+  express.static(
+    path.join(__dirname, '..', '..', '..', 'dist', 'apps', appname)
+  )
+)
 
 // Catch all routes and return the index file
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "dist", appname, "index.html"));
-});
+app.get('*', (req, res) => {
+  res.sendFile(
+    path.join(
+      __dirname,
+      '..',
+      '..',
+      '..',
+      'dist',
+      'apps',
+      appname,
+      'index.html'
+    )
+  )
+})
 
 // Get port from environment and store in Express.
-const port = process.env.PORT || "4200";
-app.set("port", port);
+const port = process.env.PORT || '4200'
+app.set('port', port)
 // Create HTTP server.
-const server = http.createServer(app);
+const server = http.createServer(app)
 // Listen on provided port, on all network interfaces.
 server.listen(port, () => {
   console.log(
-    `Angular app \'${appname}\' running in ${process.env.NODE_ENV} mode on port ${port}`
-  );
-});
+    `Angular app '${appname}' running in ${process.env.NODE_ENV} mode on port ${port}`
+  )
+})

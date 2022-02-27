@@ -15,11 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@nx-share-a-meal/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@nx-share-a-meal/dao": ["libs/dao/src/index.ts"],
-      "@nx-share-a-meal/feature": ["libs/feature/src/index.ts"],
-      "@nx-share-a-meal/ui": ["libs/ui/src/index.ts"],
-      "@nx-share-a-meal/util": ["libs/util/src/index.ts"]
+      "@cswp/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@cswp/auth": ["libs/auth/src/index.ts"],
+      "@cswp/dao": ["libs/dao/src/index.ts"],
+      "@cswp/feature": ["libs/feature/src/index.ts"],
+      "@cswp/ui": ["libs/ui/src/index.ts"],
+      "@cswp/util": ["libs/util/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

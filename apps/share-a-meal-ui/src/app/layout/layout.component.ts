@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 
 @Component({
-  selector: 'samui-layout',
+  selector: 'cswp-layout',
   templateUrl: './layout.component.html'
 })
 export class LayoutComponent {

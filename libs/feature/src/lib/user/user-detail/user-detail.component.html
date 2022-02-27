@@ -1,0 +1,5 @@
+<div *ngIf="user$ | async as user">
+  <!-- we hebben hier nu een user variable uit de user$ Observable gehaald. -->
+  <h1>{{ user.firstName }} {{ user.lastName }}</h1>
+  <p>Email: {{ user.emailAdress }}</p>
+</div>

@@ -22,7 +22,7 @@ import { Movie } from '../movie.model'
 import { MovieService } from '../movie.service'
 
 @Component({
-  selector: 'samui-movie-list',
+  selector: 'cswp-movie-list',
   templateUrl: './movie-grid.component.html',
   styleUrls: ['./movie-list.component.css']
 })

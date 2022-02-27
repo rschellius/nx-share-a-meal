@@ -24,7 +24,7 @@ export const initialFilters: MovieFilters = {
 }
 
 @Component({
-  selector: 'samui-filter',
+  selector: 'cswp-filter',
   templateUrl: './movie-filter.component.html'
 })
 export class MovieFilterComponent implements OnInit {

@@ -20,7 +20,7 @@ import { Studio } from '../../studio/studio.model'
 import { User } from '../../user/user.model'
 
 @Component({
-  selector: 'samui-movie-edit',
+  selector: 'cswp-movie-edit',
   templateUrl: './movie-edit.component.html'
 })
 export class MovieEditComponent implements OnInit, OnDestroy {
