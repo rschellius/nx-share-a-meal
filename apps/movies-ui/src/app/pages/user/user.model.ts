@@ -1,6 +1,6 @@
-import { Entity } from '../../shared/common/entity.model'
+import { IEntity } from '../../shared/common/entity.model'
 
-export class User extends Entity {
+export class User extends IEntity {
   name!: {
     firstName: string
     lastName: string

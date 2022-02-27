@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { EntityService } from '@nx-share-a-meal/util'
-import { environment } from '../../../environments/environment'
+import { EntityService } from '@cswp/entity'
 import { Movie } from './movie.model'
 
 @Injectable({
@@ -9,6 +8,6 @@ import { Movie } from './movie.model'
 })
 export class MovieService extends EntityService<Movie> {
   constructor(http: HttpClient) {
-    super(http, environment.SERVER_API_URL, 'movies')
+    super(http, 'environment.SERVER_API_URL', 'movies')
   }
 }

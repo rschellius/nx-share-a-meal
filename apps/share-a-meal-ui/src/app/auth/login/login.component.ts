@@ -1,21 +1,24 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
-import { AuthService } from '../../auth/auth.service'
+import { AuthService } from '@cswp/auth'
 import { Router } from '@angular/router'
 import { Subscription } from 'rxjs'
-import { User } from '../../pages/user/user.model'
+import { IUser } from '@cswp/api-interfaces'
 
 @Component({
   selector: 'cswp-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['../auth.css']
+  templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit, OnDestroy {
   loginForm!: FormGroup
   subs!: Subscription
   submitted = false
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    @Inject({ apiUrl: 'Injected in login.component.ts' })
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -28,7 +31,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.subs = this.authService
       .getUserFromLocalStorage()
-      .subscribe((user: User | undefined) => {
+      .subscribe((user: IUser | undefined) => {
         if (user) {
           console.log('User already logged in > to dashboard')
           this.router.navigate(['/'])
@@ -47,16 +50,13 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.submitted = true
       const email = this.loginForm.value.email
       const password = this.loginForm.value.password
-      this.authService
-        .login(email, password)
-        // .pipe(delay(1000))
-        .subscribe((user) => {
-          if (user) {
-            console.log('Logged in')
-            this.router.navigate(['/'])
-          }
-          this.submitted = false
-        })
+      this.authService.login(email, password).subscribe((user) => {
+        if (user) {
+          console.log('Logged in')
+          this.router.navigate(['/'])
+        }
+        this.submitted = false
+      })
     } else {
       this.submitted = false
       console.error('loginForm invalid')

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap } from '@angular/router'
-import { User } from '../user.model'
+import { IUser } from '@cswp/api-interfaces'
 import { UserService } from '../user.service'
 import { switchMap } from 'rxjs/operators'
 import { Observable } from 'rxjs'
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs'
   templateUrl: './user-detail.component.html'
 })
 export class UserDetailComponent implements OnInit {
-  user$!: Observable<User>
+  user$!: Observable<IUser>
 
   constructor(
     private userService: UserService,

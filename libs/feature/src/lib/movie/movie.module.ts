@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RouterModule, Routes } from '@angular/router'
-import { SharedModule } from '../../shared/shared.module'
+// import { SharedModule } from '../../shared/shared.module'
+import { UtilModule } from '@cswp/util'
 import * as fromComponents from './index'
 import { HttpClientModule } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { LoggedInAuthGuard, SaveEditedWorkGuard } from '../../auth/auth.guards'
+import { LoggedInAuthGuard, SaveEditedWorkGuard } from '@cswp/auth'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 
 const routes: Routes = [
@@ -35,12 +36,13 @@ const routes: Routes = [
   declarations: [...fromComponents.components],
   imports: [
     CommonModule,
-    SharedModule,
+    // SharedModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    UtilModule
   ]
 })
 export class MovieModule {}

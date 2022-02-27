@@ -17,9 +17,7 @@ const routes: Routes = [
       {
         path: 'users',
         loadChildren: () =>
-          import(
-            /* webpackChunkName: "user.module" */ './pages/user/user.module'
-          ).then(
+          import(/* webpackChunkName: "user.module" */ '@cswp/feature').then(
             (m) => m.UserModule,
             () => {
               throw { loadChunkError: true }
@@ -29,9 +27,7 @@ const routes: Routes = [
       {
         path: 'movies',
         loadChildren: () =>
-          import(
-            /* webpackChunkName: "movies.module" */ './pages/movie/movie.module'
-          ).then(
+          import(/* webpackChunkName: "movies.module" */ '@cswp/feature').then(
             (m) => m.MovieModule,
             () => {
               throw { loadChunkError: true }

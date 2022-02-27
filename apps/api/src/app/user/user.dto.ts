@@ -1,5 +1,5 @@
 import { PartialType } from '@nestjs/mapped-types'
-import { IUser, UserRole } from '@nx-share-a-meal/api-interfaces'
+import { IUser, UserRole } from '@cswp/api-interfaces'
 import { IsEmail, IsNotEmpty } from 'class-validator'
 
 export class CreateUserDto implements IUser {

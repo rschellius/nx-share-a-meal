@@ -4,8 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { of, Subscription } from 'rxjs'
 import { catchError, debounceTime, distinct, filter } from 'rxjs/operators'
 import { AuthService } from '@cswp/auth'
-import { Alert, AlertService } from '../../../shared/alert/alert.service'
-import { ModalConfirmYesNoComponent } from '../../../shared/modal/modal.confirm-yes-no.component'
+import { Alert, AlertService, ModalConfirmYesNoComponent } from '@cswp/util'
 import {
   initialFilters,
   MovieFilters
@@ -21,7 +20,6 @@ import { MovieService } from '../movie.service'
 })
 export class MovieListComponent implements OnInit, OnDestroy {
   movies!: Movie[] | null
-  // movies$ = new BehaviorSubject<Movie[] | null>(null);
   subs!: Subscription
   movieListSubscription!: Subscription
   movieFilterSubscription!: Subscription

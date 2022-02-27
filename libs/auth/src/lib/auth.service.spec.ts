@@ -1,6 +1,6 @@
 import { AuthService } from './auth.service'
 import { of, throwError } from 'rxjs'
-import { User } from '../pages/user/user.model'
+import { IUser } from '@cswp/api-interfaces'
 
 /**
  * See
@@ -16,11 +16,15 @@ describe('AuthService', () => {
   let alertServiceSpy: any
   let authServiceSpy: any
 
-  const expectedUserData: User = {
-    id: 'oiuwklf89gv0iuq43k',
-    name: { firstName: 'Firstname', lastName: 'Lastname' },
+  const expectedUserData: IUser = {
+    id: 1,
+    firstName: 'Firstname',
+    lastName: 'Lastname',
     emailAdress: 'user@host.com',
-    token: 'some.dummy.token'
+    token: 'some.dummy.token',
+    roles: [],
+    isActive: true,
+    password: 'secret'
   }
 
   /**
@@ -69,20 +73,14 @@ describe('AuthService', () => {
 
     const subs = authService
       .login(email, password)
-      .subscribe((user: User | undefined) => {
+      .subscribe((user: IUser | undefined) => {
         if (user) {
-          expect(user.name.firstName).toEqual('Firstname')
+          expect(user.firstName).toEqual('Firstname')
 
           expect(alertServiceSpy.success).toHaveBeenCalled()
           expect(alertServiceSpy.error).not.toHaveBeenCalled()
-          expect(alertServiceSpy.success.calls.count()).toBe(
-            1,
-            'success must have been called once'
-          )
-          expect(alertServiceSpy.error.calls.count()).toBe(
-            0,
-            'error method may not have been called'
-          )
+          expect(alertServiceSpy.success.calls.count()).toBe(1)
+          expect(alertServiceSpy.error.calls.count()).toBe(0)
         }
         if (!user) {
           fail('User should have been logged in')
@@ -91,8 +89,8 @@ describe('AuthService', () => {
 
     authService
       .getUserFromLocalStorage()
-      .subscribe((user: User | undefined) =>
-        expect(user?.name.firstName).toEqual('Firstname')
+      .subscribe((user: IUser | undefined) =>
+        expect(user?.firstName).toEqual('Firstname')
       )
 
     // Clean up subscription
@@ -128,15 +126,9 @@ describe('AuthService', () => {
       // Check de expectations:
       expect(user).toBe(undefined)
       expect(alertServiceSpy.error).toHaveBeenCalled()
-      expect(alertServiceSpy.error.calls.count()).toBe(
-        1,
-        'alertServiceSpy method must have been called once'
-      )
+      expect(alertServiceSpy.error.calls.count()).toBe(1)
       expect(alertServiceSpy.success).not.toHaveBeenCalled()
-      expect(alertServiceSpy.success.calls.count()).toBe(
-        0,
-        'alertServiceSpy method must have been called once'
-      )
+      expect(alertServiceSpy.success.calls.count()).toBe(0)
     })
 
     // Clean up subscription

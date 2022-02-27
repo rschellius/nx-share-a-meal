@@ -1,6 +1,6 @@
 import { IsBoolean, IsDate, IsNotEmpty, IsNumber, IsUrl } from 'class-validator'
 import { PartialType } from '@nestjs/mapped-types'
-import { Allergenes } from '@nx-share-a-meal/api-interfaces'
+import { Allergenes } from '@cswp/api-interfaces'
 
 export class CreateMealDto {
   @IsNotEmpty()

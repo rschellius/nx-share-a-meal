@@ -1,14 +1,13 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { EntityService } from '../../shared/common/entity.service'
-import { environment } from '../../../environments/environment'
-import { User } from './user.model'
+import { EntityService } from '@cswp/entity'
+import { IUser } from '@cswp/api-interfaces'
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService extends EntityService<User> {
+export class UserService extends EntityService<IUser> {
   constructor(http: HttpClient) {
-    super(http, environment.SERVER_API_URL, 'user')
+    super(http, 'environment.SERVER_API_URL', 'user')
   }
 }

@@ -5,9 +5,8 @@ import { Router } from '@angular/router'
 import { Subscription } from 'rxjs'
 
 @Component({
-  selector: 'cswp-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['../auth.css']
+  selector: 'cswp-auth-register',
+  templateUrl: './register.component.html'
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   registerForm!: FormGroup

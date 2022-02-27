@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import {
   CanActivate,
   CanActivateChild,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
-  Router,
-} from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { User } from '../pages/user/user.model';
-import { ModalLeaveYesNoComponent } from '../shared/modal/modal.leave-yes-no.component';
-import { AuthService } from './auth.service';
+  Router
+} from '@angular/router'
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
+import { Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
+import { IUser } from '@cswp/api-interfaces'
+import { ModalLeaveYesNoComponent } from '@cswp/util'
+import { AuthService } from './auth.service'
 
 /**
  * Verifies that user is logged in before navigating to routes.
@@ -23,26 +23,25 @@ export class LoggedInAuthGuard implements CanActivate, CanActivateChild {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(): Observable<boolean> {
-    console.log('canActivate LoggedIn');
+    console.log('canActivate LoggedIn')
     return this.authService.currentUser$.pipe(
-      map((user: User | undefined) => {
+      map((user: IUser | undefined) => {
         if (user && user.token) {
-          return true;
+          return true
         } else {
-          console.log('not logged in, reroute to /');
-          this.router.navigate(['/']);
-          return false;
+          console.log('not logged in, reroute to /')
+          this.router.navigate(['/'])
+          return false
         }
       })
-    );
+    )
   }
 
-  canActivateChild(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean> | Promise<boolean> | boolean {
-    console.log('canActivateChild LoggedIn');
-    return this.canActivate();
+  canActivateChild(): // route: ActivatedRouteSnapshot,
+  // state: RouterStateSnapshot
+  Observable<boolean> | Promise<boolean> | boolean {
+    console.log('canActivateChild LoggedIn')
+    return this.canActivate()
   }
 }
 
@@ -53,7 +52,7 @@ export class SaveEditedWorkGuard {
   canDeactivate(): Promise<boolean> {
     return this.modalService
       .open(ModalLeaveYesNoComponent)
-      .result.then((result) => true)
-      .catch(() => false);
+      .result.then(() => true)
+      .catch(() => false)
   }
 }

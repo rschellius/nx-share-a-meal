@@ -3,10 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../auth.service'
 import { Router } from '@angular/router'
 import { Subscription } from 'rxjs'
-import { IUser } from '@nx-share-a-meal/api-interfaces'
+import { IUser } from '@cswp/api-interfaces'
 
 @Component({
-  selector: 'cswp-login',
+  selector: 'cswp-auth-login',
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit, OnDestroy {
@@ -46,13 +46,15 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.submitted = true
       const email = this.loginForm.value.email
       const password = this.loginForm.value.password
-      this.authService.login(email, password).subscribe((user: IUser) => {
-        if (user) {
-          console.log('Logged in')
-          this.router.navigate(['/'])
-        }
-        this.submitted = false
-      })
+      this.authService
+        .login(email, password)
+        .subscribe((user: IUser | undefined) => {
+          if (user) {
+            console.log('Logged in')
+            this.router.navigate(['/'])
+          }
+          this.submitted = false
+        })
     } else {
       this.submitted = false
       console.error('loginForm invalid')

@@ -14,6 +14,11 @@ import { ModalLeaveYesNoComponent } from './modal/modal.leave-yes-no.component'
     ModalLeaveYesNoComponent
   ],
   imports: [CommonModule, NgbModule],
-  exports: [SpinnerComponent, AlertComponent]
+  exports: [
+    SpinnerComponent,
+    AlertComponent,
+    ModalLeaveYesNoComponent,
+    ModalConfirmYesNoComponent
+  ]
 })
 export class UtilModule {}

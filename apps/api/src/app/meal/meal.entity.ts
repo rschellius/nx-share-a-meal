@@ -10,7 +10,7 @@ import {
   UpdateDateColumn
 } from 'typeorm'
 import { User } from '../user/user.entity'
-import { IMeal, Allergenes } from '@nx-share-a-meal/api-interfaces'
+import { IMeal, Allergenes } from '@cswp/api-interfaces'
 
 @Entity()
 export class Meal implements IMeal {

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { Observable } from 'rxjs'
-import { AuthService } from '../../auth/auth.service'
-import { User } from '../../pages/user/user.model'
+import { AuthService } from '@cswp/auth'
+import { IUser } from '@cswp/api-interfaces'
 
 @Component({
   selector: 'cswp-navbar',
@@ -11,7 +11,7 @@ import { User } from '../../pages/user/user.model'
 export class NavbarComponent implements OnInit {
   @Input() title!: string
   isNavbarCollapsed = true
-  loggedInUser$!: Observable<User | undefined>
+  loggedInUser$!: Observable<IUser | undefined>
 
   constructor(private authService: AuthService) {}
 

@@ -40,7 +40,7 @@ export class UserController {
   @ApiBody({ type: User, description: 'The new user' })
   @ApiResponse({ status: 201, description: 'OK.', type: [User] })
   @ApiResponse({ status: 401, description: 'Forbidden.' })
-  async create(@Body() createUserDto: CreateUserDto): Promise<User> {
+  async create(@Body() createUserDto: CreateUserDto): Promise<IUser> {
     this.logger.log('create')
     return this.userService.create(createUserDto as User)
   }
@@ -94,7 +94,7 @@ export class UserController {
     description: 'Forbidden, no access',
     type: Error
   })
-  findOne(@Param('id') id: string): Promise<User> {
+  findOne(@Param('id') id: string): Promise<IUser> {
     this.logger.log('findOne id=' + id)
     return this.userService.findOne(id)
   }

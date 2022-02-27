@@ -11,7 +11,7 @@ import { Observable } from 'rxjs'
   styleUrls: ['./user-detail.component.css']
 })
 export class UserDetailComponent implements OnInit {
-  user$!: Observable<User>
+  user$!: Observable<IUser>
 
   constructor(
     private userService: UserService,

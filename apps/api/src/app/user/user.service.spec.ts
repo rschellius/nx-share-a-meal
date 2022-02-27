@@ -4,12 +4,12 @@ import { User } from './user.entity'
 
 const mockUser = {
   firstName: 'firstname',
-  lastName: 'lastname',
+  lastName: 'lastname'
 }
 
 describe('UsersService', () => {
   let service: UserService
-  // let model: Model<User>
+  // let model: Model<IUser>
 
   const usersArray = [
     {
@@ -19,7 +19,7 @@ describe('UsersService', () => {
       isActive: true,
       password: 'secret',
       emailAdress: 'user@server.com',
-      phoneNumber: '06-12345678',
+      phoneNumber: '06-12345678'
     },
     {
       id: 0,
@@ -28,8 +28,8 @@ describe('UsersService', () => {
       isActive: true,
       password: 'secret',
       emailAdress: 'user@server.com',
-      phoneNumber: '06-12345678',
-    },
+      phoneNumber: '06-12345678'
+    }
   ]
 
   beforeEach(async () => {
@@ -43,14 +43,14 @@ describe('UsersService', () => {
             constructor: jest.fn().mockResolvedValue(mockUser),
             find: jest.fn(),
             create: jest.fn(),
-            exec: jest.fn(),
-          },
-        },
-      ],
+            exec: jest.fn()
+          }
+        }
+      ]
     }).compile()
 
     service = module.get<UserService>(UserService)
-    // model = module.get<Model<User>>()
+    // model = module.get<Model<IUser>>()
   })
 
   it('should be defined', () => {

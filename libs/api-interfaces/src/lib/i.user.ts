@@ -16,5 +16,6 @@ export interface IUser {
   isActive: boolean
   emailAdress: string
   password: string
-  phoneNumber: string
+  phoneNumber?: string
+  token: string | undefined
 }

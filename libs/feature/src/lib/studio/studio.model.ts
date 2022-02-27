@@ -1,5 +1,6 @@
-import { Entity } from '../../shared/common/entity.model'
+import { IEntity } from '@cswp/entity'
 
-export class Studio extends Entity {
+export class Studio implements IEntity {
+  id!: number
   name!: string
 }

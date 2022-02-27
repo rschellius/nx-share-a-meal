@@ -1,8 +1,8 @@
-import { Entity } from './entity.model'
+import { IEntity } from './i.entity'
 import { Observable, throwError } from 'rxjs'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { map, catchError, tap, mergeMap, take } from 'rxjs/operators'
-import { Alert } from '../../../../../apps/share-a-meal-ui/src/app/shared/alert/alert.service'
+// import { Alert } from '../../../../../apps/share-a-meal-ui/src/app/shared/alert/alert.service'
 
 /**
  * See https://angular.io/guide/http#requesting-data-from-a-server
@@ -16,7 +16,7 @@ const httpOptions = {
  * Generic service class for communicating objects to/from services.
  * Serves generic CRUD operations.
  */
-export class EntityService<T extends Entity> {
+export class EntityService<T extends IEntity> {
   /**
    * Service constructor.
    */
@@ -106,7 +106,7 @@ export class EntityService<T extends Entity> {
   public handleError(error: HttpErrorResponse): Observable<any> {
     console.log(error)
 
-    const errorResponse: Alert = {
+    const errorResponse = {
       type: 'error',
       message: error.error.message || error.message
     }

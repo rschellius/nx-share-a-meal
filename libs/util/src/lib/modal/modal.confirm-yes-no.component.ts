@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
-  selector: 'cswp-modal-confirm-yes-no',
+  selector: 'cswp-util-modal-confirm-yes-no',
   template: `
     <div class="modal-header">
       <h4 class="modal-title" id="modal-title">Confirmation</h4>
@@ -31,8 +31,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
     </div>
   `
 })
-export class ModalConfirmYesNoComponent implements OnInit {
+export class ModalConfirmYesNoComponent {
   constructor(public modal: NgbActiveModal) {}
-
-  ngOnInit(): void {}
 }

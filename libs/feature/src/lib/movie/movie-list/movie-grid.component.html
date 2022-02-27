@@ -40,10 +40,10 @@
   <div id="moviesgrid" class="row">
     <div *ngFor="let movie of movies" class="col-md-4 col-sm-6 py-4">
       <!-- Card -->
-      <cswp-movie-card
+      <cswp-feature-movie-card
         [movie]="movie"
         (delete)="delete($event)"
-      ></cswp-movie-card>
+      ></cswp-feature-movie-card>
       <!-- Card end -->
     </div>
   </div>
@@ -51,6 +51,6 @@
 <ng-template #elseBlock>
   <!-- Content to render when condition is false. -->
   <div class="row">
-    <cswp-spinner></cswp-spinner>
+    <cswp-util-spinner></cswp-util-spinner>
   </div>
 </ng-template>

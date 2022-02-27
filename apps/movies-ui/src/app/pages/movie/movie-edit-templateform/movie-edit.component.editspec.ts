@@ -79,7 +79,7 @@ describe('MovieEditComponent', () => {
       'saveUserToLocalStorage',
       'userMayEdit'
     ])
-    const mockUser$ = new BehaviorSubject<User>(expectedUserData)
+    const mockUser$ = new BehaviorSubject<IUser>(expectedUserData)
     authServiceSpy.currentUser$ = mockUser$
 
     movieServiceSpy = jasmine.createSpyObj('MovieService', ['read', 'update'])

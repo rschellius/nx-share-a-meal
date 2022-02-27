@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
-  selector: 'cswp-modal-leave-yes-no',
+  selector: 'cswp-util-modal-leave-yes-no',
   template: `
     <div class="modal-header">
       <h4 class="modal-title" id="modal-title">Confirmation</h4>

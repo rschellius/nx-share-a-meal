@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap } from '@angular/router'
 import { Observable } from 'rxjs'
-import { switchMap, tap, delay } from 'rxjs/operators'
-import { AuthService } from '../../../auth/auth.service'
+import { switchMap, delay } from 'rxjs/operators'
+import { AuthService } from '@cswp/auth'
 import { Movie } from '../movie.model'
 import { MovieService } from '../movie.service'
 
 @Component({
-  selector: 'shareameal-movie-detail',
+  selector: 'cswp-feature-movie-detail',
   templateUrl: './movie-detail.component.html'
 })
 export class MovieDetailComponent implements OnInit {

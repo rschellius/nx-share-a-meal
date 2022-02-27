@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { EntityService } from '../../shared/common/entity.service'
-import { environment } from '../../../environments/environment'
+import { EntityService } from '@cswp/entity'
 import { Studio } from './studio.model'
 
 @Injectable({
@@ -9,6 +8,6 @@ import { Studio } from './studio.model'
 })
 export class StudioService extends EntityService<Studio> {
   constructor(http: HttpClient) {
-    super(http, environment.SERVER_API_URL, 'studios')
+    super(http, 'environment.SERVER_API_URL', 'studios')
   }
 }

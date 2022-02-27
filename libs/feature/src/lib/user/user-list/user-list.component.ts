@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Observable } from 'rxjs'
-import { User } from '../user.model'
+import { IUser } from '@cswp/api-interfaces'
 import { UserService } from '../user.service'
 
 @Component({
@@ -8,7 +8,7 @@ import { UserService } from '../user.service'
   templateUrl: './user-list.component.html'
 })
 export class UserListComponent implements OnInit {
-  users$!: Observable<User[] | null>
+  users$!: Observable<IUser[] | null>
 
   constructor(private userService: UserService) {}
 

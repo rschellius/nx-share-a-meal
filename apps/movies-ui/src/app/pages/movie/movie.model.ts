@@ -1,4 +1,4 @@
-import { Entity } from '../../shared/common/entity.model'
+import { IEntity } from '../../shared/common/entity.model'
 import { Studio } from '../studio/studio.model'
 import { User } from '../user/user.model'
 
@@ -8,12 +8,12 @@ export enum AgeCategory {
   adults = 'adults'
 }
 
-export class Actor extends Entity {
+export class Actor extends IEntity {
   name: string = ''
   dob: Date = new Date()
 }
 
-export class Movie extends Entity {
+export class Movie extends IEntity {
   name: string = ''
   releaseYear: number = 2000
   studio!: any //Studio | string;

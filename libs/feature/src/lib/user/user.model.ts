@@ -1,10 +1,10 @@
-import { IUser, UserRole } from '@nx-share-a-meal/api-interfaces'
-import { Entity } from '../../shared/common/entity.model'
+import { IUser, UserRole } from '@cswp/api-interfaces'
+import { IEntity } from '@cswp/entity'
 
-export class User extends Entity implements IUser {
+export class User implements IUser, IEntity {
   emailAdress!: string
-  token?: string
-  override id?: number | undefined
+  token: string | undefined
+  id?: number | undefined
   firstName!: string
   lastName!: string
   roles!: UserRole[]
@@ -12,8 +12,7 @@ export class User extends Entity implements IUser {
   password!: string
   phoneNumber!: string
 
-  constructor(values: any = {}) {
-    super(values)
+  constructor(values = {}) {
     // Assign all values to this objects properties
     Object.assign(this, values)
   }

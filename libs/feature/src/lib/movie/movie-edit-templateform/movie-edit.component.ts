@@ -14,13 +14,13 @@ import {
   map
 } from 'rxjs/operators'
 import { HttpHeaders, HttpParams } from '@angular/common/http'
-import { AuthService } from '../../../auth/auth.service'
-import { Alert, AlertService } from '../../../shared/alert/alert.service'
+import { AuthService } from '@cswp/auth'
+import { Alert, AlertService } from '@cswp/util'
 import { Studio } from '../../studio/studio.model'
-import { User } from '../../user/user.model'
+import { IUser } from '@cswp/api-interfaces'
 
 @Component({
-  selector: 'shareameal-movie-edit',
+  selector: 'cswp-feature-movie-edit',
   templateUrl: './movie-edit.component.html'
 })
 export class MovieEditComponent implements OnInit, OnDestroy {
@@ -58,7 +58,7 @@ export class MovieEditComponent implements OnInit, OnDestroy {
           if (!params.get('id')) {
             console.log('GEEN id gevonden')
             // maak een lege movie
-            return of(new Movie({}))
+            return of(new Movie())
           } else {
             console.log('WEL een id gevonden')
             // haal de movie met gevraagde id via de api
@@ -83,11 +83,11 @@ export class MovieEditComponent implements OnInit, OnDestroy {
     // Haal de studios voor selectie in dropdownbox
     this.subscriptionStudios = this.studioService
       .list()
-      .subscribe((studios) => (this.studios = studios))
+      .subscribe((studios: any) => (this.studios = studios))
 
     // Haal het token van de current user op zodat we dat mee kunnen sturen naar de backend.
     this.subscriptionOptions = this.authService.currentUser$.subscribe(
-      (user: User | undefined) => {
+      (user: IUser | undefined) => {
         if (user) {
           this.userid = user.id
           this.httpOptions = {

@@ -1,13 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
-import { AuthService } from '../auth.service'
+import { AuthService } from '@cswp/auth'
 import { Router } from '@angular/router'
 import { Subscription } from 'rxjs'
 
 @Component({
   selector: 'cswp-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['../auth.css']
+  templateUrl: './register.component.html'
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   registerForm!: FormGroup

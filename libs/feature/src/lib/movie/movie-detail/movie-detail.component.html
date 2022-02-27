@@ -1,5 +1,5 @@
-<div *ngIf="!(movie$ | async)">
-  <cswp-spinner></cswp-spinner>
+<div *ngIf="(movie$ | async) === undefined">
+  <cswp-util-spinner></cswp-util-spinner>
 </div>
 
 <div *ngIf="movie$ | async as movie">

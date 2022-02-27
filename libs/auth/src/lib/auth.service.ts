@@ -1,23 +1,24 @@
-import { Injectable } from '@angular/core'
+import { Inject, Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, of } from 'rxjs'
-import { User } from '../pages/user/user.model'
+import { IUser } from '@cswp/api-interfaces'
 import { Router } from '@angular/router'
-import { environment } from '../../environments/environment'
-import { map, tap, catchError, switchMap } from 'rxjs/operators'
-import { AlertService } from '../shared/alert/alert.service'
+import { map, catchError, switchMap } from 'rxjs/operators'
+import { AlertService } from '@cswp/util'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { CustomConfig } from './auth.module'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  public currentUser$ = new BehaviorSubject<User | undefined>(undefined)
+  public currentUser$ = new BehaviorSubject<IUser | undefined>(undefined)
   private readonly CURRENT_USER = 'currentuser'
   private readonly headers = new HttpHeaders({
     'Content-Type': 'application/json'
   })
 
   constructor(
+    @Inject('config') private config: CustomConfig,
     private alertService: AlertService,
     private http: HttpClient,
     private router: Router
@@ -29,7 +30,7 @@ export class AuthService {
     this.getUserFromLocalStorage()
       .pipe(
         // switchMap is overbodig als we validateToken() niet gebruiken...
-        switchMap((user: User | undefined) => {
+        switchMap((user: IUser | undefined) => {
           if (user) {
             console.log('User found in local storage')
             this.currentUser$.next(user)
@@ -44,18 +45,18 @@ export class AuthService {
       .subscribe(() => console.log('Startup auth done'))
   }
 
-  login(email: string, password: string): Observable<User | undefined> {
-    console.log(`login at ${environment.SERVER_API_URL}auth/login`)
+  login(email: string, password: string): Observable<IUser | undefined> {
+    console.log(`login at ${this.config.apiEndpoint}auth/login`)
 
     return this.http
-      .post<User>(
-        `${environment.SERVER_API_URL}auth/login`,
+      .post<IUser>(
+        `${this.config.apiEndpoint}auth/login`,
         { emailAdress: email, password: password },
         { headers: this.headers }
       )
       .pipe(
         map((data: any) => data.result),
-        map((user: User) => {
+        map((user: IUser) => {
           this.saveUserToLocalStorage(user)
           this.currentUser$.next(user)
           this.alertService.success('You have been logged in')
@@ -71,17 +72,15 @@ export class AuthService {
       )
   }
 
-  register(userData: User): Observable<User | undefined> {
-    console.log(`register at ${environment.SERVER_API_URL}users`)
+  register(userData: IUser): Observable<IUser | undefined> {
+    console.log(`register at ${this.config.apiEndpoint}users`)
     console.log(userData)
     return this.http
-      .post<User>(`${environment.SERVER_API_URL}users`, userData, {
+      .post<IUser>(`${this.config.apiEndpoint}users`, userData, {
         headers: this.headers
       })
       .pipe(
         map((user) => {
-          // const user = new User(response);
-          console.dir(user)
           this.saveUserToLocalStorage(user)
           this.currentUser$.next(user)
           this.alertService.success('You have been registered')
@@ -114,7 +113,7 @@ export class AuthService {
       .catch((error) => console.log('not logged out!'))
   }
 
-  getUserFromLocalStorage(): Observable<User | undefined> {
+  getUserFromLocalStorage(): Observable<IUser | undefined> {
     const userData = localStorage.getItem(this.CURRENT_USER)
     if (userData) {
       const localUser = JSON.parse(userData)
@@ -124,20 +123,20 @@ export class AuthService {
     }
   }
 
-  private saveUserToLocalStorage(user: User): void {
+  private saveUserToLocalStorage(user: IUser): void {
     localStorage.setItem(this.CURRENT_USER, JSON.stringify(user))
   }
 
   userMayEdit(itemUserId: number): Observable<boolean> {
     return this.currentUser$.pipe(
-      map((user: User | undefined) => (user ? user.id === itemUserId : false))
+      map((user: IUser | undefined) => (user ? user.id === itemUserId : false))
     )
   }
 
   getAuthorizationToken(): string | undefined {
     const userData = localStorage.getItem(this.CURRENT_USER)
     if (userData) {
-      const user: User = JSON.parse(userData)
+      const user: IUser = JSON.parse(userData)
       return user.token
     }
     return undefined

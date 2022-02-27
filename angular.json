@@ -30,6 +30,32 @@
       "tags": []
     },
     "dao": "libs/dao",
+    "entity": {
+      "projectType": "library",
+      "root": "libs/entity",
+      "sourceRoot": "libs/entity/src",
+      "prefix": "nx-share-a-meal",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/entity"],
+          "options": {
+            "jestConfig": "libs/entity/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/entity/src/**/*.ts",
+              "libs/entity/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "feature": "libs/feature",
     "movies-ui": {
       "projectType": "application",

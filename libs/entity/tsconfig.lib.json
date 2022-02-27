@@ -8,9 +8,5 @@
     "types": []
   },
   "exclude": ["src/test-setup.ts", "**/*.spec.ts", "**/*.test.ts"],
-  "include": [
-    "**/*.ts",
-    "../entity/src/lib/entity.service.ts",
-    "../api-interfaces/src/lib/i.entity.ts"
-  ]
+  "include": ["**/*.ts"]
 }

@@ -13,7 +13,7 @@ export class UserService {
     private userRepository: UserRepository
   ) {}
 
-  create(user: User): Promise<User> {
+  create(user: User): Promise<IUser> {
     this.logger.log('create')
     return this.userRepository.createUser(user)
   }
@@ -23,12 +23,12 @@ export class UserService {
     return this.userRepository.find({ relations: ['meals'] })
   }
 
-  findOne(id: string): Promise<User> {
+  findOne(id: string): Promise<IUser> {
     this.logger.log('findOne - id=' + id)
     return this.userRepository.findOne(id)
   }
 
-  findOneByEmail(email: string): Promise<User> {
+  findOneByEmail(email: string): Promise<IUser> {
     this.logger.log('findOneByEmail ' + email)
     return this.userRepository.findOne({ where: { emailAdress: email } })
   }

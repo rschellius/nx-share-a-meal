@@ -7,7 +7,7 @@ import { User } from './user.model'
 @Injectable({
   providedIn: 'root'
 })
-export class UserService extends EntityService<User> {
+export class UserService extends EntityService<IUser> {
   constructor(http: HttpClient) {
     super(http, environment.SERVER_API_URL, 'users')
   }

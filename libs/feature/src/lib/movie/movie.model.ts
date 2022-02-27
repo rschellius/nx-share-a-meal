@@ -1,4 +1,4 @@
-import { Entity } from '@nx-share-a-meal/util'
+import { IEntity } from '@cswp/entity'
 
 export enum AgeCategory {
   all = 'all',
@@ -6,14 +6,16 @@ export enum AgeCategory {
   adults = 'adults'
 }
 
-export class Actor extends Entity {
-  name: string = ''
+export class Actor implements IEntity {
+  id!: number
+  name = ''
   dob: Date = new Date()
 }
 
-export class Movie extends Entity {
-  name: string = ''
-  releaseYear: number = 2000
+export class Movie implements IEntity {
+  id!: number
+  name = ''
+  releaseYear = 2000
   studio!: any //Studio | string;
   genre?: string[] = []
   ageCategory?: AgeCategory

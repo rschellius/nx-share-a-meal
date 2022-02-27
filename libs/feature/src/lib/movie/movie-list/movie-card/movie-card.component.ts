@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
-import { AuthService } from '../../../../auth/auth.service'
+import { AuthService } from '@cswp/auth'
 import { Movie } from '../../movie.model'
 
 @Component({
-  selector: 'cswp-movie-card',
+  selector: 'cswp-feature-movie-card',
   templateUrl: './movie-card.component.html'
 })
 export class MovieCardComponent {

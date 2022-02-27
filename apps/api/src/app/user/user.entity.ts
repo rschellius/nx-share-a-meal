@@ -3,7 +3,7 @@ import { Exclude, instanceToPlain } from 'class-transformer'
 import { IsEmail } from 'class-validator'
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
 import { Meal } from '../meal/meal.entity'
-import { IUser, UserRole } from '@nx-share-a-meal/api-interfaces'
+import { IUser, UserRole } from '@cswp/api-interfaces'
 
 @Entity()
 /**
