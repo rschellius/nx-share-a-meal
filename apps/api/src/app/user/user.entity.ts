@@ -43,7 +43,8 @@ export class User implements IUser {
   @Column({ default: true })
   @ApiProperty({
     example: true,
-    description: 'Whether this is an active user'
+    description: 'Whether this is an active user',
+    default: true
   })
   isActive: boolean
 

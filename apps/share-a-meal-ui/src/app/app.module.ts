@@ -13,10 +13,11 @@ import {} from '../environments/environment'
 import { UtilModule } from '@cswp/util'
 import { FeatureModule } from '@cswp/feature'
 import { RouterModule } from '@angular/router'
-import { LoginUIComponent } from './auth/login-ui/login-ui.component'
-import { RegisterUiComponent } from './auth/register-ui/register-ui.component'
+import { LoginComponent } from './auth/login/login.component'
+import { RegisterComponent } from './auth/register/register.component'
 import { NavbarComponent } from './shared/navbar/navbar.component'
 import { FooterComponent } from './shared/footer/footer.component'
+import { environment } from '../environments/environment'
 
 @NgModule({
   declarations: [
@@ -24,8 +25,8 @@ import { FooterComponent } from './shared/footer/footer.component'
     LayoutComponent,
     DashboardComponent,
     AboutComponent,
-    LoginUIComponent,
-    RegisterUiComponent,
+    LoginComponent,
+    RegisterComponent,
     NavbarComponent,
     FooterComponent
   ],
@@ -35,7 +36,7 @@ import { FooterComponent } from './shared/footer/footer.component'
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    AuthModule.forRoot({ apiEndpoint: 'hier moet de server url!' }),
+    AuthModule.forRoot({ apiEndpoint: environment.SERVER_API_URL }),
     NgbModule,
     AppRoutingModule,
     UtilModule,

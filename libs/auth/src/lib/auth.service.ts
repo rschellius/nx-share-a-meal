@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, of } from 'rxjs'
-import { IUser } from '@cswp/api-interfaces'
+import { ILoginFormData, IUser } from '@cswp/api-interfaces'
 import { Router } from '@angular/router'
 import { map, catchError, switchMap } from 'rxjs/operators'
 import { AlertService } from '@cswp/util'
@@ -46,15 +46,13 @@ export class AuthService {
       .subscribe(() => console.log('Startup auth done'))
   }
 
-  login(email: string, password: string): Observable<IUser | undefined> {
+  login(formData: ILoginFormData): Observable<IUser | undefined> {
     console.log(`login at ${this.config.apiEndpoint}auth/login`)
 
     return this.http
-      .post<IUser>(
-        `${this.config.apiEndpoint}auth/login`,
-        { emailAdress: email, password: password },
-        { headers: this.headers }
-      )
+      .post<IUser>(`${this.config.apiEndpoint}auth/login`, formData, {
+        headers: this.headers
+      })
       .pipe(
         map((data: any) => data.result),
         map((user: IUser) => {
@@ -74,16 +72,16 @@ export class AuthService {
   }
 
   register(userData: IUser): Observable<IUser | undefined> {
-    console.log(`register at ${this.config.apiEndpoint}users`)
+    console.log(`register at ${this.config.apiEndpoint}user`)
     console.log(userData)
     return this.http
-      .post<IUser>(`${this.config.apiEndpoint}users`, userData, {
+      .post<IUser>(`${this.config.apiEndpoint}user`, userData, {
         headers: this.headers
       })
       .pipe(
         map((user) => {
-          this.saveUserToLocalStorage(user)
-          this.currentUser$.next(user)
+          // this.saveUserToLocalStorage(user)
+          // this.currentUser$.next(user)
           this.alertService.success('You have been registered')
           return user
         }),

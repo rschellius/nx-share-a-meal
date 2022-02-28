@@ -1,12 +1,7 @@
-import {
-  Injectable,
-  InjectionToken,
-  ModuleWithProviders,
-  NgModule
-} from '@angular/core'
+import { ModuleWithProviders, NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { RegisterComponent } from './register/register.component'
-import { LoginComponent } from './login/login.component'
+import { RegisterFormComponent } from './register/register-form.component'
+import { LoginFormComponent } from './login/login-form.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { LoggedInAuthGuard } from './auth.guards'
@@ -19,13 +14,12 @@ import { UtilModule } from '@cswp/util'
 /**
  * Module config options
  */
-// @Injectable()
 export class CustomConfig {
   apiEndpoint!: string
 }
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [LoginFormComponent, RegisterFormComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -36,7 +30,7 @@ export class CustomConfig {
     NgbModule
   ],
   providers: [LoggedInAuthGuard, AuthService, httpInterceptorProviders],
-  exports: [LoginComponent, RegisterComponent]
+  exports: [LoginFormComponent, RegisterFormComponent]
 })
 export class AuthModule {
   // implement forRoot so we can inject config options
