@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router'
 // import { SharedModule } from '../../shared/shared.module'
 import * as fromComponents from '.'
 import { HttpClientModule } from '@angular/common/http'
+import { ConfigModule } from '@cswp/util'
 
 const routes: Routes = [
   {
@@ -21,11 +22,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [...fromComponents.components],
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    RouterModule.forChild(routes)
-    // SharedModule
-  ]
+  imports: [CommonModule, HttpClientModule, RouterModule.forChild(routes)]
 })
 export class UserModule {}

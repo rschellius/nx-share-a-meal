@@ -1,5 +1,5 @@
 /**
- *
+ * Meal-related interfaces
  */
 
 export enum Allergenes {

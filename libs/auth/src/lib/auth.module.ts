@@ -11,13 +11,6 @@ import { RouterModule } from '@angular/router'
 import { HttpClientModule } from '@angular/common/http'
 import { UtilModule } from '@cswp/util'
 
-/**
- * Module config options
- */
-export class CustomConfig {
-  apiEndpoint!: string
-}
-
 @NgModule({
   declarations: [LoginFormComponent, RegisterFormComponent],
   imports: [
@@ -33,12 +26,12 @@ export class CustomConfig {
   exports: [LoginFormComponent, RegisterFormComponent]
 })
 export class AuthModule {
-  // implement forRoot so we can inject config options
-  static forRoot(config: CustomConfig): ModuleWithProviders<AuthModule> {
-    console.log('AuthModule.forRoot ' + config.apiEndpoint)
-    return {
-      ngModule: AuthModule,
-      providers: [{ provide: CustomConfig, useValue: config }]
-    }
-  }
+  // // implement forRoot so we can inject config options
+  // static forRoot(config: CustomConfig): ModuleWithProviders<AuthModule> {
+  //   console.log('AuthModule.forRoot ' + config.apiEndpoint)
+  //   return {
+  //     ngModule: AuthModule,
+  //     providers: [{ provide: CustomConfig, useValue: config }]
+  //   }
+  // }
 }

@@ -1,5 +1,5 @@
 /**
- *
+ * User interfaces
  */
 
 export enum UserRole {

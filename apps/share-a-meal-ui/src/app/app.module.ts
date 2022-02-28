@@ -9,9 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { AuthModule } from '@cswp/auth'
-import {} from '../environments/environment'
-import { UtilModule } from '@cswp/util'
-import { FeatureModule } from '@cswp/feature'
+import { ConfigModule, UtilModule } from '@cswp/util'
 import { RouterModule } from '@angular/router'
 import { LoginComponent } from './auth/login/login.component'
 import { RegisterComponent } from './auth/register/register.component'
@@ -36,11 +34,12 @@ import { environment } from '../environments/environment'
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    AuthModule.forRoot({ apiEndpoint: environment.SERVER_API_URL }),
+    ConfigModule.forRoot({ apiEndpoint: environment.SERVER_API_URL }),
+    // AuthModule.forRoot({ apiEndpoint: environment.SERVER_API_URL }),
+    AuthModule,
     NgbModule,
     AppRoutingModule,
-    UtilModule,
-    FeatureModule
+    UtilModule
   ],
   providers: [],
   bootstrap: [AppComponent]

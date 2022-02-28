@@ -7,7 +7,7 @@ import { Movie } from './movie.model'
   providedIn: 'root'
 })
 export class MovieService extends EntityService<Movie> {
-  constructor(http: HttpClient) {
-    super(http, 'environment.SERVER_API_URL', 'movies')
-  }
+  // constructor(private config: CustomConfig, http: HttpClient) {
+  //   super(http, config.apiEndpoint, 'movies')
+  // }
 }
