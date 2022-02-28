@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
-import { LoginComponent } from './auth/login/login.component'
-import { RegisterComponent } from './auth/register/register.component'
+import { LoginUIComponent } from './auth/login-ui/login-ui.component'
+import { RegisterUiComponent } from './auth/register-ui/register-ui.component'
 import { LayoutComponent } from './layout/layout.component'
 import { AboutComponent } from './pages/about/about.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component'
@@ -36,8 +36,8 @@ const routes: Routes = [
       }
     ]
   },
-  { path: 'login', pathMatch: 'full', component: LoginComponent },
-  { path: 'register', pathMatch: 'full', component: RegisterComponent },
+  { path: 'login', pathMatch: 'full', component: LoginUIComponent },
+  { path: 'register', pathMatch: 'full', component: RegisterUiComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'dashboard' }
 ]
 

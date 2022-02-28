@@ -1,4 +1,9 @@
-import { InjectionToken, ModuleWithProviders, NgModule } from '@angular/core'
+import {
+  Injectable,
+  InjectionToken,
+  ModuleWithProviders,
+  NgModule
+} from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RegisterComponent } from './register/register.component'
 import { LoginComponent } from './login/login.component'
@@ -14,8 +19,9 @@ import { UtilModule } from '@cswp/util'
 /**
  * Module config options
  */
-export interface CustomConfig {
-  apiEndpoint: string
+// @Injectable()
+export class CustomConfig {
+  apiEndpoint!: string
 }
 
 @NgModule({
@@ -35,9 +41,10 @@ export interface CustomConfig {
 export class AuthModule {
   // implement forRoot so we can inject config options
   static forRoot(config: CustomConfig): ModuleWithProviders<AuthModule> {
+    console.log('AuthModule.forRoot ' + config.apiEndpoint)
     return {
       ngModule: AuthModule,
-      providers: [AuthService, { provide: 'config', useValue: config }]
+      providers: [{ provide: CustomConfig, useValue: config }]
     }
   }
 }

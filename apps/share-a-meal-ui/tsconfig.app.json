@@ -4,6 +4,7 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "types": ["node"],
+    "emitDecoratorMetadata": false,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "target": "ES2017"

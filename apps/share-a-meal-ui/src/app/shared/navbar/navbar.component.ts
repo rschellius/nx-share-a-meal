@@ -8,6 +8,7 @@ import { IUser } from '@cswp/api-interfaces'
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+// implements OnInit
 export class NavbarComponent implements OnInit {
   @Input() title!: string
   isNavbarCollapsed = true

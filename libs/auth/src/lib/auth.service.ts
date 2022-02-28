@@ -18,11 +18,12 @@ export class AuthService {
   })
 
   constructor(
-    @Inject('config') private config: CustomConfig,
+    private config: CustomConfig,
     private alertService: AlertService,
     private http: HttpClient,
     private router: Router
   ) {
+    console.log('AuthService constructor, config=' + config.apiEndpoint)
     // Check of we al een ingelogde user hebben
     // Zo ja, check dan op de backend of het token nog valid is.
     // Het token kan namelijk verlopen zijn. Indien verlopen

@@ -21,6 +21,7 @@
     "noImplicitReturns": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": false,
     "noFallthroughCasesInSwitch": true
   },
   "angularCompilerOptions": {
