@@ -57,6 +57,58 @@
       "tags": []
     },
     "feature": "libs/feature",
+    "movies-api": {
+      "root": "apps/movies-api",
+      "sourceRoot": "apps/movies-api/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/movies-api",
+            "main": "apps/movies-api/src/main.ts",
+            "tsConfig": "apps/movies-api/tsconfig.app.json",
+            "assets": ["apps/movies-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/movies-api/src/environments/environment.ts",
+                  "with": "apps/movies-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "movies-api:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/movies-api/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/movies-api"],
+          "options": {
+            "jestConfig": "apps/movies-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "movies-ui": {
       "projectType": "application",
       "root": "apps/movies-ui",
@@ -125,7 +177,10 @@
               "browserTarget": "movies-ui:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "proxyConfig": "apps/movies-ui/proxy.conf.json"
+          }
         },
         "extract-i18n": {
           "executor": "@angular-devkit/build-angular:extract-i18n",

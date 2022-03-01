@@ -24,11 +24,11 @@
       id="navbarsDefault"
     >
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <!-- Movies -->
+        <!-- Meals -->
         <li class="nav-item dropdown">
           <div ngbDropdown class="d-inline-block">
             <button class="btn btn-link" id="dropdownMenu1" ngbDropdownToggle>
-              Movies
+              Meals
             </button>
             <div
               ngbDropdownMenu
@@ -37,20 +37,20 @@
             >
               <button
                 class="dropdown-item"
-                routerLink="/movies"
+                routerLink="/meals"
                 [routerLinkActive]="['active']"
                 [routerLinkActiveOptions]="{ exact: true }"
               >
-                Movies
+                Meals
               </button>
               <button
                 class="dropdown-item"
-                routerLink="/movies/new"
+                routerLink="/meals/new"
                 [disabled]="(loggedInUser$ | async) === undefined"
                 [routerLinkActive]="['active']"
                 [routerLinkActiveOptions]="{ exact: true }"
               >
-                Add a movie
+                Add a meal
               </button>
             </div>
           </div>

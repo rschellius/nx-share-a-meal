@@ -6,14 +6,14 @@ import { MovieService } from '../movie.service'
 import { BehaviorSubject, of, Subscription } from 'rxjs'
 import { MovieEditComponent } from './movie-edit.component'
 import { AuthService } from '../../auth/auth.service'
-import { StudioService } from '../../studio/studio.service'
+import { StudioService } from '../studio/studio.service'
 import { AgeCategory, Movie } from '../movie.model'
 import { User } from '../../user/user.model'
-import { Studio } from '../../studio/studio.model'
+import { Studio } from '../studio/studio.model'
 import { FormsModule } from '@angular/forms'
 
 @Component({ selector: 'cswp-spinner', template: '' })
-class AppSpinnerStubComponent {}
+class AppSpinnerStubComponent { }
 
 @Directive({
   selector: '[routerLink]'

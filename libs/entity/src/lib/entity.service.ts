@@ -1,8 +1,7 @@
 import { IEntity } from './i.entity'
 import { Observable, throwError } from 'rxjs'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
-import { map, catchError, tap, mergeMap, take } from 'rxjs/operators'
-// import { Alert } from '../../../../../apps/share-a-meal-ui/src/app/shared/alert/alert.service'
+import { map, catchError, tap } from 'rxjs/operators'
 
 /**
  * See https://angular.io/guide/http#requesting-data-from-a-server
@@ -24,7 +23,7 @@ export class EntityService<T extends IEntity> {
     protected readonly http: HttpClient,
     public readonly url: string,
     public readonly endpoint: string
-  ) {}
+  ) { }
 
   /**
    * Get all items.

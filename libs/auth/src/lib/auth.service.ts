@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core'
+import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, of } from 'rxjs'
 import { ILoginFormData, IUser } from '@cswp/api-interfaces'
 import { Router } from '@angular/router'
@@ -68,7 +68,7 @@ export class AuthService {
           this.alertService.success('You have been logged in')
           return user
         }),
-        catchError((error: any) => {
+        catchError((error) => {
           console.log('error:', error)
           console.log('error.message:', error.message)
           console.log('error.error.message:', error.error.message)
@@ -96,7 +96,7 @@ export class AuthService {
           this.alertService.success('You have been registered')
           return user
         }),
-        catchError((error: any) => {
+        catchError((error) => {
           console.log('error:', error)
           console.log('error.message:', error.message)
           console.log('error.error.message:', error.error.message)

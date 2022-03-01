@@ -16,14 +16,6 @@
             "prefix": "nxShareAMeal",
             "style": "camelCase"
           }
-        ],
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "type": "element",
-            "prefix": "nx-share-a-meal",
-            "style": "kebab-case"
-          }
         ]
       }
     },

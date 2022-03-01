@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { AgeCategory, Movie } from '../movie.model'
 import { MovieService } from '../movie.service'
-import { StudioService } from '../../studio/studio.service'
+import { StudioService } from '../studio/studio.service'
 import { Observable, of, Subject, Subscription } from 'rxjs'
 import {
   catchError,
@@ -16,7 +16,7 @@ import {
 import { HttpHeaders, HttpParams } from '@angular/common/http'
 import { AuthService } from '@cswp/auth'
 import { Alert, AlertService } from '@cswp/util'
-import { Studio } from '../../studio/studio.model'
+import { Studio } from '../studio/studio.model'
 import { IUser } from '@cswp/api-interfaces'
 
 @Component({
@@ -46,7 +46,7 @@ export class MovieEditComponent implements OnInit, OnDestroy {
     private studioService: StudioService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // Haal de movie op voor edit

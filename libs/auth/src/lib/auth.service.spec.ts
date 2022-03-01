@@ -47,11 +47,12 @@ describe('AuthService', () => {
     ])
 
     const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl'])
+    const configServiceSpy = jasmine.createSpyObj('ConfigService', ['getConfig'])
 
     //
     // Create service via constructor
     //
-    authService = new AuthService(alertServiceSpy, httpSpy, routerSpy)
+    authService = new AuthService(configServiceSpy, alertServiceSpy, httpSpy, routerSpy)
 
     // Set service variables to initial values
     authService.currentUser$.next(undefined)

@@ -60,7 +60,7 @@ export class AuthService {
           this.alertService.success('You have been logged in')
           return user
         }),
-        catchError((error: any) => {
+        catchError((error) => {
           console.log('error:', error)
           console.log('error.message:', error.message)
           console.log('error.error.message:', error.error.message)
@@ -86,7 +86,7 @@ export class AuthService {
           this.alertService.success('You have been registered')
           return user
         }),
-        catchError((error: any) => {
+        catchError((error) => {
           console.log('error:', error)
           console.log('error.message:', error.message)
           console.log('error.error.message:', error.error.message)
@@ -116,7 +116,7 @@ export class AuthService {
   //       console.log('token is valid');
   //       return response;
   //     }),
-  //     catchError((error: any) => {
+  //     catchError((error) => {
   //       console.log('Validate token Failed');
   //       this.logout();
   //       this.currentUser$.next(undefined);

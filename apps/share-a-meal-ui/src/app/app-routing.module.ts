@@ -25,10 +25,10 @@ const routes: Routes = [
           )
       },
       {
-        path: 'movies',
+        path: 'meals',
         loadChildren: () =>
-          import(/* webpackChunkName: "movies.module" */ '@cswp/feature').then(
-            (m) => m.MovieModule,
+          import(/* webpackChunkName: "meals.module" */ '@cswp/feature').then(
+            (m) => m.MealsModule,
             () => {
               throw { loadChunkError: true }
             }
@@ -45,4 +45,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
