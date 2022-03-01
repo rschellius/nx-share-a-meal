@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
+import { AuthService } from '@cswp/auth'
+import { BaseDetailComponent } from '@cswp/entity'
+import { Meal } from '../meal.model'
+import { MealService } from '../meal.service'
 
 @Component({
-  selector: 'nx-share-a-meal-meal-detail',
+  selector: 'cswp-feature-meal-detail',
   templateUrl: './meal-detail.component.html',
-  styles: [
-  ]
+  styles: []
 })
-export class MealDetailComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+export class MealDetailComponent extends BaseDetailComponent<Meal> {
+  constructor(
+    private mealService: MealService,
+    authService: AuthService,
+    route: ActivatedRoute
+  ) {
+    super(mealService, authService, route)
   }
-
 }

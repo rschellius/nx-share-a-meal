@@ -1,1 +1,54 @@
-<p>meal-detail works!</p>
+<div *ngIf="item === undefined">
+  <cswp-util-spinner></cswp-util-spinner>
+</div>
+
+<div *ngIf="item">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/dashboard">Home</a></li>
+      <li class="breadcrumb-item"><a routerLink="/meals">Meals</a></li>
+      <li class="breadcrumb-item active" aria-current="page">
+        {{ item.name }}
+      </li>
+    </ol>
+  </nav>
+
+  <div class="row">
+    <div class="col-auto mr-auto">
+      <h1>{{ item.name }}</h1>
+      <p>{{ item.description }}</p>
+      <p>Slechts € {{ item.price }}</p>
+      <p>Allergenen: {{ item.allergenes }} <br /></p>
+    </div>
+    <div class="col-5 mr-auto">
+      <img
+        src="{{ item.imageUrl }}"
+        class="card-img-top movie-card-img"
+        aria-label="Placeholder: Thumbnail"
+        alt=""
+      />
+    </div>
+  </div>
+
+  <!-- <div class="row">
+    <div class="col-auto">
+      <button
+        *ngIf="authService.userMayEdit(item.cook.id) | async"
+        routerLink="edit"
+        type="button"
+        class="btn btn-warning"
+      >
+        Edit
+      </button>
+    </div>
+    <div class="col-auto">
+      <button
+        *ngIf="authService.userMayEdit(item.user.id) | async"
+        type="button"
+        class="btn btn-danger"
+      >
+        Delete
+      </button>
+    </div>
+  </div> -->
+</div>

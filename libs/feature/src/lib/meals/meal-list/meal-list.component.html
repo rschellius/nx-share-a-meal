@@ -1,1 +1,22 @@
-<p>meal-list works!</p>
+<h1>Meals</h1>
+<p>Met uitleg hier</p>
+<table class="table table-hover table-stiped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Date</th>
+      <th scope="col">Cook</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let meal of items">
+      <th scope="row">{{ meal.id }}</th>
+      <td>
+        <a routerLink="{{ meal.id }}">{{ meal.name }}</a>
+      </td>
+      <td>{{ meal.dateTime | date: 'fullDate' }}</td>
+      <td>{{ meal.cook.firstName }}</td>
+    </tr>
+  </tbody>
+</table>

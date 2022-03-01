@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser'
-import { NgModule } from '@angular/core'
+import { NgModule, LOCALE_ID } from '@angular/core'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { LayoutComponent } from './layout/layout.component'
@@ -16,6 +16,10 @@ import { RegisterComponent } from './auth/register/register.component'
 import { NavbarComponent } from './shared/navbar/navbar.component'
 import { FooterComponent } from './shared/footer/footer.component'
 import { environment } from '../environments/environment'
+import { registerLocaleData } from '@angular/common'
+import localeNl from '@angular/common/locales/nl'
+
+registerLocaleData(localeNl, 'nl')
 
 @NgModule({
   declarations: [
@@ -41,7 +45,7 @@ import { environment } from '../environments/environment'
     AppRoutingModule,
     UtilModule
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'nl' }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

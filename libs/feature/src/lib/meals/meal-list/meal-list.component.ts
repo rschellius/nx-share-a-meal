@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Meal } from '../meal.model';
-import { MealService } from '../meal.service';
+import { Component } from '@angular/core'
+import { AuthService } from '@cswp/auth'
+import { BaseListComponent } from '@cswp/entity'
+import { AlertService } from '@cswp/util'
+import { Meal } from '../meal.model'
+import { MealService } from '../meal.service'
 
 @Component({
-  selector: 'cswp-meal-list',
+  selector: 'cswp-feature-meal-list',
   templateUrl: './meal-list.component.html',
-  styles: [
-  ]
+  styles: []
 })
-export class MealListComponent implements OnInit {
-  meals$!: Observable<Meal[] | null>
-  constructor(private mealService: MealService) { }
-
-  ngOnInit(): void {
-    this.meals$ = this.mealService.list()
+export class MealListComponent extends BaseListComponent<Meal> {
+  constructor(
+    mealService: MealService,
+    alertService: AlertService,
+    authService: AuthService
+  ) {
+    super(mealService, alertService, authService)
   }
-
 }
