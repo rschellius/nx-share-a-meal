@@ -137,7 +137,7 @@ export class AuthService {
     localStorage.setItem(this.CURRENT_USER, JSON.stringify(user))
   }
 
-  userMayEdit(itemUserId: number): Observable<boolean> {
+  userMayEdit(itemUserId: number | undefined): Observable<boolean> {
     return this.currentUser$.pipe(
       map((user: IUser | undefined) => (user ? user.id === itemUserId : false))
     )

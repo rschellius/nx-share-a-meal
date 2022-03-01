@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, ParamMap } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
-import { AuthService } from '@cswp/auth'
 import { EntityService, IEntity } from '..'
 
 @Component({
@@ -17,7 +16,6 @@ export class BaseDetailComponent<T extends IEntity>
 
   constructor(
     private itemService: EntityService<T>,
-    public authService: AuthService,
     private route: ActivatedRoute
   ) {}
 

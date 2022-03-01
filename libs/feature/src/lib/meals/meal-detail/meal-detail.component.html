@@ -14,13 +14,30 @@
   </nav>
 
   <div class="row">
-    <div class="col-auto mr-auto">
+    <div class="col mr-auto">
       <h1>{{ item.name }}</h1>
-      <p>{{ item.description }}</p>
-      <p>Slechts € {{ item.price }}</p>
-      <p>Allergenen: {{ item.allergenes }} <br /></p>
+      <p>
+        {{ item.description }}
+        Geschikt voor {{ item.maxAmountOfParticipants }} deelnemers.
+      </p>
+      <h2>Slechts € {{ item.price }}</h2>
+
+      <h3>Over de kok</h3>
+      <p>
+        {{ item.cook.firstName }} {{ item.cook.lastName }} <br />
+        {{ item.cook.emailAdress }}
+      </p>
+
+      <p>
+        Vega: {{ item.isVega }}<br />
+        Vegan: {{ item.isVegan }}<br />
+        Allergenen: {{ item.allergenes }} <br />
+        Meenemen: {{ item.isToTakeHome }}
+      </p>
+
+      <strong>{{ item.participants.length }} Deelnemers</strong>
     </div>
-    <div class="col-5 mr-auto">
+    <div class="col mr-auto">
       <img
         src="{{ item.imageUrl }}"
         class="card-img-top movie-card-img"
@@ -30,7 +47,7 @@
     </div>
   </div>
 
-  <!-- <div class="row">
+  <div class="row">
     <div class="col-auto">
       <button
         *ngIf="authService.userMayEdit(item.cook.id) | async"
@@ -43,12 +60,12 @@
     </div>
     <div class="col-auto">
       <button
-        *ngIf="authService.userMayEdit(item.user.id) | async"
+        *ngIf="authService.userMayEdit(item.cook.id) | async"
         type="button"
         class="btn btn-danger"
       >
         Delete
       </button>
     </div>
-  </div> -->
+  </div>
 </div>

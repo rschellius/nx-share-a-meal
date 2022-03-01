@@ -13,9 +13,9 @@ import { MealService } from '../meal.service'
 export class MealDetailComponent extends BaseDetailComponent<Meal> {
   constructor(
     private mealService: MealService,
-    authService: AuthService,
+    public authService: AuthService,
     route: ActivatedRoute
   ) {
-    super(mealService, authService, route)
+    super(mealService, route)
   }
 }
