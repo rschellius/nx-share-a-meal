@@ -40,7 +40,7 @@ export class MealController {
   ): Promise<Meal> {
     this.logger.log('create ' + createMealDto.name)
     this.logger.log('create ' + JSON.stringify(req.user))
-    return this.mealService.create({ ...createMealDto, cook: req.user.userid })
+    return this.mealService.create({ ...createMealDto, cook: req.user.userId })
   }
 
   @Public()
@@ -86,7 +86,8 @@ export class MealController {
     @Body() updateMealDto: UpdateMealDto,
     @Req() req
   ): Promise<Meal> {
-    this.logger.log('update id=' + id)
+    this.logger.log('update mealId=' + id)
+    this.logger.log(req.user)
     return this.mealService.update(id, updateMealDto, req.user.userId)
   }
 
@@ -100,9 +101,9 @@ export class MealController {
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async participate(@Param('id') id: number, @Req() req): Promise<Meal> {
     this.logger.log(
-      'participate meal id=' + id + ' participant=' + req.user.userid
+      'participate meal id=' + id + ' participant=' + req.user.userId
     )
-    await this.mealService.participate(id, req.user.userid)
+    await this.mealService.participate(id, req.user.userId)
     return
   }
 
@@ -112,7 +113,7 @@ export class MealController {
   @ApiResponse({ status: 201, description: 'OK.', type: [Meal] })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async delete(@Param('id') id: number, @Req() req): Promise<void> {
-    this.logger.log(`remove mealId=${id} userId=${req.user.userid}`)
-    return this.mealService.remove(id, req.user.userid)
+    this.logger.log(`remove mealId=${id} userId=${req.user.userId}`)
+    return this.mealService.remove(id, req.user.userId)
   }
 }

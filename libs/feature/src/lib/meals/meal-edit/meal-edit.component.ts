@@ -21,4 +21,16 @@ export class MealEditComponent extends BaseEditComponent<Meal> {
   ) {
     super(mealService, alertService, authService, route, router)
   }
+
+  override onSubmit(meal: Meal) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const {
+      // cook,
+      participants,
+      createDate,
+      updateDate,
+      ...rest
+    } = meal
+    super.onSubmit(rest as Meal)
+  }
 }

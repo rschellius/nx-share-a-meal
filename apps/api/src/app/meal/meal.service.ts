@@ -89,8 +89,11 @@ export class MealService {
     if (!meal) {
       throw new NotFoundException(`Meal #${mealId} not found`)
     }
-    const cook = await this.userRepository.findOne(userId)
-    if (meal.cook !== cook) {
+    // const cook = await this.userRepository.findOne(userId)
+    if (meal.cook.id !== userId) {
+      this.logger.log(
+        `User ${userId} is not allowed to edit meal of cook ${meal.cook.id}`
+      )
       throw new BadRequestException(`Not allowed to edit.`)
     }
     return this.mealRepository.editMeal(mealId, updateMealDto)

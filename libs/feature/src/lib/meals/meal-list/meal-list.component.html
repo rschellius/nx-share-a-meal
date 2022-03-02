@@ -1,5 +1,5 @@
 <h1>Meals</h1>
-<p>Met uitleg hier</p>
+<p>Een overzicht van de beschikbare maaltijden.</p>
 <table class="table table-hover table-stiped">
   <thead>
     <tr>
@@ -16,7 +16,7 @@
         <a routerLink="{{ meal.id }}">{{ meal.name }}</a>
       </td>
       <td>{{ meal.dateTime | date: 'fullDate' }}</td>
-      <td>{{ meal.cook.firstName }}</td>
+      <td>{{ meal.cook?.firstName }}</td>
     </tr>
   </tbody>
 </table>

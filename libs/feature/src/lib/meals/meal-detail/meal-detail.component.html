@@ -24,8 +24,8 @@
 
       <h3>Over de kok</h3>
       <p>
-        {{ item.cook.firstName }} {{ item.cook.lastName }} <br />
-        {{ item.cook.emailAdress }}
+        {{ item.cook?.firstName }} {{ item.cook?.lastName }} <br />
+        {{ item.cook?.emailAdress }}
       </p>
 
       <p>
@@ -35,7 +35,7 @@
         Meenemen: {{ item.isToTakeHome }}
       </p>
 
-      <strong>{{ item.participants.length }} Deelnemers</strong>
+      <strong>{{ item.participants?.length }} Deelnemers</strong>
     </div>
     <div class="col mr-auto">
       <img
@@ -47,25 +47,14 @@
     </div>
   </div>
 
-  <div class="row">
+  <div *ngIf="authService.userMayEdit(item.cook?.id) | async" class="row">
     <div class="col-auto">
-      <button
-        *ngIf="authService.userMayEdit(item.cook.id) | async"
-        routerLink="edit"
-        type="button"
-        class="btn btn-warning"
-      >
+      <button routerLink="edit" type="button" class="btn btn-warning">
         Edit
       </button>
     </div>
     <div class="col-auto">
-      <button
-        *ngIf="authService.userMayEdit(item.cook.id) | async"
-        type="button"
-        class="btn btn-danger"
-      >
-        Delete
-      </button>
+      <button type="button" class="btn btn-danger">Delete</button>
     </div>
   </div>
 </div>

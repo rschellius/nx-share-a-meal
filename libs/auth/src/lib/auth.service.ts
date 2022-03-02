@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, of } from 'rxjs'
 import { ILoginFormData, IUser } from '@cswp/api-interfaces'
 import { Router } from '@angular/router'
-import { map, catchError, switchMap } from 'rxjs/operators'
+import { map, tap, catchError, switchMap } from 'rxjs/operators'
 import { AlertService, ConfigService } from '@cswp/util'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 
@@ -138,6 +138,7 @@ export class AuthService {
   }
 
   userMayEdit(itemUserId: number | undefined): Observable<boolean> {
+    console.log('userMayEdit')
     return this.currentUser$.pipe(
       map((user: IUser | undefined) => (user ? user.id === itemUserId : false))
     )

@@ -1,1 +1,162 @@
-<p>meal-edit works!</p>
+<div *ngIf="!item">
+  <cswp-util-spinner></cswp-util-spinner>
+</div>
+
+<div *ngIf="item">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/dashboard">Home</a></li>
+      <li class="breadcrumb-item"><a routerLink="/items">Meals</a></li>
+      <li *ngIf="item.id" class="breadcrumb-item active" aria-current="page">
+        {{ item.name }}
+      </li>
+      <li *ngIf="!item.id" class="breadcrumb-item active" aria-current="page">
+        New
+      </li>
+    </ol>
+  </nav>
+
+  <div class="row">
+    <div class="col-auto">
+      <h1>{{ title }}</h1>
+    </div>
+    <div *ngIf="debug" class="col-auto py-2">
+      <h3>({{ item.name }})</h3>
+    </div>
+  </div>
+
+  <form
+    #itemEditForm="ngForm"
+    name="form"
+    (ngSubmit)="itemEditForm.form.valid && onSubmit(item)"
+    novalidate
+  >
+    <div class="row">
+      <div class="col">
+        <div class="form-row">
+          <!-- item name -->
+          <div class="form-group col-sm-12 col-md-5 col-lg-6">
+            <label for="itemname">item name</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="item.name"
+              name="itemname"
+              #itemname="ngModel"
+              [ngClass]="{
+                'is-invalid': itemname.invalid && itemname.touched
+              }"
+              required
+              minlength="3"
+            />
+            <div
+              *ngIf="itemname.invalid && itemname.touched"
+              class="invalid-feedback"
+            >
+              <div *ngIf="itemname.errors?.['required']">
+                item name is vereist.
+              </div>
+              <div *ngIf="itemname.errors?.['minlength']">
+                item name moet ten minste 3 letters lang zijn.
+              </div>
+            </div>
+          </div>
+
+          <!-- item price -->
+          <div class="form-group col-sm-12 col-md-3 col-lg-2">
+            <label for="itemPrice">Jaar</label>
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="item.price"
+              name="itemPrice"
+              #itemPrice="ngModel"
+              [ngClass]="{
+                'is-invalid': itemPrice.invalid || item.price < 1890
+              }"
+              required
+            />
+            <!-- minlength="4" -->
+            <div *ngIf="itemPrice.invalid" class="invalid-feedback">
+              <div *ngIf="itemPrice.errors?.['required']">Jaar is vereist.</div>
+              <div *ngIf="itemPrice.errors?.['minlength']">
+                Jaar bestaat uit 4 cijfers.
+              </div>
+            </div>
+          </div>
+
+          <!-- item isVega -->
+          <div class="form-group col-md-6">
+            <label for="itemIsVega">Vega</label>
+            <div class="form-group col-lg-12">
+              <!--  -->
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input
+                  type="checkbox"
+                  id="is-vega"
+                  name="itemIsVega"
+                  class="custom-control-input"
+                  [(ngModel)]="item.isVega"
+                  #itemIsVega="ngModel"
+                  value="false"
+                />
+                <label class="custom-control-label" for="is-vega"
+                  >Deze maaltijd is vegetarisch
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-auto">
+            <button
+              type="submit"
+              class="btn btn-success"
+              [disabled]="!itemEditForm.valid"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-warning"
+              routerLink=".."
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              (click)="debug = !debug"
+              [attr.aria-expanded]="debug"
+              aria-controls="collapseExample"
+            >
+              Toggle Debug
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <br />
+        <div #collapse="ngbCollapse" [(ngbCollapse)]="!debug">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Debug info</h5>
+              <div class="row">
+                <div class="col-auto">
+                  <div class="card">
+                    <div class="card-body">
+                      <pre>{{ item | json }}</pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

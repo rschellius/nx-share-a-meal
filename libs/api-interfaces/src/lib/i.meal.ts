@@ -2,7 +2,7 @@
  * Meal-related interfaces
  */
 
-import { IUser } from "..";
+import { IUser } from '..'
 
 export enum Allergenes {
   GLUTEN = 'gluten',
@@ -11,18 +11,18 @@ export enum Allergenes {
 }
 
 export interface IMeal {
-  readonly name: string
-  readonly description: string
-  readonly isActive: boolean
-  readonly isVega: boolean
-  readonly isVegan: boolean
-  readonly isToTakeHome: boolean
-  readonly dateTime: Date
+  name: string
+  description: string
+  isActive: boolean
+  isVega: boolean
+  isVegan: boolean
+  isToTakeHome: boolean
+  dateTime: Date
+  imageUrl: string
+  allergenes: Allergenes[]
+  maxAmountOfParticipants: number
+  price: number
+  readonly participants: IUser[] | undefined
   readonly createDate: Date | undefined
   readonly updateDate: Date | undefined
-  readonly imageUrl: string
-  readonly allergenes: Allergenes[]
-  readonly maxAmountOfParticipants: number
-  readonly price: number
-  participants: IUser[]
 }

@@ -37,10 +37,10 @@
               *ngIf="firstName.invalid && firstName.touched"
               class="invalid-feedback"
             >
-              <div *ngIf="firstName.errors?.required">
+              <div *ngIf="firstName.errors?.['required']">
                 User name is vereist.
               </div>
-              <div *ngIf="firstName.errors?.minlength">
+              <div *ngIf="firstName.errors?.['minlength']">
                 User name moet ten minste 3 letters lang zijn.
               </div>
             </div>
@@ -59,13 +59,13 @@
             >
               <!--  -->
               <!-- <ng-container *ngIf="!roless || roless?.length === 0"> -->
-                <!-- <option selected>Loading...</option> -->
+              <!-- <option selected>Loading...</option> -->
               <!-- </ng-container> -->
               <!--  -->
               <!-- <ng-container *ngFor="let roles of roless"> -->
-                <!-- <option [value]="roles.id"> -->
-                  <!-- {{ roles.name }} -->
-                <!-- </option> -->
+              <!-- <option [value]="roles.id"> -->
+              <!-- {{ roles.name }} -->
+              <!-- </option> -->
               <!-- </ng-container> -->
             </select>
           </div>
@@ -74,19 +74,22 @@
           <div class="form-group col-sm-12 col-md-3 col-lg-2">
             <label for="phoneNumber">phoneNumber</label>
 
-            <input 
-              type="number" 
+            <input
+              type="number"
               class="form-control"
-              [(ngModel)]="user.phoneNumber" 
-              name="phoneNumber" 
+              [(ngModel)]="user.phoneNumber"
+              name="phoneNumber"
               #phoneNumber="ngModel"
-              [ngClass]="{ 'is-invalid': phoneNumber.invalid }" 
+              [ngClass]="{ 'is-invalid': phoneNumber.invalid }"
               required
-              minlength="4" />
+              minlength="4"
+            />
 
             <div *ngIf="phoneNumber.invalid" class="invalid-feedback">
-              <div *ngIf="phoneNumber.errors?.required">Jaar is vereist.</div>
-              <div *ngIf="phoneNumber.errors?.minlength">
+              <div *ngIf="phoneNumber.errors?.['required']">
+                Jaar is vereist.
+              </div>
+              <div *ngIf="phoneNumber.errors?.['minlength']">
                 Jaar bestaat uit 4 cijfers.
               </div>
             </div>

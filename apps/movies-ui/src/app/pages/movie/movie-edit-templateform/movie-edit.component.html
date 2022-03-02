@@ -56,10 +56,10 @@
               *ngIf="moviename.invalid && moviename.touched"
               class="invalid-feedback"
             >
-              <div *ngIf="moviename.errors?.required">
+              <div *ngIf="moviename.errors?.['required']">
                 Movie name is vereist.
               </div>
-              <div *ngIf="moviename.errors?.minlength">
+              <div *ngIf="moviename.errors?.['minlength']">
                 Movie name moet ten minste 3 letters lang zijn.
               </div>
             </div>
@@ -109,8 +109,8 @@
               minlength="4"
             />
             <div *ngIf="movieyear.invalid" class="invalid-feedback">
-              <div *ngIf="movieyear.errors?.required">Jaar is vereist.</div>
-              <div *ngIf="movieyear.errors?.minlength">
+              <div *ngIf="movieyear.errors?.['required']">Jaar is vereist.</div>
+              <div *ngIf="movieyear.errors?.['minlength']">
                 Jaar bestaat uit 4 cijfers.
               </div>
             </div>

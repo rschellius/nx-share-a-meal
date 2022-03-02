@@ -1,6 +1,13 @@
-import { IsBoolean, IsDate, IsNotEmpty, IsNumber, IsUrl } from 'class-validator'
+import {
+  Allow,
+  IsBoolean,
+  IsDate,
+  IsNotEmpty,
+  IsNumber,
+  IsUrl
+} from 'class-validator'
 import { PartialType } from '@nestjs/mapped-types'
-import { Allergenes } from '@cswp/api-interfaces'
+import { Allergenes, IUser } from '@cswp/api-interfaces'
 
 export class CreateMealDto {
   @IsNotEmpty()
@@ -25,9 +32,6 @@ export class CreateMealDto {
   @IsDate()
   readonly dateTime: Date
 
-  readonly createDate: Date
-  readonly updateDate: Date
-
   @IsNotEmpty()
   @IsUrl()
   readonly imageUrl: string
@@ -42,7 +46,15 @@ export class CreateMealDto {
   @IsNotEmpty()
   readonly price: number
 
+  @Allow()
+  id: number
+
+  @Allow()
+  cook: IUser
+
   participants: any[]
+  readonly createDate: Date
+  readonly updateDate: Date
 }
 
 // To create a type with the same fields, but with each one optional
