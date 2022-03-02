@@ -5,15 +5,18 @@ import { UtilModule } from '@cswp/util'
 import { HttpClientModule } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { LoggedInAuthGuard, SaveEditedWorkGuard } from '@cswp/auth'
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MealListComponent } from './meal-list/meal-list.component';
-import { MealDetailComponent } from './meal-detail/meal-detail.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { MealListComponent } from './meal-list/meal-list.component'
+import { MealDetailComponent } from './meal-detail/meal-detail.component'
 import { MealEditComponent } from './meal-edit/meal-edit.component'
 import { EntityModule } from '@cswp/entity'
+import { MealGridComponent } from './meal-grid/meal-grid.component'
+import { MealCardComponent } from './meal-card/meal-card.component'
 
 const routes: Routes = [
   {
-    path: '', pathMatch: 'full',
+    path: '',
+    pathMatch: 'full',
     component: MealListComponent
   },
   {
@@ -41,7 +44,9 @@ const routes: Routes = [
   declarations: [
     MealListComponent,
     MealDetailComponent,
-    MealEditComponent
+    MealEditComponent,
+    MealGridComponent,
+    MealCardComponent
   ],
   imports: [
     CommonModule,
@@ -52,6 +57,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     UtilModule,
     EntityModule
-  ]
+  ],
+  exports: [MealGridComponent, MealCardComponent]
 })
-export class MealsModule { }
+export class MealsModule {}

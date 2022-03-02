@@ -18,6 +18,7 @@ import { FooterComponent } from './shared/footer/footer.component'
 import { environment } from '../environments/environment'
 import { registerLocaleData } from '@angular/common'
 import localeNl from '@angular/common/locales/nl'
+import { MealsModule } from '@cswp/feature'
 
 registerLocaleData(localeNl, 'nl')
 
@@ -39,11 +40,11 @@ registerLocaleData(localeNl, 'nl')
     FormsModule,
     ReactiveFormsModule,
     ConfigModule.forRoot({ apiEndpoint: environment.SERVER_API_URL }),
-    // AuthModule.forRoot({ apiEndpoint: environment.SERVER_API_URL }),
     AuthModule,
     NgbModule,
     AppRoutingModule,
-    UtilModule
+    UtilModule,
+    MealsModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'nl' }],
   bootstrap: [AppComponent]

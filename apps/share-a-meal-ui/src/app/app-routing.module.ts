@@ -23,17 +23,17 @@ const routes: Routes = [
               throw { loadChunkError: true }
             }
           )
-      },
-      {
-        path: 'meals',
-        loadChildren: () =>
-          import(/* webpackChunkName: "meals.module" */ '@cswp/feature').then(
-            (m) => m.MealsModule,
-            () => {
-              throw { loadChunkError: true }
-            }
-          )
       }
+      // {
+      //   path: 'meals',
+      //   loadChildren: () =>
+      //     import(/* webpackChunkName: "meals.module" */ '@cswp/feature').then(
+      //       (m) => m.MealsModule,
+      //       () => {
+      //         throw { loadChunkError: true }
+      //       }
+      //     )
+      // }
     ]
   },
   { path: 'login', pathMatch: 'full', component: LoginComponent },
@@ -45,4 +45,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

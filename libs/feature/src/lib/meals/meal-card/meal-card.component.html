@@ -1,0 +1,58 @@
+<div class="card mb-4 shadow-lg">
+  <div class="card-img-wrapper">
+    <!-- style="width: auto; height: 200px; object-fit: cover" -->
+    <img
+      src="{{ meal.imageUrl }}"
+      class="slideshow"
+      aria-label="Placeholder: Thumbnail"
+      alt=""
+    />
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <h5 id="meal-title" class="card-title">{{ meal?.name }}</h5>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-8">
+        <!--  -->
+        <p class="card-text">
+          {{ meal?.description }}<br />
+          Allergenen: {{ meal?.allergenes }} <br />
+        </p>
+        <p>
+          Van
+          <strong
+            >{{ meal?.cook?.firstName }} {{ meal?.cook?.lastName }}</strong
+          >
+        </p>
+      </div>
+      <div class="col-4">
+        <span *ngIf="meal.isVega" class="badge bg-warning text-dark">Vega</span
+        ><br />
+        <span *ngIf="meal.isVegan" class="badge bg-warning text-dark"
+          >Vegan</span
+        ><br />
+        <span *ngIf="meal.isToTakeHome" class="badge bg-warning text-dark"
+          >Afhalen</span
+        ><br />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-auto">
+        <button
+          type="button"
+          routerLink="{{ meal.id }}"
+          class="btn btn-sm btn-success"
+        >
+          Details
+        </button>
+      </div>
+    </div>
+
+    <div class="btn-group"></div>
+  </div>
+</div>
