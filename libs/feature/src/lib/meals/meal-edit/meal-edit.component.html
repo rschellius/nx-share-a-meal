@@ -32,39 +32,96 @@
     novalidate
   >
     <div class="row">
-      <div class="col">
+      <!-- Linker kolom -->
+      <div class="col-7">
+        <!-- item name ---------------------------------- -->
+        <div class="form-group">
+          <label for="itemname">Naam</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="item.name"
+            name="itemname"
+            #itemname="ngModel"
+            [ngClass]="{
+              'is-invalid': itemname.invalid && itemname.touched
+            }"
+            required
+            minlength="3"
+          />
+          <div
+            *ngIf="itemname.invalid && itemname.touched"
+            class="invalid-feedback"
+          >
+            <div *ngIf="itemname.errors?.['required']">
+              item name is vereist.
+            </div>
+            <div *ngIf="itemname.errors?.['minlength']">
+              item name moet ten minste 3 letters lang zijn.
+            </div>
+          </div>
+        </div>
+
+        <!-- description ---------------------------------- -->
         <div class="form-row">
-          <!-- item name -->
-          <div class="form-group col-sm-12 col-md-5 col-lg-6">
-            <label for="itemname">item name</label>
-            <input
+          <div class="form-group">
+            <label for="itemDescription">Beschrijving</label>
+            <textarea
               type="text"
               class="form-control"
-              [(ngModel)]="item.name"
-              name="itemname"
-              #itemname="ngModel"
+              [(ngModel)]="item.description"
+              name="itemDescription"
+              #itemDescription="ngModel"
               [ngClass]="{
-                'is-invalid': itemname.invalid && itemname.touched
+                'is-invalid': itemDescription.invalid && itemDescription.touched
               }"
               required
-              minlength="3"
-            />
+              minlength="12"
+            ></textarea>
             <div
-              *ngIf="itemname.invalid && itemname.touched"
+              *ngIf="itemDescription.invalid && itemDescription.touched"
               class="invalid-feedback"
             >
-              <div *ngIf="itemname.errors?.['required']">
+              <div *ngIf="itemDescription.errors?.['required']">
                 item name is vereist.
               </div>
-              <div *ngIf="itemname.errors?.['minlength']">
+              <div *ngIf="itemDescription.errors?.['minlength']">
                 item name moet ten minste 3 letters lang zijn.
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- item price -->
-          <div class="form-group col-sm-12 col-md-3 col-lg-2">
-            <label for="itemPrice">Jaar</label>
+        <!-- imageUrl ---------------------------------- -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="itemname">Image Url</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="item.imageUrl"
+              name="itemImageUrl"
+              #itemImageUrl="ngModel"
+              [ngClass]="{
+                'is-invalid': itemImageUrl.invalid && itemImageUrl.touched
+              }"
+              required
+            />
+            <div
+              *ngIf="itemImageUrl.invalid && itemImageUrl.touched"
+              class="invalid-feedback"
+            >
+              <div *ngIf="itemImageUrl.errors?.['required']">
+                ImageUrl is vereist.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- item price ---------------------------------- -->
+        <div class="form-row">
+          <div class="form-group col-sm-12 col-md-6">
+            <label for="itemPrice">Price</label>
             <input
               type="number"
               class="form-control"
@@ -72,71 +129,148 @@
               name="itemPrice"
               #itemPrice="ngModel"
               [ngClass]="{
-                'is-invalid': itemPrice.invalid || item.price < 1890
+                'is-invalid': itemPrice.invalid
               }"
               required
             />
-            <!-- minlength="4" -->
             <div *ngIf="itemPrice.invalid" class="invalid-feedback">
-              <div *ngIf="itemPrice.errors?.['required']">Jaar is vereist.</div>
+              <div *ngIf="itemPrice.errors?.['required']">
+                Prijs is vereist.
+              </div>
               <div *ngIf="itemPrice.errors?.['minlength']">
                 Jaar bestaat uit 4 cijfers.
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- item isVega -->
-          <div class="form-group col-md-6">
-            <label for="itemIsVega">Vega</label>
-            <div class="form-group col-lg-12">
-              <!--  -->
-              <div class="custom-control custom-checkbox custom-control-inline">
-                <input
-                  type="checkbox"
-                  id="is-vega"
-                  name="itemIsVega"
-                  class="custom-control-input"
-                  [(ngModel)]="item.isVega"
-                  #itemIsVega="ngModel"
-                  value="false"
-                />
-                <label class="custom-control-label" for="is-vega"
-                  >Deze maaltijd is vegetarisch
-                </label>
+        <div class="form-row gy-5">
+          <!-- item isVega ---------------------------------- -->
+          <div class="form-group col-md-6 py-1">
+            <label for="itemIsVega">Vegetarisch</label>
+            <!-- <div class="custom-control custom-checkbox custom-control-inline"> -->
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="is-vega"
+                name="itemIsVega"
+                [(ngModel)]="item.isVega"
+                #itemIsVega="ngModel"
+                value="false"
+              />
+              <label class="form-check-label" for="is-vega"
+                >Deze maaltijd is vegetarisch
+              </label>
+            </div>
+          </div>
+
+          <!-- item isVegan ---------------------------------- -->
+          <div class="form-group col-md-6 py-1">
+            <label for="itemIsVegan">Vegan</label>
+            <!-- <div class="custom-control custom-checkbox custom-control-inline"> -->
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="is-veganistic"
+                name="itemIsVegan"
+                [(ngModel)]="item.isVegan"
+                #itemIsVegan="ngModel"
+                value="false"
+              />
+              <label class="form-check-label" for="is-veganistic"
+                >Deze maaltijd is veganistisch.
+              </label>
+            </div>
+          </div>
+
+          <!-- item isToTakeHome ---------------------------------- -->
+          <div class="form-group col-md-6 py-1">
+            <label for="itemIsToTakeHome">Afhalen</label>
+            <!-- <div class="custom-control custom-checkbox custom-control-inline"> -->
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="is-take-home"
+                name="itemIsToTakeHome"
+                [(ngModel)]="item.isToTakeHome"
+                #itemIsVega="ngModel"
+                value="false"
+              />
+              <label class="form-check-label" for="is-take-home"
+                >Deze maaltijd is alleen afhalen
+              </label>
+            </div>
+          </div>
+
+          <!-- item isActive ---------------------------------- -->
+          <div class="form-group col-md-6 py-1">
+            <label for="itemIsActive">Zichtbaarheid</label>
+            <!-- <div class="custom-control custom-checkbox custom-control-inline"> -->
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="is-active"
+                name="itemIsActive"
+                [(ngModel)]="item.isActive"
+                #itemIsActive="ngModel"
+                value="false"
+              />
+              <label class="form-check-label" for="is-active"
+                >Zichtbaarheid - actief of niet
+              </label>
+            </div>
+
+            <!-- Buttons  ---------------------------------- -->
+            <div class="row gy-10">
+              <div class="col-auto py-5">
+                <button
+                  type="submit"
+                  class="btn btn-success me-md-2"
+                  [disabled]="!itemEditForm.valid"
+                >
+                  Save
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-warning me-md-2"
+                  routerLink=".."
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-primary me-md-2"
+                  (click)="debug = !debug"
+                  [attr.aria-expanded]="debug"
+                  aria-controls="collapseExample"
+                >
+                  Toggle Debug
+                </button>
               </div>
             </div>
           </div>
         </div>
+        <!-- end row  -->
 
-        <div class="form-row">
-          <div class="col-auto">
-            <button
-              type="submit"
-              class="btn btn-success"
-              [disabled]="!itemEditForm.valid"
-            >
-              Save
-            </button>
-            <button
-              type="button"
-              class="btn btn-outline-warning"
-              routerLink=".."
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              class="btn btn-outline-primary"
-              (click)="debug = !debug"
-              [attr.aria-expanded]="debug"
-              aria-controls="collapseExample"
-            >
-              Toggle Debug
-            </button>
-          </div>
-        </div>
+        <!-- End Form  ---------------------------------- -->
+      </div>
+
+      <!-- Rechter kolom -->
+      <div class="col">
+        <img
+          src="{{ item.imageUrl }}"
+          class="img-fluid"
+          aria-label="Placeholder: Thumbnail"
+          alt=""
+        />
       </div>
     </div>
+
+    <!-- Debug ---------------------------------------------------- -->
     <div class="row">
       <div class="col">
         <br />

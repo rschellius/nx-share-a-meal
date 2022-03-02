@@ -8,8 +8,7 @@ import { MealService } from '../meal.service'
 
 @Component({
   selector: 'cswp-feature-meal-edit',
-  templateUrl: './meal-edit.component.html',
-  styles: []
+  templateUrl: './meal-edit.component.html'
 })
 export class MealEditComponent extends BaseEditComponent<Meal> {
   constructor(
@@ -20,17 +19,13 @@ export class MealEditComponent extends BaseEditComponent<Meal> {
     router: Router
   ) {
     super(mealService, alertService, authService, route, router)
+    super.title = 'Maaltijd'
   }
 
   override onSubmit(meal: Meal) {
+    // filter out uneditable properties
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const {
-      // cook,
-      participants,
-      createDate,
-      updateDate,
-      ...rest
-    } = meal
+    const { participants, createDate, updateDate, ...rest } = meal
     super.onSubmit(rest as Meal)
   }
 }

@@ -36,25 +36,34 @@
       </p>
 
       <strong>{{ item.participants?.length }} Deelnemers</strong>
-    </div>
-    <div class="col mr-auto">
-      <img
-        src="{{ item.imageUrl }}"
-        class="card-img-top movie-card-img"
-        aria-label="Placeholder: Thumbnail"
-        alt=""
-      />
-    </div>
-  </div>
 
-  <div *ngIf="authService.userMayEdit(item.cook?.id) | async" class="row">
-    <div class="col-auto">
-      <button routerLink="edit" type="button" class="btn btn-warning">
-        Edit
-      </button>
+      <div
+        *ngIf="authService.userMayEdit(item.cook?.id) | async"
+        class="row gy-2"
+      >
+        <div class="col-auto py-5">
+          <button routerLink="edit" type="button" class="btn btn-warning">
+            Edit
+          </button>
+        </div>
+        <div class="col-auto py-5">
+          <button type="button" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
     </div>
-    <div class="col-auto">
-      <button type="button" class="btn btn-danger">Delete</button>
+    <!--  -->
+    <div class="col mr-auto">
+      <div class="card">
+        <div class="card-body">
+          <img
+            src="{{ item.imageUrl }}"
+            class="card-img-top movie-card-img"
+            aria-label="Placeholder: Thumbnail"
+            alt=""
+          />
+        </div>
+      </div>
     </div>
+    <!--  -->
   </div>
 </div>
