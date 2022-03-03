@@ -23,17 +23,17 @@ const routes: Routes = [
               throw { loadChunkError: true }
             }
           )
+      },
+      {
+        path: 'meals',
+        loadChildren: () =>
+          import(/* webpackChunkName: "meal.module" */ '@cswp/feature').then(
+            (m) => m.MealModule,
+            () => {
+              throw { loadChunkError: true }
+            }
+          )
       }
-      // {
-      //   path: 'meals',
-      //   loadChildren: () =>
-      //     import(/* webpackChunkName: "meals.module" */ '@cswp/feature').then(
-      //       (m) => m.MealsModule,
-      //       () => {
-      //         throw { loadChunkError: true }
-      //       }
-      //     )
-      // }
     ]
   },
   { path: 'login', pathMatch: 'full', component: LoginComponent },

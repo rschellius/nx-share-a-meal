@@ -60,4 +60,4 @@ const routes: Routes = [
   ],
   exports: [MealGridComponent, MealCardComponent]
 })
-export class MealsModule {}
+export class MealModule {}
