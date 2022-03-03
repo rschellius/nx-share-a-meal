@@ -42,7 +42,7 @@ services:
       dockerfile: ./apps/share-a-meal-ui/Dockerfile
       args:
         - NODE_ENV=development
-        - BUILD_FLAG=''
+        - BUILD_FLAG=-c development
     image: share-a-meal-ui:nx-dev
     ports:
       - 4200:4200

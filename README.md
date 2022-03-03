@@ -64,6 +64,10 @@ nx e2e api-e2e
 
 Run `nx graph` to see a diagram of the dependencies of your projects.
 
+## Sources
+
+- [Nx, NestJs, React — Docker Deploys](https://medium.com/swlh/nx-nestjs-react-docker-deploys-928a55fc19fd)
+
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
