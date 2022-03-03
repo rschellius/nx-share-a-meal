@@ -57,7 +57,7 @@ jobs:
           docker tag $IMAGE_NAME $REGISTRY/$IMAGE_NAME
           docker push $REGISTRY/$IMAGE_NAME
 
-  #Run the container in droplet
+  #Run the container in the droplet
   deploy:
     needs: pushToDORegistry
     runs-on: ubuntu-latest
