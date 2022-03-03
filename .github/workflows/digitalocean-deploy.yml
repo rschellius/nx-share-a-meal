@@ -15,7 +15,7 @@ on:
 
 env:
   IMAGE_NAME: my-base-image
-  REGISTRY: "registry.digitalocean.com/avansinformatica-container-registry"
+  REGISTRY: 'registry.digitalocean.com/avansinformatica-container-registry'
 
 jobs:
   # Run tests.
@@ -72,13 +72,9 @@ jobs:
           PORT: ${{ secrets.PORT }}
           password: ${{secrets.DIGITALOCEAN_ACCESS_TOKEN}} # ${{ secrets.PASSWORD }}
           script:
-            # Stop running container
+            # remove container and start new one
             docker stop $(echo $IMAGE_NAME)
-
-            # Remove old container
             docker rm $(echo $IMAGE_NAME)
-
-            # Run a new container from a new image
             docker run -d \
             --restart always \
             --env-file .env \
