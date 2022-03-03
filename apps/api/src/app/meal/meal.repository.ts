@@ -8,17 +8,6 @@ export class MealRepository extends Repository<Meal> {
   // Logging
   private readonly logger = new Logger(MealRepository.name)
 
-  // /**
-  //  *
-  //  * @param createMealDto
-  //  * @returns
-  //  */
-  // public createMeal(createMealDto: CreateMealDto): Promise<Meal> {
-  //   this.logger.log('createMeal ' + createMealDto.name)
-  //   return this.save(createMealDto as Meal).then((meal) => meal)
-  //   // .catch(err => )
-  // }
-
   /**
    *
    * @param id

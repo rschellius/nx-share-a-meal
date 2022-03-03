@@ -16,7 +16,7 @@ export class User implements IUser {
     description: 'The database ID of the user'
   })
   @PrimaryGeneratedColumn()
-  id: number
+  id?: number
 
   @ApiProperty({
     example: 'John',
@@ -37,7 +37,7 @@ export class User implements IUser {
     enum: UserRole,
     default: [UserRole.GUEST, UserRole.EDITOR]
   })
-  roles: UserRole[]
+  roles?: UserRole[]
 
   @Exclude({ toPlainOnly: true })
   @Column({ default: true })
@@ -46,9 +46,9 @@ export class User implements IUser {
     description: 'Whether this is an active user',
     default: true
   })
-  isActive: boolean
+  isActive?: boolean
 
-  token: string
+  token?: string
 
   @ApiProperty({
     example: 'j.doe@server.com',
@@ -73,16 +73,16 @@ export class User implements IUser {
     description: 'The user`s phonenumber'
   })
   @Column()
-  phoneNumber: string
+  phoneNumber?: string
 
   @OneToMany(() => Meal, (meal) => meal.cook)
-  meals: Meal[]
+  meals?: Meal[]
 
-  toJSON() {
+  toJSON? = function () {
     return instanceToPlain(this)
   }
 
-  validatePassword(password: string) {
+  validatePassword? = function (password: string) {
     // if (!this.password || !this.passwordSalt) {
     //   return false
     // }

@@ -1,0 +1,59 @@
+version: '3.2'
+
+services:
+  share-a-meal-api:
+    build: ./api
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=mysql
+      - DB_DATABASE=share-a-meal
+      - DB_USER=share-a-meal-user
+      - DB_PASSWORD=secret
+      - LOGLEVEL=debug # or trace, info, debug, warn, error
+    links:
+      - mysql
+    stop_grace_period: 8s
+    depends_on:
+      - mysql
+    networks:
+      - frontend
+      - backend
+
+  angular:
+    build: ./share-a-meal-ui
+    ports:
+      # <Port exposed> : < Port running inside container>
+      - '4200:4200'
+    depends_on:
+      - share-a-meal-api
+    networks:
+      - frontend
+
+  mysql:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    # restart: always
+    volumes:
+      # All the .sql's in the given directory will be imported.
+      # But only on first install of the db image!
+      - ./apps/api/src/mysql-dump:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - 3307:3306
+    expose:
+      # Opens port on the container
+      - 3307
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:
+#
+# # Names our volume
+# volumes:
+#   my-db:

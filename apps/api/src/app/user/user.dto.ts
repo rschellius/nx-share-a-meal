@@ -1,5 +1,5 @@
 import { PartialType } from '@nestjs/mapped-types'
-import { IUser, UserRole } from '@cswp/api-interfaces'
+import { IUser } from '@cswp/api-interfaces'
 import { IsEmail, IsNotEmpty } from 'class-validator'
 
 export class CreateUserDto implements IUser {
@@ -12,7 +12,7 @@ export class CreateUserDto implements IUser {
   @IsNotEmpty()
   readonly password: string
 
-  token: string
+  token?: string
 
   @IsNotEmpty()
   @IsEmail()

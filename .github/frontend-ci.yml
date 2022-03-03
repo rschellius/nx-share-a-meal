@@ -25,3 +25,12 @@ jobs:
           node-version: '16.x'
       - run: npm ci
       - run: npx nx test frontend --parallel --maxParallel=4
+
+
+- name: DigitalOcean Docker Image Publish
+  uses: ripplr-io/docr-docker-publish@v1
+  with:
+    # rename this path
+    image_path: registry-path/image-path
+    # Example when you have a non-default dockerfile
+    dockerfile: ./docker/dev.Dockerfile
