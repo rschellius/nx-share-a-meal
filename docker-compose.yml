@@ -1,44 +1,67 @@
-version: '3.2'
+version: '3.8'
+
+networks:
+  corp:
+    driver: bridge
 
 services:
   share-a-meal-api:
-    build: ./api
+    container_name: api
+    build:
+      context: ./
+      cache_from:
+        - my-base-image:nx-base
+      dockerfile: ./apps/api/Dockerfile
+      args:
+        NODE_ENV: 'development'
+        BUILD_FLAG: ''
+    image: api-server:nx-dev
     ports:
-      - '3000:3000'
+      - 3000:3000
+    depends_on:
+      - mysql
     environment:
-      - NODE_ENV=production
-      - DB_HOST=mysql
-      - DB_DATABASE=share-a-meal
-      - DB_USER=share-a-meal-user
-      - DB_PASSWORD=secret
+      - NODE_ENV=development
+      - PORT = 3000
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWORD=admin
+      - MYSQL_HOSTNAME=mysql
+      - MYSQL_PORT=3306 # api talks to the internal mysql port!
+      - MYSQL_DATABASENAME=share-a-meal
       - LOGLEVEL=debug # or trace, info, debug, warn, error
-    links:
-      - mysql
-    stop_grace_period: 8s
-    depends_on:
-      - mysql
     networks:
-      - frontend
-      - backend
+      - corp
+    restart: on-failure
 
-  angular:
-    build: ./share-a-meal-ui
+  share-a-meal-ui:
+    container_name: frontend
+    build:
+      context: ./
+      cache_from:
+        - node:16-alpine
+      dockerfile: ./apps/share-a-meal-ui/Dockerfile
+      args:
+        - NODE_ENV=development
+        - BUILD_FLAG=''
+    image: share-a-meal-ui:nx-dev
     ports:
-      # <Port exposed> : < Port running inside container>
-      - '4200:4200'
-    depends_on:
-      - share-a-meal-api
+      - 4200:4200
+    environment:
+      NODE_ENV: 'development'
+      PORT: 4200
     networks:
-      - frontend
+      - corp
+    restart: on-failure
 
   mysql:
+    container_name: mysql
     image: mysql:5.7
     command: --default-authentication-plugin=mysql_native_password
-    # restart: always
+    restart: always
     volumes:
       # All the .sql's in the given directory will be imported.
       # But only on first install of the db image!
-      - ./apps/api/src/mysql-dump:/docker-entrypoint-initdb.d
+      - ./apps/api/src/database:/docker-entrypoint-initdb.d
     environment:
       - MYSQL_ROOT_PASSWORD=admin
     ports:
@@ -48,12 +71,4 @@ services:
       # Opens port on the container
       - 3307
     networks:
-      - backend
-
-networks:
-  frontend:
-  backend:
-#
-# # Names our volume
-# volumes:
-#   my-db:
+      - corp

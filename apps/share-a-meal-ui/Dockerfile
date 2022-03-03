@@ -1,26 +1,20 @@
-# Create image based on the official Node 6 image from dockerhub
-FROM node:latest
+FROM my-base-image:nx-base AS builder
 
-# Create a directory where our app will be placed
-RUN mkdir -p /usr/src/app
+ARG NODE_ENV
+ARG BUILD_FLAG
+WORKDIR /app/builder
+COPY . .
+RUN npx nx build share-a-meal-ui ${BUILD_FLAG}
 
-# Change directory so that our commands run inside this new directory
-WORKDIR /usr/src/app
+FROM my-base-image:nx-base
 
-# Get all the code needed to run the app into the workdir
-# Files/folders to be excluded are in .dockerignore
-COPY . /usr/src/app
+WORKDIR /app
 
-# Set environment variables
-ENV NODE_ENV=production
+COPY --from=builder /app/builder/dist/apps/share-a-meal-ui ./share-a-meal-ui
+COPY --from=builder /app/builder/apps/share-a-meal-ui/server.js ./
 
-# Install dependecies
-RUN npm install
-RUN node_modules/.bin/ng build --configuration production --aot
-# RUN npm run postinstall
+RUN npm i express compression
 
-# Expose the port the app runs in
-EXPOSE 4200
+ENV NODE_ENV=$NODE_ENV
 
-# Serve the app in productionmode
-CMD ["node", "server.js"]
+CMD ["node", "./server.js"]

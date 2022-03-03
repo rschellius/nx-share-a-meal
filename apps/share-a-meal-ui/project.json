@@ -7,12 +7,14 @@
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
+      "generatePackageJson": true,
       "options": {
         "outputPath": "dist/apps/share-a-meal",
         "index": "apps/share-a-meal/src/index.html",
         "main": "apps/share-a-meal/src/main.ts",
         "polyfills": "apps/share-a-meal/src/polyfills.ts",
         "tsConfig": "apps/share-a-meal/tsconfig.app.json",
+
         "assets": [
           "apps/share-a-meal/src/favicon.ico",
           "apps/share-a-meal/src/assets"

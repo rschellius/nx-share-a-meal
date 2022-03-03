@@ -69,7 +69,8 @@
             "outputPath": "dist/apps/movies-api",
             "main": "apps/movies-api/src/main.ts",
             "tsConfig": "apps/movies-api/tsconfig.app.json",
-            "assets": ["apps/movies-api/src/assets"]
+            "assets": ["apps/movies-api/src/assets"],
+            "generatePackageJson": true
           },
           "configurations": {
             "production": {
@@ -118,6 +119,7 @@
         "build": {
           "executor": "@angular-devkit/build-angular:browser",
           "outputs": ["{options.outputPath}"],
+          "generatePackageJson": true,
           "options": {
             "outputPath": "dist/apps/movies-ui",
             "index": "apps/movies-ui/src/index.html",
@@ -245,6 +247,7 @@
         "build": {
           "executor": "@angular-devkit/build-angular:browser",
           "outputs": ["{options.outputPath}"],
+          "generatePackageJson": true,
           "options": {
             "outputPath": "dist/apps/share-a-meal-ui",
             "index": "apps/share-a-meal-ui/src/index.html",

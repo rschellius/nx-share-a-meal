@@ -30,6 +30,16 @@ nx b share-a-meal-ui
 nx b api
 ```
 
+## Docker
+
+The root Dockerfile contains the base image for all apps in the monorepo. This image must be built at first. It is tagged so that the other Dockerfiles can find it.
+
+```
+docker build . -t my-base-image:nx-base
+```
+
+Then run `docker-compose build` and/or `docker-compose up`.
+
 ## Running unit tests
 
 Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io). Run `nx affected:test` to execute the unit tests affected by a change.

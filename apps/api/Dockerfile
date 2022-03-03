@@ -1,22 +1,15 @@
-FROM node:carbon
+FROM my-base-image:nx-base AS builder
 
-# Create app directory
-WORKDIR /usr/src/app
-
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY ../../package*.json ./
-# Bundle app source
+ARG NODE_ENV
+ARG BUILD_FLAG
+WORKDIR /app/builder
 COPY . .
+RUN npx nx build api ${BUILD_FLAG}
 
-# If you are building your code for production
-RUN npm install --production
-# RUN npm install --only=production
-RUN npx nx build api
+FROM my-base-image:nx-base
 
-# Set environment variables if needed
-# ENV DB_PASSWORD='secret'
+WORKDIR /app
+COPY --from=builder /app/builder ./
+ENV NODE_ENV=$NODE_ENV
 
-EXPOSE 3000
-CMD [ "node", "../../dist/apps/api/main.js" ]
+CMD ["node", "./dist/apps/api/main.js"]

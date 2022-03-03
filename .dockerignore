@@ -1,0 +1,14 @@
+#
+# To increase the build’s performance, exclude files and directories
+# by adding them in this .dockerignore file.
+#
+node_modules
+npm-debug.log
+dist
+database
+test
+.angular
+.editorconfig
+.gitignore
+.gitlab-ci*
+README.md
