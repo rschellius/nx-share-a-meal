@@ -1,0 +1,32 @@
+name: Express Continuous Integration
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [dev, main]
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+      - uses: supercharge/mongodb-github-action@1.7.0
+        with:
+          mongodb-version: '4.2'
+      - uses: baptouuuu/setup-neo4j@v1.2.0
+      - run: npm ci
+      - run: npx nx test backend --parallel --maxParallel=4
+
+  code-quality-backend: 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+      - run: npm ci
+      - run: npx nx run backend:lint
