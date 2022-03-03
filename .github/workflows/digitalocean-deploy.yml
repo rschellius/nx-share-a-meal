@@ -67,7 +67,7 @@ jobs:
       - name: Executing remote command
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST }}
+          HOST: ${{ secrets.HOST }}
           USERNAME: ${{secrets.DIGITALOCEAN_ACCESS_TOKEN}} # ${{ secrets.USERNAME }}
           PORT: ${{ secrets.PORT }}
           password: ${{secrets.DIGITALOCEAN_ACCESS_TOKEN}} # ${{ secrets.PASSWORD }}
