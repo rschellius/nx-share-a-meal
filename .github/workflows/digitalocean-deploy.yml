@@ -1,0 +1,87 @@
+name: Docker
+
+on:
+  push:
+    # Publish `master` as Docker `latest` image.
+    branches:
+      - master
+
+    # Publish `v1.2.3` tags as releases.
+    tags:
+      - v*
+
+  # Run tests for any PRs.
+  pull_request:
+
+env:
+  IMAGE_NAME: my-base-image
+  REGISTRY: "registry.digitalocean.com/avansinformatica-container-registry"
+
+jobs:
+  # Run tests.
+  # See also https://docs.docker.com/docker-hub/builds/automated-testing/
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run tests
+        run: |
+          if [ -f docker-compose.test.yml ]; then
+            docker-compose --file docker-compose.test.yml build
+            docker-compose --file docker-compose.test.yml run sut
+          else
+            docker build . --file Dockerfile
+          fi
+
+  pushToDORegistry:
+    # Ensure test job passes before pushing image.
+    # needs: test
+    runs-on: ubuntu-latest
+    # if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build image
+        run: docker build . --file Dockerfile --tag $IMAGE_NAME
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 600
+
+      - name: push image to digitalocean
+        run: |
+          doctl registry login
+          docker tag $IMAGE_NAME $REGISTRY/$IMAGE_NAME
+          docker push $REGISTRY/$IMAGE_NAME
+
+  #Run the container in droplet
+  deploy:
+    needs: pushToDORegistry
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Executing remote command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          USERNAME: ${{secrets.DIGITALOCEAN_ACCESS_TOKEN}} # ${{ secrets.USERNAME }}
+          PORT: ${{ secrets.PORT }}
+          password: ${{secrets.DIGITALOCEAN_ACCESS_TOKEN}} # ${{ secrets.PASSWORD }}
+          script:
+            # Stop running container
+            docker stop $(echo $IMAGE_NAME)
+
+            # Remove old container
+            docker rm $(echo $IMAGE_NAME)
+
+            # Run a new container from a new image
+            docker run -d \
+            --restart always \
+            --env-file .env \
+            -p 8000:8000 \
+            --name $(echo $IMAGE_NAME) \
+            $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) # $(echo $COMMAND)
