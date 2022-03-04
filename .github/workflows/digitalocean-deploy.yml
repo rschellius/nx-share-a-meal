@@ -39,7 +39,7 @@ jobs:
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 600
 
-      - name: push image to digitalocean
+      - name: Push image to digitalocean
         run: |
           doctl registry login
           docker tag $IMAGE_NAME $REGISTRY/$IMAGE_NAME
@@ -54,6 +54,9 @@ jobs:
       IMAGE_NAME: share-a-meal-api
     steps:
       - uses: actions/checkout@v2
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 600
+
       - name: Build image
         run: docker build . --file ./apps/api/Dockerfile --tag $IMAGE_NAME
 
@@ -62,10 +65,7 @@ jobs:
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
-      - name: Log in to DigitalOcean Container Registry with short-lived credentials
-        run: doctl registry login --expiry-seconds 600
-
-      - name: push image to digitalocean
+      - name: Push image to digitalocean
         run: |
           doctl registry login
           docker tag $IMAGE_NAME $REGISTRY/$IMAGE_NAME
