@@ -1,11 +1,8 @@
-name: Docker
+name: Build and publish Docker images
 
 on:
   push:
-    # Publish `master` as the Docker `latest` image.
-    branches:
-      - master
-      - release
+    branches: [master, release]
 
     # Publish `v1.2.3` tags as releases.
     tags:
@@ -21,18 +18,18 @@ env:
 jobs:
   # Run tests.
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run tests
-        run: |
-          if [ -f docker-compose.test.yml ]; then
-            docker-compose --file docker-compose.test.yml build
-            docker-compose --file docker-compose.test.yml run sut
-          else
-            docker build . --file Dockerfile
-          fi
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Run tests
+  #       run: |
+  #         if [ -f docker-compose.test.yml ]; then
+  #           docker-compose --file docker-compose.test.yml build
+  #           docker-compose --file docker-compose.test.yml run sut
+  #         else
+  #           docker build . --file Dockerfile
+  #         fi
 
   build-api:
     # Ensure test job passes before pushing image.
@@ -44,7 +41,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build image
-        run: docker build . --file .\apps\api\Dockerfile --tag $IMAGE_NAME
+        run: docker build . --file ./apps/api/Dockerfile --tag $IMAGE_NAME
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
