@@ -39,14 +39,20 @@ The root Dockerfile contains the base image for all apps in the monorepo. This i
 To build and run as separate images and containers:
 
 ```
+// Base image
 docker build . -t my-base-image:nx-base
 ```
 
 Then:
 
 ```
+// API
 docker build . --file .\apps\api\Dockerfile --tag share-a-meal-api
 docker run -i -t share-a-meal-api
+
+// UI
+docker build . --file .\apps\share-a-meal-ui\Dockerfile --tag share-a-meal-ui
+docker run -p 4200:4200 -i -t share-a-meal-ui
 ```
 
 ### docker-compose

@@ -1,4 +1,4 @@
-FROM my-base-image:nx-base AS base-image
+FROM my-base-image:latest AS base-image
 
 ARG NODE_ENV
 ARG BUILD_FLAG
