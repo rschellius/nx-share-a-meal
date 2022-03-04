@@ -42,7 +42,7 @@ jobs:
       - name: Push image to digitalocean
         run: |
           doctl registry login
-          docker tag $IMAGE_NAME $REGISTRY/$IMAGE_NAME
+          docker tag $IMAGE_NAME:latest $REGISTRY/$IMAGE_NAME
           docker push $REGISTRY/$IMAGE_NAME
 
   build-api:
@@ -65,12 +65,12 @@ jobs:
       - name: Build image
         run: |
           doctl registry login
-          docker build . --file ./apps/api/Dockerfile --tag $IMAGE_NAME
+          docker build . --file ./apps/api/Dockerfile --tag $IMAGE_NAME:latest
 
       - name: Push image to digitalocean
         run: |
           doctl registry login
-          docker tag $IMAGE_NAME $REGISTRY/$IMAGE_NAME
+          docker tag $IMAGE_NAME:latest $REGISTRY/$IMAGE_NAME
           docker push $REGISTRY/$IMAGE_NAME
 
   # build-UI:
