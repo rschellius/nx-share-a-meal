@@ -18,22 +18,36 @@ env:
 jobs:
   # Run tests.
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-  # test:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Run tests
-  #       run: |
-  #         if [ -f docker-compose.test.yml ]; then
-  #           docker-compose --file docker-compose.test.yml build
-  #           docker-compose --file docker-compose.test.yml run sut
-  #         else
-  #           docker build . --file Dockerfile
-  #         fi
+
+  build-base-image:
+    # Ensure test job passes before pushing image.
+    # needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    env:
+      IMAGE_NAME: my-base-image
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build image
+        run: docker build . --file Dockerfile --tag $IMAGE_NAME
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 600
+
+      - name: push image to digitalocean
+        run: |
+          doctl registry login
+          docker tag $IMAGE_NAME $REGISTRY/$IMAGE_NAME
+          docker push $REGISTRY/$IMAGE_NAME
 
   build-api:
     # Ensure test job passes before pushing image.
-    # needs: test
+    needs: build-base-image
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
     env:
