@@ -15,7 +15,7 @@ on:
   pull_request:
 
 env:
-  IMAGE_NAME: my-base-image
+  # IMAGE_NAME: my-base-image
   REGISTRY: 'registry.digitalocean.com/avansinformatica-container-registry'
 
 jobs:
@@ -34,15 +34,17 @@ jobs:
             docker build . --file Dockerfile
           fi
 
-  pushToDORegistry:
+  build-api:
     # Ensure test job passes before pushing image.
     # needs: test
     runs-on: ubuntu-latest
-    # if: github.event_name == 'push'
+    if: github.event_name == 'push'
+    env:
+      IMAGE_NAME: share-a-meal-api
     steps:
       - uses: actions/checkout@v2
       - name: Build image
-        run: docker build . --file Dockerfile --tag $IMAGE_NAME
+        run: docker build . --file .\apps\api\Dockerfile --tag $IMAGE_NAME
 
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -58,9 +60,35 @@ jobs:
           docker tag $IMAGE_NAME $REGISTRY/$IMAGE_NAME
           docker push $REGISTRY/$IMAGE_NAME
 
+  # build-UI:
+  #   # Ensure test job passes before pushing image.
+  #   # needs: test
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'push'
+  #   env:
+  #     IMAGE_NAME: share-a-meal-ui
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Build image
+  #       run: docker build . --file Dockerfile --tag $IMAGE_NAME
+
+  #     - name: Install doctl
+  #       uses: digitalocean/action-doctl@v2
+  #       with:
+  #         token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+  #     - name: Log in to DigitalOcean Container Registry with short-lived credentials
+  #       run: doctl registry login --expiry-seconds 600
+
+  #     - name: push image to digitalocean
+  #       run: |
+  #         doctl registry login
+  #         docker tag $IMAGE_NAME $REGISTRY/$IMAGE_NAME
+  #         docker push $REGISTRY/$IMAGE_NAME
+
   #Run the container in the droplet
   deploy:
-    needs: pushToDORegistry
+    needs: build-api
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
     steps:

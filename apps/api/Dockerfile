@@ -7,10 +7,6 @@ ARG NODE_ENV
 ARG BUILD_FLAG
 
 WORKDIR /app/builder
-
-# COPY . .
-
-# build api dist into /app/builder/dist/apps/api 
 RUN npx nx build api ${BUILD_FLAG}
 
 # Start a new empty layer and copy only the requires folders onto it. 

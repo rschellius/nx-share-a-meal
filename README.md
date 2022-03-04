@@ -34,11 +34,24 @@ nx b api
 
 The root Dockerfile contains the base image for all apps in the monorepo. This image must be built at first. It is tagged so that the other Dockerfiles can find it.
 
+### Images and containers
+
+To build and run as separate images and containers:
+
 ```
 docker build . -t my-base-image:nx-base
 ```
 
-Then run `docker-compose build` and/or `docker-compose up`.
+Then:
+
+```
+docker build . --file .\apps\api\Dockerfile --tag share-a-meal-api
+docker run -i -t share-a-meal-api
+```
+
+### docker-compose
+
+You could also use docker-compose to run `docker-compose build` and/or `docker-compose up`.
 
 ## Running unit tests
 
