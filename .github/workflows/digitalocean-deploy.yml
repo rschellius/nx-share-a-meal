@@ -63,9 +63,9 @@ jobs:
         run: doctl registry login --expiry-seconds 600
 
       - name: Build image
-        run: docker build . --file ./apps/api/Dockerfile --tag $IMAGE_NAME
-        with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        run: |
+          doctl registry login
+          docker build . --file ./apps/api/Dockerfile --tag $IMAGE_NAME
 
       - name: Push image to digitalocean
         run: |
