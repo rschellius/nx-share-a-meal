@@ -6,6 +6,9 @@ node_modules
 npm-debug.log
 database
 test
+tools
+firebase*
+.firebaserc
 .editorconfig
 .gitignore
 .gitlab-ci*

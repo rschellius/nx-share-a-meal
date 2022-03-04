@@ -5,10 +5,11 @@ import { NestExpressApplication } from '@nestjs/platform-express'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { AppModule } from './app/app.module'
 import { TransformInterceptor } from './app/common/interceptors/transform.interceptor'
+import { environment as env } from './environments/environment'
 
 async function bootstrap() {
   const port = process.env.PORT || 3000
-
+  const mode = env.production ? 'production' : 'development'
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
 
   app.useGlobalPipes(
@@ -41,6 +42,9 @@ async function bootstrap() {
   SwaggerModule.setup('docs', app, document)
 
   await app.listen(port)
-  Logger.log(`Application is running on: ${await app.getUrl()}`, 'Main')
+  Logger.log(
+    `Application is running in ${mode} mode on ${await app.getUrl()}`,
+    'Main'
+  )
 }
 bootstrap()

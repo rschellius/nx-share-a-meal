@@ -5,6 +5,15 @@ networks:
     driver: bridge
 
 services:
+  base-image:
+    container_name: my-base-image
+    build:
+      context: ./
+      args:
+        - NODE_ENV=${NODE_ENV}
+        - BUILD_FLAG=-c ${NODE_ENV}
+    image: my-base-image:nx-base
+
   share-a-meal-api:
     container_name: api
     build:
@@ -13,15 +22,16 @@ services:
         - my-base-image:nx-base
       dockerfile: ./apps/api/Dockerfile
       args:
-        NODE_ENV: 'development'
-        BUILD_FLAG: ''
+        - NODE_ENV=${NODE_ENV}
+        - BUILD_FLAG=-c ${NODE_ENV}
     image: api-server:nx-dev
     ports:
       - 3000:3000
     depends_on:
+      - base-image
       - mysql
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=${NODE_ENV}
       - PORT = 3000
       - MYSQL_USERNAME=root
       - MYSQL_PASSWORD=admin
@@ -31,7 +41,7 @@ services:
       - LOGLEVEL=debug # or trace, info, debug, warn, error
     networks:
       - corp
-    restart: on-failure
+    # restart: on-failure
 
   share-a-meal-ui:
     container_name: frontend
@@ -41,17 +51,19 @@ services:
         - node:16-alpine
       dockerfile: ./apps/share-a-meal-ui/Dockerfile
       args:
-        - NODE_ENV=development
-        - BUILD_FLAG=-c development
+        - NODE_ENV=${NODE_ENV}
+        - BUILD_FLAG=-c ${NODE_ENV}
     image: share-a-meal-ui:nx-dev
+    depends_on:
+      - base-image
     ports:
       - 4200:4200
     environment:
-      NODE_ENV: 'development'
+      NODE_ENV: '${NODE_ENV}'
       PORT: 4200
     networks:
       - corp
-    restart: on-failure
+    # restart: on-failure
 
   mysql:
     container_name: mysql
