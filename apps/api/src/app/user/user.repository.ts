@@ -32,7 +32,10 @@ export class UserRepository extends Repository<User> {
         }
         if (!user) {
           this.logger.log('createUser - creating ' + createUserDto.emailAdress)
-          return this.save(createUserDto)
+          const newUser = new User()
+          const toInsert = { ...newUser, ...createUserDto }
+          this.logger.log(toInsert)
+          return this.save(toInsert)
         }
       }
     )

@@ -18,6 +18,9 @@ COPY --from=base-image /app/builder/dist ./dist
 COPY --from=base-image /app/builder/node_modules ./node_modules
 COPY --from=base-image /app/builder/.env .
 
+EXPOSE 3000
+EXPOSE 3306
+
 ENV NODE_ENV=${NODE_ENV}
 
 CMD ["node", "./dist/apps/api/main.js"]

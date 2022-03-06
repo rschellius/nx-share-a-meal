@@ -37,7 +37,7 @@ export class User implements IUser {
     enum: UserRole,
     default: [UserRole.GUEST, UserRole.EDITOR]
   })
-  roles?: UserRole[]
+  roles?: UserRole[] = []
 
   @Exclude({ toPlainOnly: true })
   @Column({ default: true })
@@ -46,7 +46,7 @@ export class User implements IUser {
     description: 'Whether this is an active user',
     default: true
   })
-  isActive?: boolean
+  isActive?: boolean = true
 
   token?: string
 
@@ -72,13 +72,13 @@ export class User implements IUser {
     example: '06 12425475',
     description: 'The user`s phonenumber'
   })
-  @Column()
-  phoneNumber?: string
+  @Column({ nullable: true, default: '-' })
+  phoneNumber?: string = ''
 
   @OneToMany(() => Meal, (meal) => meal.cook)
   meals?: Meal[]
 
-  toJSON? = function () {
+  toJSON() {
     return instanceToPlain(this)
   }
 

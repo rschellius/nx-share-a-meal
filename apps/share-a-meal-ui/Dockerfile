@@ -1,4 +1,4 @@
-FROM my-base-image:latest AS base-image
+FROM my-base-image:nx-base AS base-image
 
 ARG NODE_ENV
 ARG BUILD_FLAG
@@ -16,7 +16,7 @@ COPY --from=base-image /app/builder/dist/apps/share-a-meal-ui ./share-a-meal-ui
 COPY --from=base-image /app/builder/apps/share-a-meal-ui/server.js ./
 COPY --from=base-image /app/builder/node_modules ./node_modules
 
-RUN npm i express compression
+# RUN npm i express compression
 
 ENV NODE_ENV=$NODE_ENV
 
