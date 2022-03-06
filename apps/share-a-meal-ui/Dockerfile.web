@@ -16,8 +16,12 @@ COPY --from=base-image /app/builder/dist/apps/share-a-meal-ui ./share-a-meal-ui
 COPY --from=base-image /app/builder/apps/share-a-meal-ui/server.js ./
 COPY --from=base-image /app/builder/node_modules ./node_modules
 
-# RUN npm i express compression
+ENV NODE_ENV=${NODE_ENV}
 
-ENV NODE_ENV=$NODE_ENV
+# Run the image as a non-root user
+RUN adduser -D myuser
+USER myuser
 
-CMD ["node", "./server.js"]
+# Run the app.  CMD is required to run on Heroku
+# $PORT is set by Heroku			
+CMD node ./server.js

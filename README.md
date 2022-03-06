@@ -36,10 +36,9 @@ The root Dockerfile contains the base image for all apps in the monorepo. This i
 
 ### Images and containers
 
-To build and run as separate images and containers:
+To build and run as separate images and containers, first build the base image
 
 ```
-// Base image
 docker build . -t my-base-image:nx-base
 ```
 
@@ -47,17 +46,33 @@ Then:
 
 ```
 // API
-docker build . --file .\apps\api\Dockerfile --tag share-a-meal-api
+docker build . --file .\apps\api\Dockerfile.web --tag share-a-meal-api
 docker run -i -t share-a-meal-api
 
 // UI
-docker build . --file .\apps\share-a-meal-ui\Dockerfile --tag share-a-meal-ui
+docker build . --file .\apps\share-a-meal-ui\Dockerfile.web --tag share-a-meal-ui
 docker run -p 4200:4200 -i -t share-a-meal-ui
 ```
 
 ### docker-compose
 
 You could also use docker-compose to run `docker-compose build` and/or `docker-compose up`.
+
+### Deploying Docker containers on Heroku
+
+Navigate to the root folder and follow these commands:
+
+```
+heroku create shareameal-api
+heroku container:login
+heroku container:push web --recursive -a shareameal-api
+heroku ps:scale web=1
+heroku container:release web  -a shareameal-api
+```
+
+Heroku will ask which of the web applications you want to deploy. Do this for both the API backend and the WebUI frontend.
+
+To inspect the logging, type `heroku logs -a shareameal-api`.
 
 ## Running unit tests
 

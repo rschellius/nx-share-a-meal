@@ -1,10 +1,10 @@
-// import { version } from '../../../../package.json'
+import { default as env } from '../../../../package.json'
 
 export const environment = {
   production: true,
 
-  SERVER_DOCS_URL: 'https://nestjs-shareameal.herokuapp.com/docs',
-  SERVER_API_URL: 'https://nestjs-shareameal.herokuapp.com/api/',
+  SERVER_DOCS_URL: 'https://shareameal-api.herokuapp.com/docs',
+  SERVER_API_URL: 'https://shareameal-api.herokuapp.com/api/',
 
-  appVersion: '1.2.3'
+  appVersion: env.version
 }

@@ -7,7 +7,8 @@ import {
   IsUrl
 } from 'class-validator'
 import { PartialType } from '@nestjs/mapped-types'
-import { Allergenes, IUser } from '@cswp/api-interfaces'
+import { Allergenes } from '@cswp/api-interfaces'
+import { User } from '../user/user.entity'
 
 export class CreateMealDto {
   @IsNotEmpty()
@@ -50,7 +51,7 @@ export class CreateMealDto {
   id: number
 
   @Allow()
-  cook: IUser
+  cook: User
 
   participants: any[]
   readonly createDate: Date
