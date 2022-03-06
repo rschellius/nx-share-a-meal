@@ -118,112 +118,223 @@
           </div>
         </div>
 
-        <!-- item price ---------------------------------- -->
-        <div class="form-row">
-          <div class="form-group col-sm-12 col-md-6">
-            <label for="itemPrice">Price</label>
-            <input
-              type="number"
-              class="form-control"
-              [(ngModel)]="item.price"
-              name="itemPrice"
-              #itemPrice="ngModel"
-              [ngClass]="{
-                'is-invalid': itemPrice.invalid
-              }"
-              required
-            />
-            <div *ngIf="itemPrice.invalid" class="invalid-feedback">
-              <div *ngIf="itemPrice.errors?.['required']">
-                Prijs is vereist.
-              </div>
-              <div *ngIf="itemPrice.errors?.['minlength']">
-                Jaar bestaat uit 4 cijfers.
+        <div class="row">
+          <div class="col">
+            <!-- linker subcolumn -->
+
+            <!-- item price ---------------------------------- -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="itemPrice">Price</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  [(ngModel)]="item.price"
+                  name="itemPrice"
+                  #itemPrice="ngModel"
+                  [ngClass]="{
+                    'is-invalid': itemPrice.invalid
+                  }"
+                  required
+                />
+                <div *ngIf="itemPrice.invalid" class="invalid-feedback">
+                  <div *ngIf="itemPrice.errors?.['required']">
+                    Prijs is vereist.
+                  </div>
+                  <div *ngIf="itemPrice.errors?.['minlength']">
+                    Jaar bestaat uit 4 cijfers.
+                  </div>
+                </div>
               </div>
             </div>
+
+            <!-- item maxAmountOfParticipants ---------------------------------- -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="itemMaxParticipants">Max aantal deelnemers</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  [(ngModel)]="item.maxAmountOfParticipants"
+                  id="itemMaxParticipants"
+                  name="itemMaxParticipants"
+                  #itemMaxParticipants="ngModel"
+                  [ngClass]="{
+                    'is-invalid': itemMaxParticipants.invalid
+                  }"
+                  required
+                />
+                <div
+                  *ngIf="itemMaxParticipants.invalid"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="itemMaxParticipants.errors?.['required']">
+                    Max aantal deelnemers is vereist.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row gy-5">
+              <!-- item isVega ---------------------------------- -->
+              <div class="form-group py-1">
+                <label for="itemIsVega">Vegetarisch</label>
+                <!-- <div class="custom-control custom-checkbox custom-control-inline"> -->
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="is-vega"
+                    name="itemIsVega"
+                    [(ngModel)]="item.isVega"
+                    #itemIsVega="ngModel"
+                    value="false"
+                  />
+                  <label class="form-check-label" for="is-vega"
+                    >Deze maaltijd is vegetarisch
+                  </label>
+                </div>
+              </div>
+
+              <!-- item isVegan ---------------------------------- -->
+              <div class="form-group py-1">
+                <label for="itemIsVegan">Vegan</label>
+                <!-- <div class="custom-control custom-checkbox custom-control-inline"> -->
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="is-veganistic"
+                    name="itemIsVegan"
+                    [(ngModel)]="item.isVegan"
+                    #itemIsVegan="ngModel"
+                    value="false"
+                  />
+                  <label class="form-check-label" for="is-veganistic"
+                    >Deze maaltijd is veganistisch.
+                  </label>
+                </div>
+              </div>
+
+              <!-- item isToTakeHome ---------------------------------- -->
+              <div class="form-group py-1">
+                <label for="itemIsToTakeHome">Afhalen</label>
+                <!-- <div class="custom-control custom-checkbox custom-control-inline"> -->
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="is-take-home"
+                    name="itemIsToTakeHome"
+                    [(ngModel)]="item.isToTakeHome"
+                    #itemIsVega="ngModel"
+                    value="false"
+                  />
+                  <label class="form-check-label" for="is-take-home"
+                    >Deze maaltijd is alleen afhalen
+                  </label>
+                </div>
+              </div>
+
+              <!-- item isActive ---------------------------------- -->
+              <div class="form-group py-1">
+                <label for="itemIsActive">Zichtbaarheid</label>
+                <!-- <div class="custom-control custom-checkbox custom-control-inline"> -->
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="is-active"
+                    name="itemIsActive"
+                    [(ngModel)]="item.isActive"
+                    #itemIsActive="ngModel"
+                    value="false"
+                  />
+                  <label class="form-check-label" for="is-active"
+                    >Zichtbaarheid - actief of niet
+                  </label>
+                </div>
+              </div>
+              <!-- End linker subcolumn -->
+            </div>
+          </div>
+          <div class="col">
+            <!-- rechter subcolumn -->
+
+            <!-- Date -->
+            <div class="form-group">
+              <label for="itemDateTime">Datum en tijd</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="item.dateTime"
+                name="itemDateTime"
+                #itemDateTime="ngModel"
+                [ngClass]="{
+                  'is-invalid': itemDateTime.invalid && itemDateTime.touched
+                }"
+                required
+              />
+              <div
+                *ngIf="itemDateTime.invalid && itemDateTime.touched"
+                class="invalid-feedback"
+              >
+                <div *ngIf="itemDateTime.errors?.['required']">
+                  item name is vereist.
+                </div>
+              </div>
+            </div>
+
+            <!-- Time -->
+            <!-- <ngb-timepicker [(ngModel)]="time"></ngb-timepicker> -->
+            <!-- Allergenen -->
+
+            <!-- item isActive ---------------------------------- -->
+            <div class="form-group py-1">
+              <label for="itemAllergenesGluten">Allergenen</label>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="itemAllergenesGluten"
+                  name="itemAllergenesGluten"
+                />
+                <label class="form-check-label" for="itemAllergenesGluten"
+                  >Gluten
+                </label>
+              </div>
+              <!--  -->
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="itemAllergenesNoten"
+                  name="itemAllergenesNoten"
+                />
+                <label class="form-check-label" for="itemAllergenesNoten"
+                  >Noten
+                </label>
+              </div>
+              <!--  -->
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="itemAllergenesLactose"
+                  name="itemAllergenesLactose"
+                />
+                <label class="form-check-label" for="itemAllergenesLactose"
+                  >Lactose
+                </label>
+              </div>
+            </div>
+            <!-- End rechter subcolumn -->
           </div>
         </div>
+        <!-- end row  -->
 
-        <div class="form-row gy-5">
-          <!-- item isVega ---------------------------------- -->
-          <div class="form-group col-md-6 py-1">
-            <label for="itemIsVega">Vegetarisch</label>
-            <!-- <div class="custom-control custom-checkbox custom-control-inline"> -->
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="is-vega"
-                name="itemIsVega"
-                [(ngModel)]="item.isVega"
-                #itemIsVega="ngModel"
-                value="false"
-              />
-              <label class="form-check-label" for="is-vega"
-                >Deze maaltijd is vegetarisch
-              </label>
-            </div>
-          </div>
-
-          <!-- item isVegan ---------------------------------- -->
-          <div class="form-group col-md-6 py-1">
-            <label for="itemIsVegan">Vegan</label>
-            <!-- <div class="custom-control custom-checkbox custom-control-inline"> -->
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="is-veganistic"
-                name="itemIsVegan"
-                [(ngModel)]="item.isVegan"
-                #itemIsVegan="ngModel"
-                value="false"
-              />
-              <label class="form-check-label" for="is-veganistic"
-                >Deze maaltijd is veganistisch.
-              </label>
-            </div>
-          </div>
-
-          <!-- item isToTakeHome ---------------------------------- -->
-          <div class="form-group col-md-6 py-1">
-            <label for="itemIsToTakeHome">Afhalen</label>
-            <!-- <div class="custom-control custom-checkbox custom-control-inline"> -->
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="is-take-home"
-                name="itemIsToTakeHome"
-                [(ngModel)]="item.isToTakeHome"
-                #itemIsVega="ngModel"
-                value="false"
-              />
-              <label class="form-check-label" for="is-take-home"
-                >Deze maaltijd is alleen afhalen
-              </label>
-            </div>
-          </div>
-
-          <!-- item isActive ---------------------------------- -->
-          <div class="form-group col-md-6 py-1">
-            <label for="itemIsActive">Zichtbaarheid</label>
-            <!-- <div class="custom-control custom-checkbox custom-control-inline"> -->
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="is-active"
-                name="itemIsActive"
-                [(ngModel)]="item.isActive"
-                #itemIsActive="ngModel"
-                value="false"
-              />
-              <label class="form-check-label" for="is-active"
-                >Zichtbaarheid - actief of niet
-              </label>
-            </div>
-
+        <div class="row">
+          <div class="col">
             <!-- Buttons  ---------------------------------- -->
             <div class="row gy-10">
               <div class="col-auto py-5">
@@ -254,7 +365,6 @@
             </div>
           </div>
         </div>
-        <!-- end row  -->
 
         <!-- End Form  ---------------------------------- -->
       </div>

@@ -87,7 +87,6 @@ export class MealController {
     @Req() req
   ): Promise<Meal> {
     this.logger.log('update mealId=' + id)
-    this.logger.log(req.user)
     return this.mealService.update(id, updateMealDto, req.user.userId)
   }
 

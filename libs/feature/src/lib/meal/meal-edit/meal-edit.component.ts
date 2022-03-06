@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { AuthService } from '@cswp/auth'
 import { BaseEditComponent } from '@cswp/entity'
@@ -10,7 +10,12 @@ import { MealService } from '../meal.service'
   selector: 'cswp-feature-meal-edit',
   templateUrl: './meal-edit.component.html'
 })
-export class MealEditComponent extends BaseEditComponent<Meal> {
+export class MealEditComponent
+  extends BaseEditComponent<Meal>
+  implements OnInit
+{
+  time: { hour: number; minutes: number } = { hour: 0, minutes: 0 }
+
   constructor(
     private mealService: MealService,
     alertService: AlertService,
@@ -22,10 +27,21 @@ export class MealEditComponent extends BaseEditComponent<Meal> {
     super.title = 'Maaltijd'
   }
 
+  override ngOnInit(): void {
+    super.ngOnInit()
+    if (!this.item?.id) {
+      this.item = new Meal()
+    }
+  }
+
   override onSubmit(meal: Meal) {
     // filter out uneditable properties
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { participants, createDate, updateDate, ...rest } = meal
     super.onSubmit(rest as Meal)
+  }
+
+  onDateSelect(date: any) {
+    console.log(date)
   }
 }
