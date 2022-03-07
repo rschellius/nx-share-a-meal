@@ -16,10 +16,7 @@
   <div class="row">
     <div class="col mr-auto">
       <h1>{{ item.name }}</h1>
-      <p>
-        {{ item.description }}
-        Geschikt voor {{ item.maxAmountOfParticipants }} deelnemers.
-      </p>
+      <p>{{ item.description }}</p>
       <h2>Slechts € {{ item.price }}</h2>
 
       <h3>Over de kok</h3>
@@ -35,7 +32,13 @@
         Meenemen: {{ item.isToTakeHome }}
       </p>
 
-      <strong>{{ item.participants?.length }} Deelnemers</strong>
+      <div *ngIf="item" class="row p-4">
+        <div class="col-sm-12">
+          <cswp-feature-meal-participate
+            [mealId]="item.id"
+          ></cswp-feature-meal-participate>
+        </div>
+      </div>
 
       <div
         *ngIf="authService.userMayEdit(item.cook?.id) | async"

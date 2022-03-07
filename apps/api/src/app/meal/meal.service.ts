@@ -9,7 +9,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm'
 import { UserRepository } from '../user/user.repository'
 import { UpdateMealDto } from './meal.dto'
-import { Meal } from './meal.entity'
+import { Meal, ParticipationInfo } from './meal.entity'
 import { MealRepository } from './meal.repository'
 
 @Injectable()
@@ -105,12 +105,13 @@ export class MealService {
    * @param updateMealDto
    * @returns
    */
-  public async participate(mealId: number, userId: number): Promise<void> {
+  public async participate(
+    mealId: number,
+    userId: number
+  ): Promise<ParticipationInfo> {
     this.logger.log('participate mealId=' + mealId + ' participant=' + userId)
 
-    const meal = await this.mealRepository.findOne(mealId, {
-      // relations: ['participants']
-    })
+    const meal = await this.mealRepository.findOne(mealId)
     if (!meal) {
       throw new NotFoundException(`Meal #${mealId} not found`)
     }
@@ -118,14 +119,28 @@ export class MealService {
     if (!participant) {
       throw new NotFoundException(`Participant #${userId} not found`)
     }
-    this.logger.log('participant = ' + participant.firstName)
+    this.logger.log(
+      `participant = ${participant.firstName} ${participant.lastName}`
+    )
     if (meal.participants.length >= meal.maxAmountOfParticipants) {
       throw new BadRequestException(`Max amount of participants reached.`)
     }
-    meal.participants = [...meal.participants, participant]
 
-    await this.mealRepository.save(meal)
-    return
+    const userParticipates = meal.participants.filter(
+      (user) => user.id === participant.id
+    )
+    if (userParticipates.length === 0) {
+      this.logger.log('Currently not participating, so add')
+      meal.participants = [...meal.participants, participant]
+      await this.mealRepository.save(meal)
+      return new ParticipationInfo(true, meal.participants.length)
+    } else {
+      this.logger.log('Currently participating, so remove')
+      const [participant, ...others] = meal.participants
+      meal.participants = others
+      await this.mealRepository.save(meal)
+      return new ParticipationInfo(false, meal.participants.length)
+    }
   }
 
   /**

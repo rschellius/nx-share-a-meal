@@ -26,3 +26,8 @@ export interface IMeal {
   readonly createDate: Date | undefined
   readonly updateDate: Date | undefined
 }
+
+export interface IParticipationInfo {
+  currentlyParticipating: boolean
+  currentAmountOfParticipants: number
+}

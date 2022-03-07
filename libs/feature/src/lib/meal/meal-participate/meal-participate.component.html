@@ -1,0 +1,25 @@
+<div class="row bg-light border gx-5">
+  <div class="col-8 p-3">
+    <div *ngIf="meal">
+      <p>
+        Nog {{ this.amount }} plaatsen beschikbaar.<br />
+        <span *ngIf="currentUserIsParticipating">Je bent aangemeld.</span>
+        <span *ngIf="!currentUserIsParticipating"
+          >Jij neemt nog niet deel.</span
+        >
+      </p>
+    </div>
+  </div>
+  <div class="col-4 p-3">
+    <div *ngIf="this.currentUser$ | async">
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        (click)="participate()"
+      >
+        <span *ngIf="currentUserIsParticipating">Afmelden</span>
+        <span *ngIf="!currentUserIsParticipating">Meld je aan!</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -18,7 +18,7 @@ import {
 } from '@nestjs/swagger'
 import { MealService } from './meal.service'
 import { CreateMealDto, UpdateMealDto } from './meal.dto'
-import { Meal } from './meal.entity'
+import { Meal, ParticipationInfo } from './meal.entity'
 import { Public } from '../common/decorators/decorators'
 
 @ApiBearerAuth()
@@ -96,14 +96,16 @@ export class MealController {
     description:
       'Register or unregister as participant in a meal. Requires a valid JWT.'
   })
-  @ApiResponse({ status: 201, description: 'OK.', type: [Meal] })
+  @ApiResponse({ status: 201, description: 'OK.', type: [ParticipationInfo] })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
-  async participate(@Param('id') id: number, @Req() req): Promise<Meal> {
+  async participate(
+    @Param('id') id: number,
+    @Req() req
+  ): Promise<ParticipationInfo> {
     this.logger.log(
       'participate meal id=' + id + ' participant=' + req.user.userId
     )
-    await this.mealService.participate(id, req.user.userId)
-    return
+    return this.mealService.participate(id, req.user.userId)
   }
 
   @Delete(':id')

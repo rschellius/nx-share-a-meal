@@ -12,6 +12,7 @@ import { MealEditComponent } from './meal-edit/meal-edit.component'
 import { EntityModule } from '@cswp/entity'
 import { MealGridComponent } from './meal-grid/meal-grid.component'
 import { MealCardComponent } from './meal-card/meal-card.component'
+import { MealParticipateComponent } from './meal-participate/meal-participate.component'
 
 const routes: Routes = [
   {
@@ -46,7 +47,8 @@ const routes: Routes = [
     MealDetailComponent,
     MealEditComponent,
     MealGridComponent,
-    MealCardComponent
+    MealCardComponent,
+    MealParticipateComponent
   ],
   imports: [
     CommonModule,

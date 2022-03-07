@@ -21,5 +21,5 @@ export class Meal implements IMeal, IEntity {
   maxAmountOfParticipants = 0
   price = 0.0
   readonly cook?: IUser
-  readonly participants: IUser[] | undefined = []
+  readonly participants: IUser[] = []
 }

@@ -6,9 +6,9 @@ import { map, catchError, tap } from 'rxjs/operators'
 /**
  * See https://angular.io/guide/http#requesting-data-from-a-server
  */
-const httpOptions = {
-  observe: 'body',
-  responseType: 'json'
+export const httpOptions = {
+  observe: 'body' as const,
+  responseType: 'json' as const
 }
 
 /**
@@ -23,7 +23,7 @@ export class EntityService<T extends IEntity> {
     protected readonly http: HttpClient,
     public readonly url: string,
     public readonly endpoint: string
-  ) { }
+  ) {}
 
   /**
    * Get all items.
@@ -61,7 +61,7 @@ export class EntityService<T extends IEntity> {
    *
    * @param id ID of the item to get.
    */
-  public read(id: string | null, options?: any): Observable<T> {
+  public read(id: number | string | null, options?: any): Observable<T> {
     const endpoint = `${this.url}${this.endpoint}/${id}`
     console.log(`read ${endpoint}`)
     return this.http.get<T[]>(endpoint, { ...options, ...httpOptions }).pipe(

@@ -10,7 +10,7 @@ import {
   UpdateDateColumn
 } from 'typeorm'
 import { User } from '../user/user.entity'
-import { IMeal, Allergenes } from '@cswp/api-interfaces'
+import { IMeal, Allergenes, IParticipationInfo } from '@cswp/api-interfaces'
 
 @Entity()
 export class Meal implements IMeal {
@@ -121,4 +121,23 @@ export class Meal implements IMeal {
   @ManyToMany(() => User, { eager: true })
   @JoinTable()
   participants: User[]
+}
+
+export class ParticipationInfo implements IParticipationInfo {
+  @ApiProperty({
+    description:
+      'Property indicating whether the authenticated user is currently paticipating in the meal.'
+  })
+  currentlyParticipating: boolean
+
+  @ApiProperty({
+    description:
+      'Property indicating the number of users currently paticipating in the meal.'
+  })
+  currentAmountOfParticipants: number
+
+  constructor(participation: boolean, currentAmount: number) {
+    this.currentlyParticipating = participation
+    this.currentAmountOfParticipants = currentAmount
+  }
 }

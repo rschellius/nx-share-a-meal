@@ -152,4 +152,13 @@ export class AuthService {
     }
     return undefined
   }
+
+  getUserId(): number | undefined {
+    const userData = localStorage.getItem(this.CURRENT_USER)
+    if (userData) {
+      const user: IUser = JSON.parse(userData)
+      return user.id
+    }
+    return undefined
+  }
 }
