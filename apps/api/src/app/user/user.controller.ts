@@ -37,7 +37,7 @@ export class UserController {
   @Public()
   @Post()
   @ApiOperation({ summary: 'Register as a new user' })
-  @ApiBody({ type: User, description: 'The new user' })
+  @ApiBody({ type: CreateUserDto, description: 'The new user' })
   @ApiResponse({ status: 201, description: 'OK.', type: [User] })
   @ApiResponse({ status: 401, description: 'Forbidden.' })
   async create(@Body() createUserDto: CreateUserDto): Promise<User> {
