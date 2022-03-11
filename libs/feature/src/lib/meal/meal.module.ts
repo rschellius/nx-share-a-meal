@@ -60,6 +60,6 @@ const routes: Routes = [
     UtilModule,
     EntityModule
   ],
-  exports: [MealGridComponent, MealCardComponent]
+  exports: [MealGridComponent, MealCardComponent, MealParticipateComponent]
 })
 export class MealModule {}

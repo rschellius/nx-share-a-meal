@@ -18,12 +18,26 @@
       <h1>{{ item.name }}</h1>
       <p>{{ item.description }}</p>
       <h2>Slechts € {{ item.price }}</h2>
-
-      <h3>Over de kok</h3>
       <p>
-        {{ item.cook?.firstName }} {{ item.cook?.lastName }} <br />
-        {{ item.cook?.emailAdress }}
+        Beschikbaar op <strong>{{ item.dateTime | date: 'medium' }}</strong>
       </p>
+
+      <div class="row">
+        <h3>Over de kok</h3>
+        <div class="col">
+          <p>
+            {{ item.cook?.firstName }} {{ item.cook?.lastName }} <br />
+            {{ item.cook?.street }} {{ item.cook?.city }} <br />
+            {{ item.cook?.emailAdress }}
+          </p>
+        </div>
+        <!-- <div class="col">
+          <img
+            src="https://randomuser.me/api/portraits/men/75.jpg"
+            class="rounded-circle border mx-auto d-block"
+          />
+        </div> -->
+      </div>
 
       <p>
         Vega: {{ item.isVega }}<br />

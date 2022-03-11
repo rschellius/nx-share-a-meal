@@ -35,7 +35,7 @@ async function bootstrap() {
     .setVersion('1.0')
     .addBearerAuth(
       { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
-      'access-token'
+      'Add a user and then login to receive a valid JWT token. Insert the JWT token here. '
     )
     .build()
   const document = SwaggerModule.createDocument(app, config)

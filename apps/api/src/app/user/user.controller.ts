@@ -13,6 +13,7 @@ import {
   UseGuards
 } from '@nestjs/common'
 import {
+  ApiBadRequestResponse,
   ApiBearerAuth,
   ApiBody,
   ApiOperation,
@@ -20,13 +21,12 @@ import {
   ApiTags
 } from '@nestjs/swagger'
 import { UserService } from './user.service'
-import { CreateUserDto } from './user.dto'
+import { CreateUserDto, UpdateUserDto } from './user.dto'
 import { User } from './user.entity'
 import { ListAllUsersDto } from './user.dto'
 import { JwtAuthGuard } from '../auth/auth.guards'
 import { Public } from '../common/decorators/decorators'
 
-@ApiBearerAuth()
 @ApiTags('User')
 @Controller('user')
 export class UserController {
@@ -45,12 +45,12 @@ export class UserController {
     return this.userService.create(createUserDto as User)
   }
 
+  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Request your personal user profile',
     description:
       'A logged in user (having a valid JWT token) can request its own user information.'
   })
-  @ApiBearerAuth()
   @ApiResponse({
     status: 201,
     description: 'Returns the user details of the authenticated user',
@@ -64,6 +64,7 @@ export class UserController {
   }
 
   @Get()
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Get all users' })
   @ApiResponse({
     status: 201,
@@ -76,6 +77,7 @@ export class UserController {
       'Unauthorized. You need to create a new user first, and login, to get a valid JWT.',
     type: Error
   })
+  @UseGuards(JwtAuthGuard)
   findAll(@Query() queryParams: ListAllUsersDto): Promise<User[]> {
     this.logger.log('findAll')
     // this.logger.log('queryParams: ', queryParams);
@@ -83,6 +85,7 @@ export class UserController {
   }
 
   @Get(':id')
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Get a single user by id' })
   @ApiResponse({
     status: 201,
@@ -94,12 +97,14 @@ export class UserController {
     description: 'Forbidden, no access',
     type: Error
   })
+  @UseGuards(JwtAuthGuard)
   findOne(@Param('id') id: string): Promise<User> {
     this.logger.log('findOne id=' + id)
     return this.userService.findOne(id)
   }
 
   @Put(':id')
+  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Update a single user',
     description:
@@ -108,22 +113,27 @@ export class UserController {
   @ApiBody({ type: User, description: 'the new user properties' })
   @ApiResponse({ status: 201, description: 'OK.', type: [User] })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
+  @ApiBadRequestResponse({ description: 'Not allowed to edit' })
+  @UseGuards(JwtAuthGuard)
   async update(
-    @Param('id') id: string,
-    @Body() updateUserDto: CreateUserDto,
+    @Param('id') id: number,
+    @Body() updateUserDto: UpdateUserDto,
     @Req() req
-  ): Promise<void> {
-    this.logger.log('update')
-    return this.userService.update(id, updateUserDto, req.user)
+  ): Promise<User> {
+    this.logger.log(`update id=${id} user.id=${req.user.userId}`)
+    return this.userService.update(id, updateUserDto, req.user.userId)
   }
 
   @Delete(':id')
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Delete user' })
   @ApiBody({ type: 'string', description: 'the id of the user to remove' })
   @ApiResponse({ status: 201, description: 'OK.', type: [User] })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
+  @ApiBadRequestResponse({ description: 'Not allowed to delete' })
+  @UseGuards(JwtAuthGuard)
   async delete(@Param('id') id: string, @Req() req): Promise<void> {
-    this.logger.log('delete user id=' + id)
+    this.logger.log(`delete user.id=${req.user.userId}`)
     return this.userService.delete(id, req.user)
   }
 }

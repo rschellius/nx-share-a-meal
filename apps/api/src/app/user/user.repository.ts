@@ -1,6 +1,6 @@
 import { Repository, EntityRepository } from 'typeorm'
 import { User } from './user.entity'
-import { CreateUserDto } from './user.dto'
+import { CreateUserDto, UpdateUserDto } from './user.dto'
 import { HttpException, HttpStatus, Logger } from '@nestjs/common'
 
 @EntityRepository(User)
@@ -44,16 +44,19 @@ export class UserRepository extends Repository<User> {
     // })
   }
 
-  // public async editUser(
-  //   id: number,
-  //   updateUserDto: UpdateUserDto
-  // ): Promise<User> {
-  //   this.logger.log('editUser id=' + id)
-  //   let user = await this.findOne(id)
-  //   user = { ...user, ...updateUserDto }
-  //   await this.save(user)
-  //   return user
-  // }
+  public async updateUser(
+    id: number,
+    updateUserDto: UpdateUserDto
+  ): Promise<User> {
+    this.logger.log('updateUser id=' + id)
+    console.log(updateUserDto)
+    const user = await this.findOne(id)
+    if (user) {
+      const updatedUser = { ...user, ...updateUserDto }
+      return this.save(updatedUser)
+    }
+    return undefined
+  }
 
   // public async destroy(id: number): Promise<void> {
   //   this.logger.log('destroy id=' + id)

@@ -32,6 +32,20 @@ export class User implements IUser {
   @Column()
   lastName: string
 
+  @ApiProperty({
+    example: 'Lovensdijkstraat 61',
+    description: 'The street and housenumber of the users adress'
+  })
+  @Column()
+  street: string
+
+  @ApiProperty({
+    example: 'Breda',
+    description: 'The user`s city'
+  })
+  @Column()
+  city: string
+
   @Column({
     type: 'set',
     enum: UserRole,
@@ -39,7 +53,7 @@ export class User implements IUser {
   })
   roles?: UserRole[] = []
 
-  @Exclude({ toPlainOnly: true })
+  // @Exclude({ toPlainOnly: true })
   @Column({ default: true })
   @ApiProperty({
     example: true,

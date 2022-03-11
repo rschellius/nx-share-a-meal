@@ -21,7 +21,6 @@ import { CreateMealDto, UpdateMealDto } from './meal.dto'
 import { Meal, ParticipationInfo } from './meal.entity'
 import { Public } from '../common/decorators/decorators'
 
-@ApiBearerAuth()
 @ApiTags('Meal')
 @Controller('meal')
 export class MealController {
@@ -30,6 +29,7 @@ export class MealController {
   constructor(private readonly mealService: MealService) {}
 
   @Post()
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Register meal' })
   @ApiBody({ type: Meal, description: 'The new meal' })
   @ApiResponse({ status: 201, description: 'OK.', type: [Meal] })
@@ -77,6 +77,7 @@ export class MealController {
   }
 
   @Put(':id')
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Update a single meal' })
   @ApiBody({ type: Meal, description: 'the new meal properties' })
   @ApiResponse({ status: 201, description: 'OK.', type: [Meal] })
@@ -91,6 +92,7 @@ export class MealController {
   }
 
   @Get(':id/participate')
+  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Participate in a meal.',
     description:
@@ -109,6 +111,7 @@ export class MealController {
   }
 
   @Delete(':id')
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Delete meal' })
   @ApiBody({ type: 'string', description: 'the id of the meal to remove' })
   @ApiResponse({ status: 201, description: 'OK.', type: [Meal] })

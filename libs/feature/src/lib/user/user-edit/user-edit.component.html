@@ -1,7 +1,3 @@
-<!-- <div *ngIf="!user">
-  <cswp-util-spinner></cswp-util-spinner>
-</div> -->
-
 <div *ngIf="user">
   <div class="row">
     <div class="col-auto">
@@ -15,148 +11,234 @@
     (ngSubmit)="userEditForm.form.valid && onSubmit()"
     novalidate
   >
-    <div class="row">
-      <div class="col">
-        <div class="form-row">
-          <!-- User name -->
-          <div class="form-group col-sm-12 col-md-5 col-lg-6">
-            <label for="firstName">User name</label>
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="user.firstName"
-              name="firstName"
-              #firstName="ngModel"
-              [ngClass]="{
-                'is-invalid': firstName.invalid && firstName.touched
-              }"
-              required
-              minlength="3"
-            />
-            <div
-              *ngIf="firstName.invalid && firstName.touched"
-              class="invalid-feedback"
-            >
-              <div *ngIf="firstName.errors?.['required']">
-                User name is vereist.
-              </div>
-              <div *ngIf="firstName.errors?.['minlength']">
-                User name moet ten minste 3 letters lang zijn.
-              </div>
-            </div>
+    <!-- <div class="row">
+      <div class="col"> -->
+    <div class="row form-row">
+      <!-- 
+            Firstname -------------------------------------------- 
+          -->
+      <div class="col-md-5 form-group">
+        <label for="firstName">First name</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="user.firstName"
+          name="firstName"
+          #firstName="ngModel"
+          [ngClass]="{
+            'is-invalid': firstName.invalid && firstName.touched
+          }"
+          required
+          minlength="3"
+        />
+        <div
+          *ngIf="firstName.invalid && firstName.touched"
+          class="invalid-feedback"
+        >
+          <div *ngIf="firstName.errors?.['required']">
+            First name is vereist.
           </div>
-
-          <!-- User roles -->
-          <div class="form-group col-sm-12 col-md-4 col-lg-4">
-            <label class="mr-sm-2" for="user_roles">Roles</label>
-            <select
-              class="custom-select mr-sm-2"
-              id="user_roles"
-              name="userroles"
-              [(ngModel)]="user.roles"
-              #userroles="ngModel"
-              required
-            >
-              <!--  -->
-              <!-- <ng-container *ngIf="!roless || roless?.length === 0"> -->
-              <!-- <option selected>Loading...</option> -->
-              <!-- </ng-container> -->
-              <!--  -->
-              <!-- <ng-container *ngFor="let roles of roless"> -->
-              <!-- <option [value]="roles.id"> -->
-              <!-- {{ roles.name }} -->
-              <!-- </option> -->
-              <!-- </ng-container> -->
-            </select>
-          </div>
-
-          <!-- User releaseyear -->
-          <div class="form-group col-sm-12 col-md-3 col-lg-2">
-            <label for="phoneNumber">phoneNumber</label>
-
-            <input
-              type="number"
-              class="form-control"
-              [(ngModel)]="user.phoneNumber"
-              name="phoneNumber"
-              #phoneNumber="ngModel"
-              [ngClass]="{ 'is-invalid': phoneNumber.invalid }"
-              required
-              minlength="4"
-            />
-
-            <div *ngIf="phoneNumber.invalid" class="invalid-feedback">
-              <div *ngIf="phoneNumber.errors?.['required']">
-                Jaar is vereist.
-              </div>
-              <div *ngIf="phoneNumber.errors?.['minlength']">
-                Jaar bestaat uit 4 cijfers.
-              </div>
-            </div>
-          </div>
-
-          <!-- User inTheatres -->
-          <div class="form-group col-md-6">
-            <label for="userInTheatres">Beschikbaarheid</label>
-            <div class="form-group col-lg-12">
-              <!--  -->
-              <div class="custom-control custom-checkbox custom-control-inline">
-                <input
-                  type="checkbox"
-                  id="in-theatres"
-                  name="userInTheatres"
-                  class="custom-control-input"
-                  [(ngModel)]="user.isActive"
-                  #userInTheatres="ngModel"
-                  value="false"
-                />
-                <label class="custom-control-label" for="in-theatres"
-                  >Nu in de bioscoop
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="col-auto">
-            <button
-              type="submit"
-              class="btn btn-success"
-              [disabled]="!userEditForm.valid"
-            >
-              Save
-            </button>
-            <button
-              type="button"
-              class="btn btn-outline-warning"
-              routerLink=".."
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              class="btn btn-outline-primary"
-              (click)="debug = !debug"
-              [attr.aria-expanded]="debug"
-              aria-controls="collapseExample"
-            >
-              Toggle Debug
-            </button>
+          <div *ngIf="firstName.errors?.['minlength']">
+            First name moet ten minste 3 letters lang zijn.
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card">
-          <div class="card-header featured">Let op!</div>
-          <div class="card-body">
-            <p class="card-text">
-              In dit scherm kan de gebruiker een nieuwe User aanmaken of een
-            </p>
+      <!-- 
+            lastName -------------------------------------------- 
+          -->
+      <div class="col form-group">
+        <label for="lastName">Last name</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="user.lastName"
+          name="lastName"
+          #lastName="ngModel"
+          [ngClass]="{
+            'is-invalid': lastName.invalid && lastName.touched
+          }"
+          required
+          minlength="3"
+        />
+        <div
+          *ngIf="lastName.invalid && lastName.touched"
+          class="invalid-feedback"
+        >
+          <div *ngIf="lastName.errors?.['required']">Last name is vereist.</div>
+          <div *ngIf="lastName.errors?.['minlength']">
+            Last name moet ten minste 3 letters lang zijn.
           </div>
         </div>
       </div>
     </div>
+
+    <!-- 
+            emailAdress -------------------------------------------- 
+          -->
+
+    <div class="row">
+      <div class="col form-group">
+        <label for="emailAdress">Emailadress</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="user.emailAdress"
+          name="emailAdress"
+          #emailAdress="ngModel"
+          [ngClass]="{
+            'is-invalid': emailAdress.invalid && emailAdress.touched
+          }"
+          required
+          minlength="3"
+        />
+        <div
+          *ngIf="emailAdress.invalid && emailAdress.touched"
+          class="invalid-feedback"
+        >
+          <div *ngIf="emailAdress.errors?.['required']">
+            Emailadress is vereist.
+          </div>
+          <div *ngIf="emailAdress.errors?.['minlength']">
+            Emailadress moet ten minste 3 letters lang zijn.
+          </div>
+        </div>
+      </div>
+      <!-- 
+            PhoneNumber -------------------------------------------- 
+            -->
+      <div class="col form-group">
+        <label for="phoneNumber">PhoneNumber</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="user.phoneNumber"
+          name="phoneNumber"
+          #phoneNumber="ngModel"
+          [ngClass]="{
+            'is-invalid': phoneNumber.invalid && phoneNumber.touched
+          }"
+        />
+        <div
+          *ngIf="phoneNumber.invalid && phoneNumber.touched"
+          class="invalid-feedback"
+        ></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- 
+            Street -------------------------------------------- 
+          -->
+      <div class="col-md-7 form-group">
+        <label for="street">Street and housenumber</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="user.street"
+          name="street"
+          #street="ngModel"
+          [ngClass]="{
+            'is-invalid': street.invalid && street.touched
+          }"
+          required
+          minlength="3"
+        />
+        <div *ngIf="street.invalid && street.touched" class="invalid-feedback">
+          <div *ngIf="street.errors?.['required']">Street is vereist.</div>
+          <div *ngIf="street.errors?.['minlength']">
+            Street moet ten minste 3 letters lang zijn.
+          </div>
+        </div>
+      </div>
+      <!-- 
+            City -------------------------------------------- 
+          -->
+      <div class="col form-group">
+        <label for="city">City</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="user.city"
+          name="city"
+          #city="ngModel"
+          [ngClass]="{
+            'is-invalid': city.invalid && city.touched
+          }"
+          required
+          minlength="3"
+        />
+        <div *ngIf="city.invalid && city.touched" class="invalid-feedback">
+          <div *ngIf="city.errors?.['required']">City is vereist.</div>
+          <div *ngIf="city.errors?.['minlength']">
+            City moet ten minste 3 letters lang zijn.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 
+            isActive --------------------------------------------  
+          -->
+    <div class="form-group col-md-6">
+      <label for="userIsActive">Active</label>
+      <div class="form-group col-lg-12">
+        <!--  -->
+        <div class="custom-control custom-checkbox custom-control-inline">
+          <input
+            type="checkbox"
+            id="is-active"
+            name="userIsActive"
+            class="custom-control-input"
+            [(ngModel)]="user.isActive"
+            #movieInTheatres="ngModel"
+            value="false"
+          />
+          <label class="custom-control-label" for="is-active"
+            >User is active
+          </label>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+    <!-- </div> -->
+    <!-- 
+
+         -->
+    <div class="form-row">
+      <div class="col-auto">
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="!userEditForm.valid"
+        >
+          Save
+        </button>
+        <button type="button" class="btn btn-outline-warning" routerLink="..">
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          (click)="debug = !debug"
+          [attr.aria-expanded]="debug"
+          aria-controls="collapseExample"
+        >
+          Toggle Debug
+        </button>
+      </div>
+    </div>
+    <!-- </div> -->
+    <!-- 
+
+
+
+       -->
+    <!-- </div> -->
+    <!-- 
+
+
+  
+    -->
     <div class="row">
       <div class="col">
         <br />
@@ -165,28 +247,11 @@
             <div class="card-body">
               <h5 class="card-title">Debug info</h5>
               <p class="card-text">
-                Hier zie je links de status van het user.name veld, en rechts de
-                content van de user in het formulier. Zodra je wijzigingen in
-                het formulier doorvoert, zie je in deze informatie de
-                wijzigingen. Zo kun je de code aan de informatie linken.
+                Hier zie je de status van het user object.
               </p>
-              <div class="row">
-                <div class="col-auto">
-                  <div class="card">
-                    <div class="card-body">
-                      <p>name.invalid = {{ firstName.invalid }}</p>
-                      <p>name.touched = {{ firstName.touched }}</p>
-                      <p>name.dirty = {{ firstName.dirty }}</p>
-                      <p>name.pristine = {{ firstName.pristine }}</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-auto">
-                  <div class="card">
-                    <div class="card-body">
-                      <pre>{{ user | json }}</pre>
-                    </div>
-                  </div>
+              <div class="card">
+                <div class="card-body">
+                  <pre>{{ user | json }}</pre>
                 </div>
               </div>
             </div>

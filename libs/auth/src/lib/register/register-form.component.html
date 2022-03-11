@@ -12,30 +12,28 @@
           firstName
          -->
           <div class="form-row">
-            <div class="col-5">
-              <label for="inputFirstName">Firstname</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="firstName"
-                placeholder="Firstname"
-                id="inputFirstName"
-                [ngClass]="{
-                  'is-invalid':
-                    registerForm.get('firstName')?.invalid &&
-                    registerForm.get('firstName')?.touched
-                }"
-              />
-              <span
-                *ngIf="
-                  !registerForm.get('firstName')?.valid &&
+            <label for="inputFirstName">Firstname</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="firstName"
+              placeholder="Firstname"
+              id="inputFirstName"
+              [ngClass]="{
+                'is-invalid':
+                  registerForm.get('firstName')?.invalid &&
                   registerForm.get('firstName')?.touched
-                "
-                class="invalid-feedback"
-              >
-                <p id="firstName-invalid">Name is invalid.</p>
-              </span>
-            </div>
+              }"
+            />
+            <span
+              *ngIf="
+                !registerForm.get('firstName')?.valid &&
+                registerForm.get('firstName')?.touched
+              "
+              class="invalid-feedback"
+            >
+              <p id="firstName-invalid">Name is invalid.</p>
+            </span>
             <!--
           lastName
          -->
@@ -121,7 +119,58 @@
               <p id="password-invalid">Enter a valid password</p>
             </span>
           </div>
+          <!--  -->
+          <div class="form-group">
+            <label for="inputStreet">Street and housenumber</label>
+            <input
+              type="text"
+              placeholder="Street and housenumber"
+              class="form-control"
+              formControlName="street"
+              id="inputStreet"
+              [ngClass]="{
+                'is-invalid':
+                  registerForm.get('street')?.invalid &&
+                  registerForm.get('street')?.touched
+              }"
+            />
+            <span
+              *ngIf="
+                !registerForm.get('street')?.valid &&
+                registerForm.get('street')?.touched
+              "
+              class="invalid-feedback"
+            >
+              <p id="street-invalid">Enter a valid street</p>
+            </span>
+          </div>
+          <!--  -->
+          <div class="form-group">
+            <label for="inputCity">City</label>
+            <input
+              type="text"
+              placeholder="City"
+              class="form-control"
+              formControlName="city"
+              id="inputCity"
+              [ngClass]="{
+                'is-invalid':
+                  registerForm.get('city')?.invalid &&
+                  registerForm.get('city')?.touched
+              }"
+            />
+            <span
+              *ngIf="
+                !registerForm.get('city')?.valid &&
+                registerForm.get('city')?.touched
+              "
+              class="invalid-feedback"
+            >
+              <p id="city-invalid">Enter a valid street</p>
+            </span>
+          </div>
 
+          <!--  -->
           <div class="form-group">
             <button
               id="submitbutton"

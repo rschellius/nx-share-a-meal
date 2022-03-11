@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { CreateUserDto } from './user.dto'
+import { CreateUserDto, UpdateUserDto } from './user.dto'
 import { User } from './user.entity'
 import { UserRepository } from './user.repository'
 
@@ -34,19 +34,19 @@ export class UserService {
   }
 
   async update(
-    id: string,
-    userDetails: CreateUserDto,
-    owner: User
-  ): Promise<void> {
-    this.logger.log('update user id=' + id)
-    const user = await this.userRepository.findOne(id)
-    if (!user) {
+    id: number,
+    userDetails: UpdateUserDto,
+    ownerId: number
+  ): Promise<User> {
+    this.logger.log(`update user.id=${ownerId}`)
+    const userToUpdate = await this.userRepository.findOne(id)
+    if (!userToUpdate) {
       throw new BadRequestException(`User does not exist`)
     }
-    if (user !== owner) {
+    if (userToUpdate.id !== ownerId) {
       throw new BadRequestException(`Not allowed to edit`)
     }
-    await this.userRepository.update(id, userDetails)
+    return this.userRepository.updateUser(id, userDetails)
   }
 
   async delete(id: string, owner: User): Promise<void> {

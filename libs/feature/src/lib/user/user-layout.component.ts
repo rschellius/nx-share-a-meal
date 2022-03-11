@@ -12,14 +12,12 @@ import { Component } from '@angular/core'
 
     <div class="row">
       <div class="col">
-        <button class="btn btn-primary"><a routerLink="/users/new">Nieuw</a></button>
         <cswp-user-list></cswp-user-list>
       </div>
       <div class="col">
-      <button class="btn btn-primary"><a routerLink="edit">Edit</a></button>
         <router-outlet></router-outlet>
       </div>
     </div>
   `
 })
-export class UserLayoutComponent { }
+export class UserLayoutComponent {}

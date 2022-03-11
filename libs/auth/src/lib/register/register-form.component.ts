@@ -18,12 +18,8 @@ interface IUserFormGroup extends FormGroup {
     lastName: AbstractControl
     password: AbstractControl
     emailAdress: AbstractControl
-
-    // phoneNumber?: AbstractControl
-    // id?: number
-    // roles: UserRole[]
-    // isActive: boolean
-    // token: string | undefined
+    street: AbstractControl
+    city: AbstractControl
   }
 }
 
@@ -44,6 +40,8 @@ export class RegisterFormComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       firstName: new FormControl(null, [Validators.required]),
       lastName: new FormControl(null, [Validators.required]),
+      street: new FormControl(null, [Validators.required]),
+      city: new FormControl(null, [Validators.required]),
       emailAdress: new FormControl(null, [
         Validators.required,
         Validators.email
