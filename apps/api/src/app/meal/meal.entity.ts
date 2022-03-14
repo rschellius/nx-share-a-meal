@@ -109,14 +109,16 @@ export class Meal implements IMeal {
   })
   allergenes: Allergenes[]
 
-  // @ApiProperty({
-  //   description: 'The person who created and cooks this meal.'
-  // })
+  @ApiProperty({
+    type: () => User,
+    description: 'The person who created and cooks this meal.'
+  })
   @ManyToOne(() => User, (cook) => cook.meals, { eager: true })
   cook: User
 
   @ApiProperty({
-    description: 'An array of the people participating in this meal.'
+    description: 'An array of the people participating in this meal.',
+    type: () => [User]
   })
   @ManyToMany(() => User, { eager: true })
   @JoinTable()

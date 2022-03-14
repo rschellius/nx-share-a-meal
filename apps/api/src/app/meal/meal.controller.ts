@@ -30,8 +30,12 @@ export class MealController {
 
   @Post()
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'Register meal' })
-  @ApiBody({ type: Meal, description: 'The new meal' })
+  @ApiOperation({
+    summary: 'Register meal',
+    description:
+      'Add a new meal. Notice that allergenes can only contain "gluten", "noten" and/or "lactose".'
+  })
+  @ApiBody({ type: CreateMealDto, description: 'The new meal' })
   @ApiResponse({ status: 201, description: 'OK.', type: [Meal] })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async create(
@@ -96,10 +100,14 @@ export class MealController {
   @ApiOperation({
     summary: 'Participate in a meal.',
     description:
-      'Register or unregister as participant in a meal. Requires a valid JWT.'
+      'Register or unregister as participant in a meal. Requires a valid JWT. The same endpoint is used for both registering and unregistering. The second request unregisters the previous from the same user.'
   })
   @ApiResponse({ status: 201, description: 'OK.', type: [ParticipationInfo] })
-  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  @ApiResponse({ status: 401, description: 'Not Authorized' })
+  @ApiResponse({
+    status: 404,
+    description: 'Not Found, in case the meal does not exist.'
+  })
   async participate(
     @Param('id') id: number,
     @Req() req

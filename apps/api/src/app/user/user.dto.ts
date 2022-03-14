@@ -46,7 +46,7 @@ export class CreateUserDto implements IUser {
     example: 'secret',
     description: 'The user`s password'
   })
-  // @IsNotEmpty()
+  @IsNotEmpty()
   readonly password: string
 
   @ApiProperty({
