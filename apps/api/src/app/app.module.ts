@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { UsersModule } from './user/user.module'
 import { AuthModule } from './auth/auth.module'
-import { TypeOrmModule } from '@nestjs/typeorm'
 import { MealsModule } from './meal/meal.module'
 import { APP_GUARD } from '@nestjs/core'
 import { JwtAuthGuard } from './auth/auth.guards'
+import { TypeOrmModule } from '@nestjs/typeorm'
 import { Meal } from './meal/meal.entity'
 import { User } from './user/user.entity'
 
@@ -20,8 +20,7 @@ import { User } from './user/user.entity'
         username: configService.get('MYSQL_USERNAME'),
         password: configService.get('MYSQL_PASSWORD'),
         database: configService.get('MYSQL_DATABASENAME'),
-        // entities: [Meal, User],
-        entities: [__dirname + '/**/*.entity.{ts,js}'],
+        entities: [Meal, User],
         synchronize: true,
         retryAttempts: 1
       }),
