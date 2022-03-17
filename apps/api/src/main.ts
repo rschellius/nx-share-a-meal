@@ -33,10 +33,7 @@ async function bootstrap() {
     .setTitle('Share-a-Meal Backend API')
     .setDescription('API documentation for the Android Share-a-Meal app.')
     .setVersion('1.0')
-    .addBearerAuth(
-      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
-      'Add a user and then login to receive a valid JWT token. Insert the JWT token here. '
-    )
+    .addBearerAuth()
     .build()
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('docs', app, document)

@@ -20,7 +20,8 @@ import { User } from './user/user.entity'
         username: configService.get('MYSQL_USERNAME'),
         password: configService.get('MYSQL_PASSWORD'),
         database: configService.get('MYSQL_DATABASENAME'),
-        entities: [Meal, User],
+        // entities: [Meal, User],
+        entities: [__dirname + '/**/*.entity.{ts,js}'],
         synchronize: true,
         retryAttempts: 1
       }),

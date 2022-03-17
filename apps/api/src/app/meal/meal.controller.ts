@@ -83,7 +83,11 @@ export class MealController {
   @Put(':id')
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Update a single meal' })
-  @ApiBody({ type: Meal, description: 'the new meal properties' })
+  @ApiBody({
+    type: CreateMealDto,
+    description:
+      'The updated properties. You can update a whole Meal object, or only a smaller subset of the properties.'
+  })
   @ApiResponse({ status: 201, description: 'OK.', type: [Meal] })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async update(

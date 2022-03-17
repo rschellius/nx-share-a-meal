@@ -1,0 +1,49 @@
+{
+  "root": "apps/api-e2e",
+  "sourceRoot": "apps/api-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/api-e2e",
+        "main": "apps/api-e2e/src/main.ts",
+        "tsConfig": "apps/api-e2e/tsconfig.app.json",
+        "assets": ["apps/api-e2e/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/api-e2e/src/environments/environment.ts",
+              "with": "apps/api-e2e/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "lint": {
+      "executor": "@angular-devkit/build-angular:tslint",
+      "options": {
+        "tsConfig": [
+          "apps/api-e2e/tsconfig.app.json",
+          "apps/api-e2e/tsconfig.spec.json"
+        ],
+        "exclude": ["**/node_modules/**", "!apps/api-e2e/**/*"]
+      }
+    },
+    "e2e": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/api-e2e"],
+      "options": {
+        "jestConfig": "apps/api-e2e/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
