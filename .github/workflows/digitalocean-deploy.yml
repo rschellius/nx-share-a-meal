@@ -2,7 +2,7 @@ name: Build and publish Docker images
 
 on:
   push:
-    branches: [heroku-deployment]
+    branches: [release]
 
     # Publish `v1.2.3` tags as releases.
     tags:
