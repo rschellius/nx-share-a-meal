@@ -1,6 +1,7 @@
 import { Logger, ValidationPipe } from '@nestjs/common'
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface'
 import { NestFactory } from '@nestjs/core'
+import { MicroserviceOptions, Transport } from '@nestjs/microservices'
 import { NestExpressApplication } from '@nestjs/platform-express'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { AppModule } from './app/app.module'
@@ -10,7 +11,17 @@ import { environment as env } from './environments/environment'
 async function bootstrap() {
   const port = process.env.PORT || 3000
   const mode = env.production ? 'production' : 'development'
+
+  /**
+   * This project contains a hybrid application (HTTP + TCP)
+   */
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
+
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.TCP,
+    options: { retryAttempts: 5, retryDelay: 3000 }
+  })
+  await app.startAllMicroservices()
 
   app.useGlobalPipes(
     new ValidationPipe({

@@ -8,6 +8,7 @@ import { JwtAuthGuard } from './auth/auth.guards'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { Meal } from './meal/meal.entity'
 import { User } from './user/user.entity'
+import { ClientsModule, Transport } from '@nestjs/microservices'
 
 @Module({
   imports: [
@@ -27,6 +28,17 @@ import { User } from './user/user.entity'
       inject: [ConfigService]
     }),
     ConfigModule.forRoot({ envFilePath: './.env', isGlobal: true }),
+
+    ClientsModule.register([
+      {
+        name: 'MATH_SERVICE',
+        transport: Transport.MQTT,
+        options: {
+          url: 'mqtt://localhost:1883'
+        }
+      }
+    ]),
+
     AuthModule,
     UsersModule,
     MealsModule
