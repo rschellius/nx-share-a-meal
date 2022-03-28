@@ -1,13 +1,14 @@
-import { Controller, Get } from '@nestjs/common'
-
-import { AppService } from './app.service'
+import { Controller, Logger } from '@nestjs/common'
+import { MessagePattern, Payload, Ctx, RmqContext } from '@nestjs/microservices'
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  //
+  private readonly logger = new Logger(AppController.name)
 
-  @Get()
-  getData() {
-    return this.appService.getData()
+  @MessagePattern({ cmd: 'sum' })
+  sum(@Payload() data: number[], @Ctx() context: RmqContext): number {
+    this.logger.log(`Pattern: ${context.getPattern()} received`)
+    return (data || []).reduce((a, b) => a + b)
   }
 }

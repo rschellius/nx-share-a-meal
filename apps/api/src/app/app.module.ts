@@ -8,10 +8,17 @@ import { JwtAuthGuard } from './auth/auth.guards'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { Meal } from './meal/meal.entity'
 import { User } from './user/user.entity'
-import { ClientsModule, Transport } from '@nestjs/microservices'
+import {
+  ClientProxyFactory,
+  ClientsModule,
+  Transport
+} from '@nestjs/microservices'
+import { MathController } from './math.controller'
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ envFilePath: './.env', isGlobal: true }),
+
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
@@ -27,15 +34,28 @@ import { ClientsModule, Transport } from '@nestjs/microservices'
       }),
       inject: [ConfigService]
     }),
-    ConfigModule.forRoot({ envFilePath: './.env', isGlobal: true }),
 
-    ClientsModule.register([
+    ClientsModule.registerAsync([
       {
-        name: 'MATH_SERVICE',
-        transport: Transport.MQTT,
-        options: {
-          url: 'mqtt://localhost:1883'
-        }
+        name: 'API_QUEUE_SERVICE',
+        imports: [ConfigModule],
+        useFactory: async (configService: ConfigService) => ({
+          transport: Transport.RMQ,
+          options: {
+            queue: configService.get<string>('API_RMQ_QUEUE_NAME'),
+            urls: [
+              `amqp://${configService.get('RABBITMQ_USER')}:${configService.get(
+                'RABBITMQ_PASSWORD'
+              )}@${configService.get('RABBITMQ_HOST')}`
+            ],
+            queueOptions: {
+              durable: configService.get<boolean>(
+                'API_RMQ_QUEUE_OPTION_DURABLE'
+              )
+            }
+          }
+        }),
+        inject: [ConfigService]
       }
     ]),
 
@@ -43,10 +63,32 @@ import { ClientsModule, Transport } from '@nestjs/microservices'
     UsersModule,
     MealsModule
   ],
+  controllers: [MathController],
   providers: [
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard
+    },
+    {
+      provide: 'API_QUEUE_SERVICE',
+      useFactory: (configService: ConfigService) => {
+        const user = configService.get<string>('RABBITMQ_USER')
+        const password = configService.get<string>('RABBITMQ_PASSWORD')
+        const host = configService.get<string>('RABBITMQ_HOST')
+        const queueName = configService.get<string>('API_RMQ_QUEUE_NAME')
+
+        return ClientProxyFactory.create({
+          transport: Transport.RMQ,
+          options: {
+            urls: [`amqp://${user}:${password}@${host}`],
+            queue: queueName,
+            queueOptions: {
+              durable: true
+            }
+          }
+        })
+      },
+      inject: [ConfigService]
     }
   ]
 })

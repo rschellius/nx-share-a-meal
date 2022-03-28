@@ -20,7 +20,7 @@ services:
       context: ./
       cache_from:
         - my-base-image:nx-base
-      dockerfile: ./apps/api/Dockerfile
+      dockerfile: ./apps/api/Dockerfile.web
       args:
         - NODE_ENV=${NODE_ENV}
         - BUILD_FLAG=-c ${NODE_ENV}
@@ -32,11 +32,12 @@ services:
       - mysql
     environment:
       - NODE_ENV=${NODE_ENV}
-      - PORT = 3000
+      - PORT=3000
       - MYSQL_USERNAME=root
       - MYSQL_PASSWORD=admin
       - MYSQL_HOSTNAME=mysql
-      - MYSQL_PORT=3306 # api talks to the internal mysql port!
+      # api talks to the internal mysql port!
+      - MYSQL_PORT=3306
       - MYSQL_DATABASENAME=share-a-meal
       - LOGLEVEL=debug # or trace, info, debug, warn, error
     networks:
@@ -49,7 +50,7 @@ services:
       context: ./
       cache_from:
         - node:16-alpine
-      dockerfile: ./apps/share-a-meal-ui/Dockerfile
+      dockerfile: ./apps/share-a-meal-ui/Dockerfile.web
       args:
         - NODE_ENV=${NODE_ENV}
         - BUILD_FLAG=-c ${NODE_ENV}
@@ -84,3 +85,18 @@ services:
       - 3307
     networks:
       - corp
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    volumes:
+      - /var/lib/rabbitmq
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    # env_file:
+    #   - ./rabbitmq.env

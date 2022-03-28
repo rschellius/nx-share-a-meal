@@ -1,22 +1,29 @@
 import { Logger } from '@nestjs/common'
+import { ConfigService } from '@nestjs/config'
 import { NestFactory } from '@nestjs/core'
-import { Transport } from '@nestjs/microservices'
+import { MicroserviceOptions, Transport } from '@nestjs/microservices'
 import { AppModule } from './app/app.module'
-import { environment as env } from './environments/environment'
 
 async function bootstrap() {
-  const port = process.env.PORT || 8877
-  const mode = env.production ? 'production' : 'development'
+  const app = await NestFactory.create(AppModule)
+  const configService = app.get(ConfigService)
 
-  const app = await NestFactory.createMicroservice(AppModule, {
-    transport: Transport.MQTT,
+  const user = configService.get('RABBITMQ_USER')
+  const password = configService.get('RABBITMQ_PASSWORD')
+  const host = configService.get('RABBITMQ_HOST')
+
+  await app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.RMQ,
     options: {
-      url: 'mqtt://localhost:1883'
+      urls: [`amqp://${user}:${password}@${host}`],
+      queue: configService.get<string>('API_RMQ_QUEUE_NAME'),
+      queueOptions: {
+        durable: configService.get<boolean>('API_RMQ_QUEUE_OPTION_DURABLE')
+      }
     }
   })
-  Logger.log(
-    `Microservice is listening in ${mode} mode on port ${port}`,
-    'Main'
-  )
+
+  await app.startAllMicroservices()
+  Logger.log(`Identity API is running`, 'Main')
 }
 bootstrap()

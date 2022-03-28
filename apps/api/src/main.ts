@@ -1,5 +1,6 @@
 import { Logger, ValidationPipe } from '@nestjs/common'
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface'
+import { ConfigService } from '@nestjs/config'
 import { NestFactory } from '@nestjs/core'
 import { MicroserviceOptions, Transport } from '@nestjs/microservices'
 import { NestExpressApplication } from '@nestjs/platform-express'
@@ -17,11 +18,25 @@ async function bootstrap() {
    */
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
 
-  app.connectMicroservice<MicroserviceOptions>({
-    transport: Transport.TCP,
-    options: { retryAttempts: 5, retryDelay: 3000 }
-  })
-  await app.startAllMicroservices()
+  // const configService = app.get<ConfigService>(ConfigService)
+  // const user = configService.get('RABBITMQ_USER')
+  // const password = configService.get('RABBITMQ_PASSWORD')
+  // const host = configService.get('RABBITMQ_HOST')
+
+  /**
+   * RabbitMq queue connection
+   */
+  // app.connectMicroservice<MicroserviceOptions>({
+  //   transport: Transport.RMQ,
+  //   options: {
+  //     queue: configService.get<string>('API_RMQ_QUEUE_NAME'),
+  //     urls: [`amqp://${user}:${password}@${host}`],
+  //     queueOptions: {
+  //       durable: configService.get<boolean>('API_RMQ_QUEUE_OPTION_DURABLE')
+  //     }
+  //   }
+  // })
+  // await app.startAllMicroservices()
 
   app.useGlobalPipes(
     new ValidationPipe({

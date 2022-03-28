@@ -74,6 +74,14 @@ Heroku will ask which of the web applications you want to deploy. Do this for bo
 
 To inspect the logging, type `heroku logs -a shareameal-api`.
 
+### RabbitMq Docker container
+
+To start RabbitMq:
+
+```
+docker run -it --rm --name rabbitmq -e RABBITMQ_DEFAULT_USER=rmq_user -e RABBITMQ_DEFAULT_PASS=secret -p 5672:5672 -p 15672:15672 rabbitmq:3.9-management
+```
+
 ## Running unit tests
 
 Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io). Run `nx affected:test` to execute the unit tests affected by a change.

@@ -1,14 +1,15 @@
-# Avans Programmeren 4 example server
+# Share-a-Meal API backend
 
-Dit is voorbeeldcode bij de lessen Programmeren 4. Deze server gaat uit van een Movie-casus die niet beschreven staat in een functioneel ontwerp, maar aansluit bij bv de Samen Eten casus uit Programmeren 4.
+Share a Meal Programmeren 3 backend server.
 
 ## Installing and starting
 
-Om te installeren run je:
+Deze implementatie gebruikt een NX monorepo.
+Om te installeren en runnen:
 
 ```
 npm install
-npm run dev
+nx serve api
 ```
 
 ## Testing
@@ -16,16 +17,7 @@ npm run dev
 Om te testen run je:
 
 ```
-npm test
-```
-
-## Codecoverage en Sonar analysis
-
-Run:
-
-```
-npm run coverage
-npm run sonar
+nx test api
 ```
 
 ## Docker
@@ -43,4 +35,13 @@ SQL scripts must be in a folder; in this case 'mysql-dump'. This folder is linke
 ```
 docker system prune -a
 docker-compose up --build
+```
+
+## RabbitMq
+
+For a local Docker instance of RabbitMQ 3.9, the latest series, see
+[https://www.rabbitmq.com/download.html](https://www.rabbitmq.com/download.html).
+
+```
+docker run -it --rm --name rabbitmq -e RABBITMQ_DEFAULT_USER=rmq_user -e RABBITMQ_DEFAULT_PASS=secret -p 5672:5672 -p 15672:15672 rabbitmq:3.9-management
 ```
