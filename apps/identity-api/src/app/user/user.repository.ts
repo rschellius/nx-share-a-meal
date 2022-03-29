@@ -1,19 +1,19 @@
 import { Repository, EntityRepository } from 'typeorm'
-import { User } from './user.entity'
+import { UserEntity } from '@cswp/api-interfaces'
 import { CreateUserDto, UpdateUserDto } from './user.dto'
 import { HttpException, HttpStatus, Logger } from '@nestjs/common'
 
-@EntityRepository(User)
-export class UserRepository extends Repository<User> {
+@EntityRepository(UserEntity)
+export class UserRepository extends Repository<UserEntity> {
   // Logging
   private readonly logger = new Logger(UserRepository.name)
 
-  public async findAll(): Promise<User[]> {
+  public async findAll(): Promise<UserEntity[]> {
     this.logger.log('findAll')
     return await this.find({ relations: ['user'] })
   }
 
-  public createUser(createUserDto: CreateUserDto): Promise<User> {
+  public createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
     return this.findOne({ emailAdress: createUserDto.emailAdress }).then(
       (user) => {
         if (user) {
@@ -27,7 +27,7 @@ export class UserRepository extends Repository<User> {
         }
         if (!user) {
           this.logger.log('createUser - creating ' + createUserDto.emailAdress)
-          const newUser = new User()
+          const newUser = new UserEntity()
           const toInsert = { ...newUser, ...createUserDto }
           this.logger.log(toInsert)
           return this.save(toInsert)
@@ -39,7 +39,7 @@ export class UserRepository extends Repository<User> {
   public async updateUser(
     id: number,
     updateUserDto: UpdateUserDto
-  ): Promise<User> {
+  ): Promise<UserEntity> {
     this.logger.log('updateUser id=' + id)
     console.log(updateUserDto)
     const user = await this.findOne(id)

@@ -2,6 +2,10 @@ import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { AppController } from './app.controller'
 import { ClientsModule, Transport } from '@nestjs/microservices'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { UserEntity } from '@cswp/api-interfaces'
+import { UserModule } from '@cswp/feature'
+import { AuthModule } from './auth/auth.module'
 
 @Module({
   imports: [
@@ -9,7 +13,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices'
 
     ClientsModule.registerAsync([
       {
-        name: 'API_QUEUE_SERVICE',
+        name: 'API_QUEUE_SERVICE', // beter: 'user-identity-queue'
         imports: [ConfigModule],
         useFactory: async (configService: ConfigService) => ({
           transport: Transport.RMQ,
@@ -25,7 +29,26 @@ import { ClientsModule, Transport } from '@nestjs/microservices'
         }),
         inject: [ConfigService]
       }
-    ])
+    ]),
+
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        type: 'mysql',
+        host: configService.get('MYSQL_HOSTNAME'),
+        port: +configService.get<number>('MYSQL_PORT'),
+        username: configService.get('MYSQL_USERNAME'),
+        password: configService.get('MYSQL_PASSWORD'),
+        database: configService.get('MYSQL_DATABASENAME'),
+        entities: [UserEntity],
+        synchronize: true,
+        retryAttempts: 1
+      }),
+      inject: [ConfigService]
+    }),
+
+    UserModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: []

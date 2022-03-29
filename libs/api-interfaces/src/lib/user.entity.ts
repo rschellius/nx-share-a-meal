@@ -2,15 +2,15 @@ import { ApiProperty } from '@nestjs/swagger'
 import { Exclude, instanceToPlain } from 'class-transformer'
 import { IsEmail } from 'class-validator'
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
-import { Meal } from '../meal/meal.entity'
-import { IUser, UserRole } from '@cswp/api-interfaces'
+import { IUser, UserRole } from './i.user'
+import { Meal } from './meal.entity'
 
 @Entity()
 /**
  * https://stackoverflow.com/a/59140504
  * export class User extends BaseAbstractEntity implements IUser {
  */
-export class User implements IUser {
+export class UserEntity implements IUser {
   @ApiProperty({
     example: 0,
     description: 'The database ID of the user'
