@@ -2,7 +2,7 @@ import { Controller, Request, Post, UseGuards, Logger } from '@nestjs/common'
 import { LocalAuthGuard } from './auth.guards'
 import { AuthService } from './auth.service'
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
-import { UserEntity } from '@cswp/api-interfaces'
+import { UserEntity } from '../user/user.entity'
 import { Public } from '../common/decorators/decorators'
 
 @Controller('auth')

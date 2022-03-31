@@ -1,5 +1,3 @@
 export * from './lib/i.message'
 export * from './lib/i.meal'
 export * from './lib/i.user'
-export * from './lib/user.entity'
-export * from './lib/meal.entity'

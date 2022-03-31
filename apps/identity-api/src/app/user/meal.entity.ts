@@ -10,7 +10,7 @@ import {
   UpdateDateColumn
 } from 'typeorm'
 import { UserEntity } from './user.entity'
-import { IMeal, Allergenes, IParticipationInfo } from './i.meal'
+import { IMeal, Allergenes, IParticipationInfo } from '@cswp/api-interfaces'
 
 @Entity()
 export class Meal implements IMeal {

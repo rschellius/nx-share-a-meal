@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { UserService } from './user.service'
-import { UserEntity } from '@cswp/api-interfaces'
+import { UserEntity } from './user.entity'
 
 const mockUser = {
   firstName: 'firstname',

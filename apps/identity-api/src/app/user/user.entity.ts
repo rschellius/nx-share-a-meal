@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { Exclude, instanceToPlain } from 'class-transformer'
 import { IsEmail } from 'class-validator'
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
-import { IUser, UserRole } from './i.user'
+import { IUser, UserRole } from '@cswp/api-interfaces'
 import { Meal } from './meal.entity'
 
 @Entity()

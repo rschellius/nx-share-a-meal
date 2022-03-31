@@ -1,5 +1,5 @@
 import { Repository, EntityRepository } from 'typeorm'
-import { UserEntity } from '@cswp/api-interfaces'
+import { UserEntity } from './user.entity'
 import { CreateUserDto, UpdateUserDto } from './user.dto'
 import { HttpException, HttpStatus, Logger } from '@nestjs/common'
 

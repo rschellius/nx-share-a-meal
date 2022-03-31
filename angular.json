@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 1,
   "projects": {
     "api": "apps/api",
     "api-e2e": "apps/api-e2e",
@@ -70,7 +70,8 @@
             "outputPath": "dist/apps/identity-api",
             "main": "apps/identity-api/src/main.ts",
             "tsConfig": "apps/identity-api/tsconfig.app.json",
-            "assets": ["apps/identity-api/src/assets"]
+            "assets": ["apps/identity-api/src/assets"],
+            "generatePackageJson": true
           },
           "configurations": {
             "production": {
