@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "projects": {
     "api": "apps/api",
     "api-e2e": "apps/api-e2e",
@@ -391,6 +391,58 @@
     },
     "share-a-meal-ui-e2e": "apps/share-a-meal-ui-e2e",
     "ui": "libs/ui",
+    "users-api": {
+      "root": "apps/users-api",
+      "sourceRoot": "apps/users-api/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/users-api",
+            "main": "apps/users-api/src/main.ts",
+            "tsConfig": "apps/users-api/tsconfig.app.json",
+            "assets": ["apps/users-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/users-api/src/environments/environment.ts",
+                  "with": "apps/users-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "users-api:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/users-api/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/users-api"],
+          "options": {
+            "jestConfig": "apps/users-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "util": "libs/util"
   }
 }

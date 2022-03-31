@@ -1,7 +1,6 @@
 {
   "name": "nx-share-a-meal",
   "version": "0.1.0",
-  "--- type ---": "module",
   "license": "MIT",
   "scripts": {
     "ng": "nx",
