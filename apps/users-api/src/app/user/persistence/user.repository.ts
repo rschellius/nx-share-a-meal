@@ -1,25 +1,52 @@
-import { IUser } from '@cswp/api-interfaces'
-import { Injectable } from '@nestjs/common'
-import { IUserRepository } from '../domain/iuser.repository'
+import { Repository, EntityRepository } from 'typeorm'
+import { UserEntity } from './user.entity'
+import { CreateUserDto, UpdateUserDto } from '../api/user.dto'
+import { HttpException, HttpStatus, Logger } from '@nestjs/common'
 
-@Injectable()
-export class UserRepository implements IUserRepository {
-  create(user: IUser): Promise<IUser> {
-    throw new Error('Method not implemented.')
+@EntityRepository(UserEntity)
+export class UserRepository extends Repository<UserEntity> {
+  // Logging
+  private readonly logger = new Logger(UserRepository.name)
+
+  public async findAll(): Promise<UserEntity[]> {
+    this.logger.log('findAll')
+    return await this.find({ relations: ['user'] })
   }
-  findAll(): Promise<IUser[]> {
-    throw new Error('Method not implemented.')
+
+  public createUser(createUserDto: CreateUserDto): Promise<UserEntity> {
+    return this.findOne({ emailAdress: createUserDto.emailAdress }).then(
+      (user) => {
+        if (user) {
+          this.logger.log(
+            'createUser - ' + user.emailAdress + ' already taken.'
+          )
+          throw new HttpException(
+            'Emailadress already taken',
+            HttpStatus.CONFLICT
+          )
+        }
+        if (!user) {
+          this.logger.log('createUser - creating ' + createUserDto.emailAdress)
+          const newUser = new UserEntity()
+          const toInsert = { ...newUser, ...createUserDto }
+          this.logger.log(toInsert)
+          return this.save(toInsert)
+        }
+      }
+    )
   }
-  findOne(id: string): Promise<IUser> {
-    throw new Error('Method not implemented.')
-  }
-  findOneByEmail(email: string): Promise<IUser> {
-    throw new Error('Method not implemented.')
-  }
-  update(id: number, userDetails: any, ownerId: number): Promise<IUser> {
-    throw new Error('Method not implemented.')
-  }
-  delete(id: string, owner: IUser): Promise<void> {
-    throw new Error('Method not implemented.')
+
+  public async updateUser(
+    id: number,
+    updateUserDto: UpdateUserDto
+  ): Promise<UserEntity> {
+    this.logger.log('updateUser id=' + id)
+    console.log(updateUserDto)
+    const user = await this.findOne(id)
+    if (user) {
+      const updatedUser = { ...user, ...updateUserDto }
+      return this.save(updatedUser)
+    }
+    return undefined
   }
 }

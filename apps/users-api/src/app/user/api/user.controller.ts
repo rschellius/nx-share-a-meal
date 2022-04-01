@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  Inject,
   Logger,
   Param,
   Post,
@@ -21,21 +20,20 @@ import {
   ApiResponse,
   ApiTags
 } from '@nestjs/swagger'
-import { CreateUserDto, UpdateUserDto, ListAllUsersDto } from './user.dto'
+import { UserService } from '../persistence/user.service'
+import { CreateUserDto, UpdateUserDto } from './user.dto'
+// import { UserEntity } from './user.entity'
 import { UserEntity } from '../persistence/user.entity'
+import { ListAllUsersDto } from './user.dto'
 import { JwtAuthGuard } from '../../auth/auth.guards'
 import { Public } from '../../common/decorators/decorators'
-import { IUserRepository } from '../domain/iuser.repository'
-import { IUser } from '@cswp/api-interfaces'
-
-const UserRepository = () => Inject('UserRepository')
 
 @ApiTags('User')
 @Controller('user')
 export class UserController {
   private readonly logger = new Logger(UserController.name)
 
-  constructor(@UserRepository() private userRepository: IUserRepository) {}
+  constructor(private readonly userService: UserService) {}
 
   @Public()
   @Post()
@@ -45,7 +43,7 @@ export class UserController {
   @ApiResponse({ status: 401, description: 'Forbidden.' })
   async create(@Body() createUserDto: CreateUserDto): Promise<UserEntity> {
     this.logger.log('create')
-    return this.userRepository.create(createUserDto as IUser)
+    return this.userService.create(createUserDto as UserEntity)
   }
 
   @ApiBearerAuth()
@@ -63,7 +61,7 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   getUserProfile(@Request() req) {
-    return this.userRepository.findOne(req.user.userId)
+    return this.userService.findOne(req.user.userId)
   }
 
   @Get()
@@ -81,10 +79,10 @@ export class UserController {
     type: Error
   })
   @UseGuards(JwtAuthGuard)
-  findAll(@Query() queryParams: ListAllUsersDto): Promise<IUser[]> {
+  findAll(@Query() queryParams: ListAllUsersDto): Promise<UserEntity[]> {
     this.logger.log('findAll')
     // this.logger.log('queryParams: ', queryParams);
-    return this.userRepository.findAll(/* queryParams */)
+    return this.userService.findAll(/* queryParams */)
   }
 
   @Get(':id')
@@ -101,9 +99,9 @@ export class UserController {
     type: Error
   })
   @UseGuards(JwtAuthGuard)
-  findOne(@Param('id') id: string): Promise<IUser> {
+  findOne(@Param('id') id: string): Promise<UserEntity> {
     this.logger.log('findOne id=' + id)
-    return this.userRepository.findOne(id)
+    return this.userService.findOne(id)
   }
 
   @Put(':id')
@@ -122,9 +120,9 @@ export class UserController {
     @Param('id') id: number,
     @Body() updateUserDto: UpdateUserDto,
     @Req() req
-  ): Promise<IUser> {
+  ): Promise<UserEntity> {
     this.logger.log(`update id=${id} user.id=${req.user.userId}`)
-    return this.userRepository.update(id, updateUserDto, req.user.userId)
+    return this.userService.update(id, updateUserDto, req.user.userId)
   }
 
   @Delete(':id')
@@ -137,6 +135,6 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   async delete(@Param('id') id: string, @Req() req): Promise<void> {
     this.logger.log(`delete user.id=${req.user.userId}`)
-    return this.userRepository.delete(id, req.user)
+    return this.userService.delete(id, req.user)
   }
 }

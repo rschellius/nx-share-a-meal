@@ -1,10 +1,10 @@
 import { Inject, Injectable, Logger } from '@nestjs/common'
-// import { UserService } from '../user/user.service'
 import { JwtService } from '@nestjs/jwt'
+import { InjectRepository } from '@nestjs/typeorm'
 import { IUserRepository } from '../user/domain/iuser.repository'
-// import { UserEntity } from '../user/user.entity'
+import { UserService } from '../user/persistence/user.service'
 
-const UserRepository = () => Inject('UserRepository')
+// const UserRepository = () => Inject('UserRepository')
 
 @Injectable()
 export class AuthService {
@@ -12,13 +12,14 @@ export class AuthService {
   private readonly logger = new Logger(AuthService.name)
 
   constructor(
-    @UserRepository() private userRepository: IUserRepository,
+    // @UserRepository() private userRepository: IUserRepository,
+    private userService: UserService,
     private jwtService: JwtService
   ) {}
 
   async validateUser(email: string, pass: string): Promise<any> {
     this.logger.log('validateUser')
-    const user = await this.userRepository.findOneByEmail(email)
+    const user = await this.userService.findOneByEmail(email)
     if (user && user.password === pass) {
       return user
     }
