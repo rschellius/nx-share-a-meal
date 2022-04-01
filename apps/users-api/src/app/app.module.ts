@@ -4,11 +4,9 @@ import { AppController } from './app.controller'
 import { ClientsModule, Transport } from '@nestjs/microservices'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { AppService } from './app.service'
-// import { UserEntity } from './user/user.entity'
-// import { Meal } from './user/meal.entity'
-// import { UserModule } from '@cswp/feature'
 import { AuthModule } from './auth/auth.module'
-import { UserRepositoryModule } from './user/persistence/user.repository.module'
+import { UserModule } from './user/user.module'
+import { UserEntity } from './user/persistence/user.entity'
 
 @Module({
   imports: [
@@ -43,15 +41,14 @@ import { UserRepositoryModule } from './user/persistence/user.repository.module'
         username: configService.get('MYSQL_USERNAME'),
         password: configService.get('MYSQL_PASSWORD'),
         database: configService.get('MYSQL_DATABASENAME'),
-        // entities: [UserEntity, Meal],
+        entities: [UserEntity],
         synchronize: true,
         retryAttempts: 1
       }),
       inject: [ConfigService]
     }),
 
-    // UserModule,
-    UserRepositoryModule,
+    UserModule,
     AuthModule
   ],
   controllers: [AppController],

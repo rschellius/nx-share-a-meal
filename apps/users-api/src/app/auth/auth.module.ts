@@ -5,13 +5,10 @@ import { PassportModule } from '@nestjs/passport'
 import { JwtModule } from '@nestjs/jwt'
 import { JwtStrategy } from './jwt.strategy'
 import { AuthController } from './auth.controller'
-import { UserRepositoryModule } from '../user/persistence/user.repository.module'
+import { UserModule } from '../user/user.module'
 
 @Module({
   imports: [
-    // UsersModule,
-    UserRepositoryModule,
-
     PassportModule.register({
       defaultStrategy: 'jwt',
       property: 'user',
@@ -21,7 +18,9 @@ import { UserRepositoryModule } from '../user/persistence/user.repository.module
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'secretstring',
       signOptions: { expiresIn: '2 days' }
-    })
+    }),
+
+    UserModule
   ],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, JwtStrategy],

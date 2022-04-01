@@ -42,7 +42,7 @@ async function bootstrap() {
   )
   app.setGlobalPrefix('api')
 
-  await app.listen(3030)
+  await app.listen(3000)
   Logger.log(`Identity API is running`, 'Main')
 }
 bootstrap()
