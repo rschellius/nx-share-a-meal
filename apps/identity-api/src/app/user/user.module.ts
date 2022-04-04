@@ -1,21 +1,11 @@
 import { Module } from '@nestjs/common'
-import { TypeOrmModule } from '@nestjs/typeorm'
-import { UserController } from './user.controller'
-import { UserService } from './user.service'
-import { UserRepository } from './user.repository'
-import { APP_GUARD } from '@nestjs/core'
-import { JwtAuthGuard } from '../auth/auth.guards'
+import { UserController } from './api/user.controller'
+import { UserRepository } from './persistence/user.repository'
+import { UserService } from './persistence/user.service'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserRepository])],
   controllers: [UserController],
-  providers: [
-    UserService,
-    {
-      provide: APP_GUARD,
-      useClass: JwtAuthGuard
-    }
-  ],
-  exports: [TypeOrmModule, UserService]
+  providers: [UserRepository, UserService],
+  exports: [UserRepository, UserService]
 })
-export class UsersModule {}
+export class UserModule {}

@@ -1,7 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common'
-import { UserService } from '../user/user.service'
 import { JwtService } from '@nestjs/jwt'
-import { UserEntity } from '../user/user.entity'
+import { UserService } from '../user/persistence/user.service'
+
+// const UserRepository = () => Inject('UserRepository')
 
 @Injectable()
 export class AuthService {
@@ -22,7 +23,7 @@ export class AuthService {
     return null
   }
 
-  async login(user: UserEntity) {
+  async login(user: any) {
     this.logger.log('login ' + user.emailAdress)
     const payload = { email: user.emailAdress, sub: user.id }
     const { password, phoneNumber, ...attribs } = user
