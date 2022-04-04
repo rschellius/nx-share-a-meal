@@ -2,7 +2,6 @@ import { Controller, Request, Post, UseGuards, Logger } from '@nestjs/common'
 import { LocalAuthGuard } from './auth.guards'
 import { AuthService } from './auth.service'
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
-// import { UserEntity } from '../user/user.entity'
 import { Public } from '../common/decorators/decorators'
 
 @Controller('auth')
@@ -20,7 +19,6 @@ export class AuthController {
     description:
       'UserEntity credentials { "emailAdress": email, "password": secret}'
   })
-  // @ApiResponse({ status: 201, description: 'OK.', type: UserEntity })
   @ApiResponse({ status: 401, description: 'Forbidden.' })
   async login(@Request() req) {
     this.logger.log('login')

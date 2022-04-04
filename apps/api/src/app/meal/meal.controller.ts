@@ -18,7 +18,7 @@ import {
 } from '@nestjs/swagger'
 import { MealService } from './meal.service'
 import { CreateMealDto, UpdateMealDto } from './meal.dto'
-import { Meal, ParticipationInfo } from './meal.entity'
+import { Meal, ParticipationInfo } from '@cswp/api-interfaces'
 import { Public } from '../common/decorators/decorators'
 
 @ApiTags('Meal')

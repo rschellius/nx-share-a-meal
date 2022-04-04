@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { MealsModule } from './meal/meal.module'
 import { APP_GUARD } from '@nestjs/core'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { Meal } from './meal/meal.entity'
+import { Meal, UserEntity } from '@cswp/api-interfaces'
 import {
   ClientProxyFactory,
   ClientsModule,
@@ -24,7 +24,7 @@ import { MathController } from './math.controller'
         username: configService.get('MYSQL_USERNAME'),
         password: configService.get('MYSQL_PASSWORD'),
         database: configService.get('MYSQL_DATABASENAME'),
-        entities: [Meal],
+        entities: [Meal, UserEntity],
         synchronize: true,
         retryAttempts: 1
       }),

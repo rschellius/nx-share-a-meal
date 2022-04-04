@@ -16,8 +16,8 @@ import { UserModule } from '../user/user.module'
     }),
 
     JwtModule.register({
-      secret: process.env.JWT_SECRET || 'secretstring',
-      signOptions: { expiresIn: '2 days' }
+      secret: process.env.JWT_SECRET || 'veryverysecretstring',
+      signOptions: { expiresIn: '24 days' }
     }),
 
     UserModule

@@ -7,10 +7,12 @@ import {
   NotFoundException
 } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { UserRepository } from '../user/user.repository'
+// import { UserRepository } from '../user/user.repository'
 import { UpdateMealDto } from './meal.dto'
-import { Meal, ParticipationInfo } from './meal.entity'
+import { Meal, ParticipationInfo } from '@cswp/api-interfaces'
 import { MealRepository } from './meal.repository'
+
+// const UserRepository = () => Inject('UserRepository')
 
 @Injectable()
 export class MealService {
@@ -24,9 +26,7 @@ export class MealService {
    */
   constructor(
     @InjectRepository(MealRepository)
-    private mealRepository: MealRepository,
-    @InjectRepository(UserRepository)
-    private userRepository: UserRepository
+    private mealRepository: MealRepository // @InjectRepository(UserRepository) // private userRepository: UserRepository
   ) {}
 
   /**
@@ -111,10 +111,16 @@ export class MealService {
   ): Promise<ParticipationInfo> {
     this.logger.log('participate mealId=' + mealId + ' participant=' + userId)
 
+    throw new BadRequestException(`ToDo, userRepo dependency`)
+
+    /*
     const meal = await this.mealRepository.findOne(mealId)
     if (!meal) {
       throw new NotFoundException(`Meal #${mealId} not found`)
     }
+    //
+    // userRepository dependency verwijderern - ToDo
+    //
     const participant = await this.userRepository.findOne({ id: userId })
     if (!participant) {
       throw new NotFoundException(`Participant #${userId} not found`)
@@ -141,6 +147,7 @@ export class MealService {
       await this.mealRepository.save(meal)
       return new ParticipationInfo(false, meal.participants.length)
     }
+    */
   }
 
   /**
@@ -156,8 +163,9 @@ export class MealService {
     this.logger.log(
       `remove mealId=${mealId} userId=${userId} ownerId=${meal.cook.id}`
     )
-    const cook = await this.userRepository.findOne(userId)
-    if (meal.cook !== cook) {
+    // const cook = await this.userRepository.findOne(userId)
+    this.logger.warn('DANGER: comparing COOK to UserID - gaat dit goed?')
+    if (meal.cook.id !== userId) {
       throw new BadRequestException(`Not allowed to delete.`)
     }
     await this.mealRepository.delete(mealId)

@@ -1,5 +1,5 @@
 import { Repository, EntityRepository } from 'typeorm'
-import { Meal } from './meal.entity'
+import { Meal } from '@cswp/api-interfaces'
 import { UpdateMealDto } from './meal.dto'
 import { Logger } from '@nestjs/common'
 
