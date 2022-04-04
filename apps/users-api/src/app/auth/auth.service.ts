@@ -1,7 +1,5 @@
-import { Inject, Injectable, Logger } from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import { InjectRepository } from '@nestjs/typeorm'
-import { IUserRepository } from '../user/domain/iuser.repository'
 import { UserService } from '../user/persistence/user.service'
 
 // const UserRepository = () => Inject('UserRepository')
@@ -12,7 +10,6 @@ export class AuthService {
   private readonly logger = new Logger(AuthService.name)
 
   constructor(
-    // @UserRepository() private userRepository: IUserRepository,
     private userService: UserService,
     private jwtService: JwtService
   ) {}

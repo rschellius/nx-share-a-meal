@@ -22,11 +22,11 @@ import {
 } from '@nestjs/swagger'
 import { UserService } from '../persistence/user.service'
 import { CreateUserDto, UpdateUserDto } from './user.dto'
-// import { UserEntity } from './user.entity'
 import { UserEntity } from '../persistence/user.entity'
 import { ListAllUsersDto } from './user.dto'
 import { JwtAuthGuard } from '../../auth/auth.guards'
 import { Public } from '../../common/decorators/decorators'
+import { IUser } from '@cswp/api-interfaces'
 
 @ApiTags('User')
 @Controller('user')
@@ -41,9 +41,9 @@ export class UserController {
   @ApiBody({ type: CreateUserDto, description: 'The new user' })
   @ApiResponse({ status: 201, description: 'OK.', type: [UserEntity] })
   @ApiResponse({ status: 401, description: 'Forbidden.' })
-  async create(@Body() createUserDto: CreateUserDto): Promise<UserEntity> {
+  async create(@Body() createUserDto: CreateUserDto): Promise<IUser> {
     this.logger.log('create')
-    return this.userService.create(createUserDto as UserEntity)
+    return this.userService.create(createUserDto as IUser)
   }
 
   @ApiBearerAuth()
@@ -79,7 +79,7 @@ export class UserController {
     type: Error
   })
   @UseGuards(JwtAuthGuard)
-  findAll(@Query() queryParams: ListAllUsersDto): Promise<UserEntity[]> {
+  findAll(@Query() queryParams: ListAllUsersDto): Promise<IUser[]> {
     this.logger.log('findAll')
     // this.logger.log('queryParams: ', queryParams);
     return this.userService.findAll(/* queryParams */)
@@ -99,7 +99,7 @@ export class UserController {
     type: Error
   })
   @UseGuards(JwtAuthGuard)
-  findOne(@Param('id') id: string): Promise<UserEntity> {
+  findOne(@Param('id') id: string): Promise<IUser> {
     this.logger.log('findOne id=' + id)
     return this.userService.findOne(id)
   }
@@ -120,7 +120,7 @@ export class UserController {
     @Param('id') id: number,
     @Body() updateUserDto: UpdateUserDto,
     @Req() req
-  ): Promise<UserEntity> {
+  ): Promise<IUser> {
     this.logger.log(`update id=${id} user.id=${req.user.userId}`)
     return this.userService.update(id, updateUserDto, req.user.userId)
   }

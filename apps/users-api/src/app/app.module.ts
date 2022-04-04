@@ -1,9 +1,7 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import { AppController } from './app.controller'
 import { ClientsModule, Transport } from '@nestjs/microservices'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
 import { UserModule } from './user/user.module'
 import { UserEntity } from './user/persistence/user.entity'
@@ -51,7 +49,6 @@ import { UserEntity } from './user/persistence/user.entity'
     UserModule,
     AuthModule
   ],
-  controllers: [AppController],
-  providers: [AppService]
+  providers: []
 })
 export class AppModule {}
