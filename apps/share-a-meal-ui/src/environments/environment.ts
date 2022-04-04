@@ -9,6 +9,9 @@ export const environment = {
   SERVER_DOCS_URL: 'http://localhost:3000/docs',
   SERVER_API_URL: 'http://localhost:3000/api/',
 
+  IDENTITY_API_DOCS_URL: 'http://localhost:3030/docs',
+  IDENTITY_API_URL: 'http://localhost:3030/api/',
+
   appVersion: env.version
 }
 

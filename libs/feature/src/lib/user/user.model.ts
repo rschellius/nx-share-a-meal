@@ -7,6 +7,8 @@ export class User implements IUser, IEntity {
   id?: number | undefined
   firstName!: string
   lastName!: string
+  street!: string
+  city!: string
   roles!: UserRole[]
   isActive!: boolean
   password!: string

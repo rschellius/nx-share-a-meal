@@ -4,7 +4,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { AuthModule } from './auth/auth.module'
 import { UserModule } from './user/user.module'
-import { UserEntity } from './user/persistence/user.entity'
+import { UserEntity, Meal } from '@cswp/api-interfaces'
 
 @Module({
   imports: [
@@ -39,7 +39,7 @@ import { UserEntity } from './user/persistence/user.entity'
         username: configService.get('MYSQL_USERNAME'),
         password: configService.get('MYSQL_PASSWORD'),
         database: configService.get('MYSQL_DATABASENAME'),
-        entities: [UserEntity],
+        entities: [UserEntity, Meal],
         synchronize: true,
         retryAttempts: 1
       }),

@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common'
 import { Connection } from 'typeorm'
 import { UpdateUserDto } from '../api/user.dto'
-import { UserEntity } from './user.entity'
+import { UserEntity } from '@cswp/api-interfaces'
 import { UserRepository } from './user.repository'
 
 @Injectable()

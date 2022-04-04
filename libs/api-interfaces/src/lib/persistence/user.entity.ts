@@ -2,15 +2,15 @@ import { ApiProperty } from '@nestjs/swagger'
 import { Exclude, instanceToPlain } from 'class-transformer'
 import { IsEmail } from 'class-validator'
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
-import { Meal } from '../meal/meal.entity'
-import { IUser, UserRole } from '@cswp/api-interfaces'
+import { IUser, UserRole } from '../i.user'
+import { Meal } from './meal.entity'
 
 @Entity()
 /**
  * https://stackoverflow.com/a/59140504
  * export class User extends BaseAbstractEntity implements IUser {
  */
-export class User implements IUser {
+export class UserEntity implements IUser {
   @ApiProperty({
     example: 0,
     description: 'The database ID of the user'
@@ -23,28 +23,28 @@ export class User implements IUser {
     description: 'The firstname of the user'
   })
   @Column()
-  firstName: string
+  firstName!: string
 
   @ApiProperty({
     example: 'Doe',
     description: 'The lastname of the user'
   })
   @Column()
-  lastName: string
+  lastName!: string
 
   @ApiProperty({
     example: 'Lovensdijkstraat 61',
     description: 'The street and housenumber of the users adress'
   })
   @Column()
-  street: string
+  street!: string
 
   @ApiProperty({
     example: 'Breda',
     description: 'The user`s city'
   })
   @Column()
-  city: string
+  city!: string
 
   @Column({
     type: 'set',
@@ -72,7 +72,7 @@ export class User implements IUser {
   // @ApiModelProperty({ example: faker.internet.email() })
   @IsEmail()
   @Column({ unique: true })
-  emailAdress: string
+  emailAdress!: string
 
   @Exclude({ toPlainOnly: true })
   @Column()
@@ -80,7 +80,7 @@ export class User implements IUser {
     example: 'secret',
     description: 'The password of the user'
   })
-  password: string
+  password!: string
 
   @ApiProperty({
     example: '06 12425475',
@@ -92,9 +92,9 @@ export class User implements IUser {
   @OneToMany(() => Meal, (meal) => meal.cook)
   meals?: Meal[]
 
-  toJSON() {
-    return instanceToPlain(this)
-  }
+  // toJSON() {
+  //   return instanceToPlain(this)
+  // }
 
   validatePassword? = function (password: string) {
     // if (!this.password || !this.passwordSalt) {

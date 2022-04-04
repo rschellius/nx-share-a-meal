@@ -23,7 +23,7 @@ export class AuthService {
     private router: Router
   ) {
     console.log(
-      'AuthService constructor ' + configService.getConfig().apiEndpoint
+      'AuthService constructor ' + configService.getConfig().apiIdentityEndpoint
     )
     // Check of we al een ingelogde user hebben
     // Zo ja, check dan op de backend of het token nog valid is.
@@ -49,12 +49,12 @@ export class AuthService {
 
   login(formData: ILoginFormData): Observable<IUser | undefined> {
     console.log(
-      `login at ${this.configService.getConfig().apiEndpoint}auth/login`
+      `login at ${this.configService.getConfig().apiIdentityEndpoint}auth/login`
     )
 
     return this.http
       .post<IUser>(
-        `${this.configService.getConfig().apiEndpoint}auth/login`,
+        `${this.configService.getConfig().apiIdentityEndpoint}auth/login`,
         formData,
         {
           headers: this.headers
@@ -79,11 +79,13 @@ export class AuthService {
   }
 
   register(userData: IUser): Observable<IUser | undefined> {
-    console.log(`register at ${this.configService.getConfig().apiEndpoint}user`)
+    console.log(
+      `register at ${this.configService.getConfig().apiIdentityEndpoint}user`
+    )
     console.log(userData)
     return this.http
       .post<IUser>(
-        `${this.configService.getConfig().apiEndpoint}user`,
+        `${this.configService.getConfig().apiIdentityEndpoint}user`,
         userData,
         {
           headers: this.headers

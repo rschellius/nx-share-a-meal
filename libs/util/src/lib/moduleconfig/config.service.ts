@@ -6,14 +6,10 @@ import { CustomConfig } from './config.module'
 })
 export class ConfigService {
   constructor(private config: CustomConfig) {
-    console.log('ConfigService ' + config.apiEndpoint)
+    console.log('ConfigService init')
   }
 
   public getConfig(): CustomConfig {
     return this.config
-  }
-
-  public getApiEndpoint(): string {
-    return this.config.apiEndpoint
   }
 }

@@ -22,7 +22,7 @@ import {
 } from '@nestjs/swagger'
 import { UserService } from '../persistence/user.service'
 import { CreateUserDto, UpdateUserDto } from './user.dto'
-import { UserEntity } from '../persistence/user.entity'
+import { UserEntity } from '@cswp/api-interfaces'
 import { ListAllUsersDto } from './user.dto'
 import { JwtAuthGuard } from '../../auth/auth.guards'
 import { Public } from '../../common/decorators/decorators'

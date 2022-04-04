@@ -9,8 +9,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn
 } from 'typeorm'
-import { User } from '../user/user.entity'
-import { IMeal, Allergenes, IParticipationInfo } from '@cswp/api-interfaces'
+import { UserEntity } from './user.entity'
+import { IMeal, Allergenes, IParticipationInfo } from '../i.meal'
 
 @Entity()
 export class Meal implements IMeal {
@@ -26,69 +26,69 @@ export class Meal implements IMeal {
     description: 'The name of the meal'
   })
   @Column('varchar', { length: 200 })
-  name: string
+  name!: string
 
   @ApiProperty({
     example: 'Dé pastaklassieker bij uitstek.',
     description: 'The longer description of the meal'
   })
   @Column('varchar', { length: 400 })
-  description: string
+  description!: string
 
   @ApiProperty({
     example: true,
     description: 'Whether this is an active meal'
   })
   @Column('boolean', { default: false })
-  isActive: boolean
+  isActive!: boolean
 
   @ApiProperty({
     example: true,
     description: 'Whether this is a vegetarian meal'
   })
   @Column('boolean', { default: false })
-  isVega: boolean
+  isVega!: boolean
 
   @ApiProperty({
     example: true,
     description: 'Whether this is a vegan meal'
   })
   @Column('boolean', { default: false })
-  isVegan: boolean
+  isVegan!: boolean
 
   @ApiProperty({
     example: true,
     description: 'Whether this is a meal to take home'
   })
   @Column('boolean', { default: true })
-  isToTakeHome: boolean
+  isToTakeHome!: boolean
 
   @ApiProperty({
     example: new Date(),
     description: 'The date this meal is served.'
   })
   @Column('datetime', {})
-  dateTime: Date
+  dateTime!: Date
 
   @CreateDateColumn()
-  createDate: Date
+  createDate!: Date
 
   @UpdateDateColumn()
-  updateDate: Date
+  updateDate!: Date
 
   @ApiProperty({
     example: '6',
     description: 'The maximum amount of participants of the meal'
   })
   @Column({ default: 6 })
-  maxAmountOfParticipants: number
+  maxAmountOfParticipants!: number
 
   @ApiProperty({
     example: '6.75',
     description: 'The price of the meal'
   })
   @Column({ type: 'decimal', precision: 5, scale: 2 })
-  price: number
+  price!: number
 
   @ApiProperty({
     example:
@@ -96,7 +96,7 @@ export class Meal implements IMeal {
     description: 'The url to an image of the meal'
   })
   @Column()
-  imageUrl: string
+  imageUrl!: string
 
   @ApiProperty({
     description: 'Enumeration of allergene information',
@@ -107,22 +107,22 @@ export class Meal implements IMeal {
     enum: Allergenes,
     default: []
   })
-  allergenes: Allergenes[]
+  allergenes!: Allergenes[]
 
   @ApiProperty({
-    type: () => User,
+    type: () => UserEntity,
     description: 'The person who created and cooks this meal.'
   })
-  @ManyToOne(() => User, (cook) => cook.meals, { eager: true })
-  cook: User
+  @ManyToOne(() => UserEntity, (cook) => cook.meals, { eager: true })
+  cook!: UserEntity
 
   @ApiProperty({
     description: 'An array of the people participating in this meal.',
-    type: () => [User]
+    type: () => [UserEntity]
   })
-  @ManyToMany(() => User, { eager: true })
+  @ManyToMany(() => UserEntity, { eager: true })
   @JoinTable()
-  participants: User[]
+  participants!: UserEntity[]
 }
 
 export class ParticipationInfo implements IParticipationInfo {
@@ -130,13 +130,13 @@ export class ParticipationInfo implements IParticipationInfo {
     description:
       'Property indicating whether the authenticated user is currently paticipating in the meal.'
   })
-  currentlyParticipating: boolean
+  currentlyParticipating!: boolean
 
   @ApiProperty({
     description:
       'Property indicating the number of users currently paticipating in the meal.'
   })
-  currentAmountOfParticipants: number
+  currentAmountOfParticipants!: number
 
   constructor(participation: boolean, currentAmount: number) {
     this.currentlyParticipating = participation
