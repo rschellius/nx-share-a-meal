@@ -1,11 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { Exclude, instanceToPlain } from 'class-transformer'
 import { IsEmail } from 'class-validator'
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  BeforeInsert
+} from 'typeorm'
 import { IUser, UserRole } from '../i.user'
 import { Meal } from './meal.entity'
+import * as bcrypt from 'bcrypt'
 
-@Entity()
+@Entity('user')
 /**
  * https://stackoverflow.com/a/59140504
  * export class User extends BaseAbstractEntity implements IUser {
@@ -92,6 +99,11 @@ export class UserEntity implements IUser {
   @OneToMany(() => Meal, (meal) => meal.cook)
   meals?: Meal[]
 
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = await bcrypt.hash(this.password, 10)
+  }
+
   // toJSON() {
   //   return instanceToPlain(this)
   // }
@@ -103,11 +115,3 @@ export class UserEntity implements IUser {
     // return comparedToHashed(password, this.password, this.passwordSalt)
   }
 }
-
-//
-// Hashing van password toevoegen
-//
-//   @BeforeInsert()
-//   async hashPassword() {
-//     this.password = await argon2.hash(this.password);
-//   }

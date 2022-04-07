@@ -7,7 +7,8 @@ import {
   Param,
   Post,
   Put,
-  Req
+  Req,
+  UseGuards
 } from '@nestjs/common'
 import {
   ApiBearerAuth,
@@ -20,9 +21,11 @@ import { MealService } from './meal.service'
 import { CreateMealDto, UpdateMealDto } from './meal.dto'
 import { Meal, ParticipationInfo } from '@cswp/api-interfaces'
 import { Public } from '../common/decorators/decorators'
+import { RabbitMqAuthGuard } from '../auth/auth.guards'
 
 @ApiTags('Meal')
 @Controller('meal')
+@UseGuards(RabbitMqAuthGuard)
 export class MealController {
   private readonly logger = new Logger(MealController.name)
 

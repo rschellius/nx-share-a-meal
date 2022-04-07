@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import { ClientsModule, Transport } from '@nestjs/microservices'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { UserModule } from './user/user.module'
 import { UserEntity, Meal } from '@cswp/api-interfaces'
@@ -8,26 +7,6 @@ import { UserEntity, Meal } from '@cswp/api-interfaces'
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: './.env', isGlobal: true }),
-
-    ClientsModule.registerAsync([
-      {
-        name: 'API_QUEUE_SERVICE', // beter: 'user-identity-queue'
-        imports: [ConfigModule],
-        useFactory: async (configService: ConfigService) => ({
-          transport: Transport.RMQ,
-          options: {
-            queue: configService.get<string>('API_RMQ_QUEUE_NAME'),
-            urls: [configService.get<string>('API_RMQ_QUEUE_URL')],
-            queueOptions: {
-              durable: configService.get<boolean>(
-                'API_RMQ_QUEUE_OPTION_DURABLE'
-              )
-            }
-          }
-        }),
-        inject: [ConfigService]
-      }
-    ]),
 
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -46,7 +25,6 @@ import { UserEntity, Meal } from '@cswp/api-interfaces'
     }),
 
     UserModule
-  ],
-  providers: []
+  ]
 })
 export class AppModule {}

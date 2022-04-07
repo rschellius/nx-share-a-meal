@@ -1,36 +1,26 @@
-import { NestExpressApplication } from '@nestjs/platform-express'
 import { Logger, ValidationPipe } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface'
 import { NestFactory } from '@nestjs/core'
+import { Transport } from '@nestjs/microservices'
+import { NestExpressApplication } from '@nestjs/platform-express'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
-import { MicroserviceOptions, Transport } from '@nestjs/microservices'
 import { AppModule } from './app/app.module'
 import { TransformInterceptor } from './app/common/interceptors/transform.interceptor'
 import { environment as env } from './environments/environment'
 
 async function bootstrap() {
-  const port = process.env.PORT || 3030
+  const port = process.env.PORT || 3020
   const mode = env.production ? 'production' : 'development'
 
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
 
-  // const configService = app.get(ConfigService)
-
-  // const user = configService.get('RABBITMQ_USER')
-  // const password = configService.get('RABBITMQ_PASSWORD')
-  // const host = configService.get('RABBITMQ_HOST')
-
-  await app.connectMicroservice<MicroserviceOptions>({
+  app.connectMicroservice({
     transport: Transport.TCP,
     options: {
       host: 'localhost',
-      port: 4000
+      port: 4010
     }
   })
-
-  // await
-  app.startAllMicroservices()
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -50,17 +40,18 @@ async function bootstrap() {
   app.enableCors(corsOptions)
 
   const config = new DocumentBuilder()
-    .setTitle('Identity API')
-    .setDescription('Documentation for the Identity API backend server.')
+    .setTitle('Share-a-Meal Backend API')
+    .setDescription('API documentation for the Android Share-a-Meal app.')
     .setVersion('1.0')
     .addBearerAuth()
     .build()
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('docs', app, document)
 
+  await app.startAllMicroservices()
   await app.listen(port)
   Logger.log(
-    `Identity API is running in ${mode} mode on ${await app.getUrl()}`,
+    `User API is running in ${mode} mode on ${await app.getUrl()}`,
     'Main'
   )
 }
