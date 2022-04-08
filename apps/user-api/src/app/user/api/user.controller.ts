@@ -9,7 +9,8 @@ import {
   Put,
   Query,
   Req,
-  Request
+  Request,
+  UseGuards
 } from '@nestjs/common'
 import {
   ApiBadRequestResponse,
@@ -25,6 +26,7 @@ import { UserEntity } from '@cswp/api-interfaces'
 import { ListAllUsersDto } from './user.dto'
 import { IUser } from '@cswp/api-interfaces'
 import { MessagePattern } from '@nestjs/microservices'
+import { AuthApiGuard } from '@cswp/api-interfaces'
 
 @ApiTags('User')
 @Controller('user')
@@ -64,9 +66,10 @@ export class UserController {
     type: [UserEntity]
   })
   @ApiResponse({ status: 401, description: 'Forbidden.' })
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(AuthApiGuard)
   @Get('profile')
   getUserProfile(@Request() req) {
+    this.logger.log(`getUserProfile req.user.userId = ${req.user.userId}`)
     return this.userService.findOne(req.user.userId)
   }
 
@@ -84,7 +87,7 @@ export class UserController {
       'Unauthorized. You need to create a new user first, and login, to get a valid JWT.',
     type: Error
   })
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(AuthApiGuard)
   findAll(@Query() queryParams: ListAllUsersDto): Promise<IUser[]> {
     this.logger.log('findAll')
     // this.logger.log('queryParams: ', queryParams);
@@ -104,7 +107,7 @@ export class UserController {
     description: 'Forbidden, no access',
     type: Error
   })
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(AuthApiGuard)
   findOne(@Param('id') id: number): Promise<IUser> {
     this.logger.log('findOne id=' + id)
     return this.userService.findOne({ id })
@@ -121,7 +124,7 @@ export class UserController {
   @ApiResponse({ status: 201, description: 'OK.', type: [UserEntity] })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   @ApiBadRequestResponse({ description: 'Not allowed to edit' })
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(AuthApiGuard)
   async update(
     @Param('id') id: number,
     @Body() updateUserDto: UpdateUserDto,
@@ -138,7 +141,7 @@ export class UserController {
   @ApiResponse({ status: 201, description: 'OK.', type: [UserEntity] })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   @ApiBadRequestResponse({ description: 'Not allowed to delete' })
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(AuthApiGuard)
   async delete(@Param('id') id: string, @Req() req): Promise<void> {
     this.logger.log(`delete user.id=${req.user.userId}`)
     return this.userService.delete(id, req.user)

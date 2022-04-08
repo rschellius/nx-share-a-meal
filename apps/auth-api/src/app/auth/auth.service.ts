@@ -52,12 +52,21 @@ export class AuthService {
     }
   }
 
-  async login(user) {
-    const payload = { user, sub: user.id }
+  validateToken(jwt: string) {
+    this.logger.log(`validateToken`)
+    return this.jwtService.verify(jwt)
+  }
 
-    return {
+  async login(user) {
+    this.logger.log(`login`)
+    const payload = { userId: user.id }
+    const result = {
       userId: user.id,
-      accessToken: this.jwtService.sign(payload)
+      roles: user.roles,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      token: this.jwtService.sign(payload)
     }
+    return result
   }
 }
