@@ -6,9 +6,11 @@ import { Transport } from '@nestjs/microservices'
 import { NestExpressApplication } from '@nestjs/platform-express'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { AppModule } from './app/app.module'
-import { TransformInterceptor } from './app/common/interceptors/transform.interceptor'
-import { environment as env } from './environments/environment'
+import { TransformInterceptor } from '@cswp/api-interfaces'
 
+/**
+ *
+ */
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
 

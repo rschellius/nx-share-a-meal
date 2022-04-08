@@ -9,14 +9,15 @@ import { ConfigModule } from '@nestjs/config'
 
 @Module({
   imports: [
-    ConfigModule,
+    ConfigModule.forRoot({ envFilePath: './.env', isGlobal: true }),
+
     ClientsModule.register([
       {
         name: 'USER_CLIENT',
         transport: Transport.TCP,
         options: {
           host: 'localhost',
-          port: 4010
+          port: 4020
         }
       }
     ]),

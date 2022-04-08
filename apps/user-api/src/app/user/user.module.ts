@@ -9,13 +9,14 @@ import { UserService } from './persistence/user.service'
 @Module({
   imports: [
     TypeOrmModule.forFeature([UserEntity]),
+
     ClientsModule.register([
       {
         name: 'AUTH_CLIENT',
         transport: Transport.TCP,
         options: {
           host: 'localhost',
-          port: 4000
+          port: 4010
         }
       }
     ])

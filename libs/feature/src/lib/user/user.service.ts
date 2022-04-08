@@ -9,7 +9,7 @@ import { ConfigService } from '@cswp/util'
 })
 export class UserService extends EntityService<IUser> {
   constructor(private config: ConfigService, http: HttpClient) {
-    super(http, config.getConfig().apiIdentityEndpoint, 'user')
-    console.log('UserService ' + config.getConfig().apiIdentityEndpoint)
+    super(http, config.getConfig().userApiEndpoint, 'user')
+    console.log('UserService ' + config.getConfig().userApiEndpoint)
   }
 }

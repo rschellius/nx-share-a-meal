@@ -13,8 +13,8 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.runningMode = environment.production ? 'production' : 'development'
-    this.apiUrl = environment.SERVER_API_URL
-    this.apiDocsUrl = environment.SERVER_DOCS_URL
+    this.apiUrl = environment.MEAL_API_URL
+    this.apiDocsUrl = environment.MEAL_DOCS_URL
     this.version = environment.appVersion
   }
 }

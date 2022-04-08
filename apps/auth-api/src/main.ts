@@ -3,6 +3,8 @@ import { NestFactory } from '@nestjs/core'
 import { Transport } from '@nestjs/microservices'
 import { AppModule } from './app/app.module'
 import { ConfigService } from '@nestjs/config'
+import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface'
+import { TransformInterceptor } from '@cswp/api-interfaces'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
@@ -18,7 +20,11 @@ async function bootstrap() {
     'AUTH_API_MICROSERVICE_PORT'
   )
 
+  app.useGlobalInterceptors(new TransformInterceptor())
   app.setGlobalPrefix('api')
+
+  const corsOptions: CorsOptions = {}
+  app.enableCors(corsOptions)
 
   app.connectMicroservice({
     transport: Transport.TCP,

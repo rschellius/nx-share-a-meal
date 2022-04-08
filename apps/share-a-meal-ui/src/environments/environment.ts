@@ -6,11 +6,14 @@ import { default as env } from '../../../../package.json'
 export const environment = {
   production: false,
 
-  SERVER_DOCS_URL: 'http://localhost:3000/docs',
-  SERVER_API_URL: 'http://localhost:3000/api/',
+  MEAL_DOCS_URL: 'http://localhost:3000/docs',
+  MEAL_API_URL: 'http://localhost:3000/api/',
 
-  IDENTITY_API_DOCS_URL: 'http://localhost:3030/docs',
-  IDENTITY_API_URL: 'http://localhost:3030/api/',
+  AUTH_API_DOCS_URL: 'http://localhost:3030/docs',
+  AUTH_API_URL: 'http://localhost:3010/api/',
+
+  USER_API_DOCS_URL: 'http://localhost:3030/docs',
+  USER_API_URL: 'http://localhost:3020/api/',
 
   appVersion: env.version
 }

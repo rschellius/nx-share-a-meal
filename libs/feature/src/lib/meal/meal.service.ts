@@ -11,7 +11,7 @@ import { Meal } from './meal.model'
 })
 export class MealService extends EntityService<Meal> {
   constructor(private configService: ConfigService, http: HttpClient) {
-    super(http, configService.getConfig().apiMealEndpoint, 'meal')
+    super(http, configService.getConfig().mealApiEndpoint, 'meal')
   }
 
   public participate(mealId: number): Observable<IParticipationInfo> {

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable, of } from 'rxjs'
 import { ILoginFormData, IUser } from '@cswp/api-interfaces'
 import { Router } from '@angular/router'
-import { map, tap, catchError, switchMap } from 'rxjs/operators'
+import { map, catchError, switchMap } from 'rxjs/operators'
 import { AlertService, ConfigService } from '@cswp/util'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 
@@ -23,7 +23,7 @@ export class AuthService {
     private router: Router
   ) {
     console.log(
-      'AuthService constructor ' + configService.getConfig().apiIdentityEndpoint
+      'AuthService constructor ' + configService.getConfig().authApiEndpoint
     )
     // Check of we al een ingelogde user hebben
     // Zo ja, check dan op de backend of het token nog valid is.
@@ -49,12 +49,12 @@ export class AuthService {
 
   login(formData: ILoginFormData): Observable<IUser | undefined> {
     console.log(
-      `login at ${this.configService.getConfig().apiIdentityEndpoint}auth/login`
+      `login at ${this.configService.getConfig().authApiEndpoint}auth/login`
     )
 
     return this.http
       .post<IUser>(
-        `${this.configService.getConfig().apiIdentityEndpoint}auth/login`,
+        `${this.configService.getConfig().authApiEndpoint}auth/login`,
         formData,
         {
           headers: this.headers
@@ -80,12 +80,12 @@ export class AuthService {
 
   register(userData: IUser): Observable<IUser | undefined> {
     console.log(
-      `register at ${this.configService.getConfig().apiIdentityEndpoint}user`
+      `register at ${this.configService.getConfig().userApiEndpoint}user`
     )
     console.log(userData)
     return this.http
       .post<IUser>(
-        `${this.configService.getConfig().apiIdentityEndpoint}user`,
+        `${this.configService.getConfig().userApiEndpoint}user`,
         userData,
         {
           headers: this.headers

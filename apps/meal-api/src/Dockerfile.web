@@ -1,0 +1,32 @@
+# 
+# https://docs.docker.com/develop/develop-images/multistage-build/
+# 
+FROM my-base-image:nx-base AS base-image
+
+ARG NODE_ENV
+ARG BUILD_FLAG
+
+WORKDIR /app/builder
+RUN npx nx build api ${BUILD_FLAG}
+
+# Start a new empty layer and copy only the requires folders onto it. 
+# FROM my-base-image:nx-base
+FROM node:16-alpine
+
+WORKDIR /app/builder
+COPY --from=base-image /app/builder/dist ./dist
+COPY --from=base-image /app/builder/node_modules ./node_modules
+
+# Expose is NOT supported by Heroku
+# EXPOSE 3000
+# EXPOSE 3306
+
+ENV NODE_ENV=${NODE_ENV}
+
+# Run the image as a non-root user
+RUN adduser -D myuser
+USER myuser
+
+# Run the app.  CMD is required to run on Heroku
+# $PORT is set by Heroku			
+CMD node ./dist/apps/api/main.js

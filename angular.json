@@ -42,7 +42,8 @@
             "outputPath": "dist/apps/auth-api",
             "main": "apps/auth-api/src/main.ts",
             "tsConfig": "apps/auth-api/tsconfig.app.json",
-            "assets": ["apps/auth-api/src/assets"]
+            "assets": ["apps/auth-api/src/assets"],
+            "generatePackageJson": true
           },
           "configurations": {
             "production": {
@@ -122,7 +123,8 @@
             "outputPath": "dist/apps/meal-api",
             "main": "apps/meal-api/src/main.ts",
             "tsConfig": "apps/meal-api/tsconfig.app.json",
-            "assets": ["apps/meal-api/src/assets"]
+            "assets": ["apps/meal-api/src/assets"],
+            "generatePackageJson": true
           },
           "configurations": {
             "production": {
@@ -454,7 +456,8 @@
             "outputPath": "dist/apps/user-api",
             "main": "apps/user-api/src/main.ts",
             "tsConfig": "apps/user-api/tsconfig.app.json",
-            "assets": ["apps/user-api/src/assets"]
+            "assets": ["apps/user-api/src/assets"],
+            "generatePackageJson": true
           },
           "configurations": {
             "production": {
