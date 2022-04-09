@@ -3,6 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { UserModule } from './user/user.module'
 import { UserEntity, Meal } from '@cswp/api-interfaces'
+// import mysql2 required to add package to generated dist/package.json
+import * as mysql from 'mysql2'
 
 @Module({
   imports: [

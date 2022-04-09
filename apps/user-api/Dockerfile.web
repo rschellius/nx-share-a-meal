@@ -5,14 +5,9 @@ FROM my-base-image:nx-base AS base-image
 
 ARG NODE_ENV
 ARG BUILD_FLAG
-ARG JWT_SECRET
-ARG AUTH_API_HTTP_PORT
-ARG AUTH_API_MICROSERVICE_PORT
-ARG AUTH_API_MICROSERVICE_HOSTNAME
-
 
 WORKDIR /app/builder
-RUN npx nx build auth-api ${BUILD_FLAG}
+RUN npx nx build user-api ${BUILD_FLAG}
 
 # 
 # Start a new empty layer and copy only the requires folders onto it. 
@@ -22,22 +17,30 @@ RUN npx nx build auth-api ${BUILD_FLAG}
 FROM node:latest
 
 WORKDIR /app/builder/dist
-COPY --from=base-image /app/builder/dist/apps/auth-api .
+COPY --from=base-image /app/builder/dist/apps/user-api .
 RUN npm install
 
 # Expose is NOT supported by Heroku
-EXPOSE 3010
-EXPOSE 4010
+EXPOSE 3020
+EXPOSE 3306
+EXPOSE 4020
 
+# # Env variables with their default values.
+# # Values are overridden when set from the outside.
 # ENV NODE_ENV=${NODE_ENV}
 # ENV JWT_SECRET=${JWT_SECRET}
-# ENV AUTH_API_HTTP_PORT=3010
-# # We provide the AuthApi microservice
+# ENV USER_API_HTTP_PORT=3020
+# # We use the AuthApi microservice as a client
 # ENV AUTH_API_MICROSERVICE_PORT=4010
 # ENV AUTH_API_MICROSERVICE_HOSTNAME=host.docker.internal
-# # We use the UserApi microservice as a client
+# # We provide the UserApi microservice
 # ENV USER_API_MICROSERVICE_PORT=4020
 # ENV USER_API_MICROSERVICE_HOSTNAME=host.docker.internal
+# ENV MYSQL_USERNAME=share-a-meal-user
+# ENV MYSQL_PASSWORD=secret
+# ENV MYSQL_HOSTNAME=host.docker.internal
+# ENV MYSQL_PORT=3306
+# ENV MYSQL_DATABASENAME=share-a-meal
 
 # Run the image as a non-root user
 RUN adduser myuser

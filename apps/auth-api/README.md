@@ -4,8 +4,7 @@ Nestjs backend server that provides a login HTTP endpoint, and a microservice th
 
 ## Installing and starting
 
-Deze implementatie gebruikt een NX monorepo.
-Om te installeren en runnen:
+Install this required dependencies for this server by running the following command in the root of this monorepo.
 
 ```
 npm install
@@ -14,7 +13,7 @@ nx serve auth-api
 
 ## Testing
 
-Om te testen run je:
+To run the tests:
 
 ```
 nx test auth-api
@@ -22,26 +21,28 @@ nx test auth-api
 
 ## Docker
 
+Building and running the server in a Docker container must be done from the root of the repository.
+
 ```
-docker build --tag movies:1.0 .
-docker run -e DB_HOST=192.168.178.20 -e DB_PASSWORD=secret --publish 3000:3000 --name movies movies:1.0
-docker rm --force movies
+docker build . --file .\apps\auth-api\Dockerfile.web --tag auth-api
+
+docker run
+    -e AUTH_API_HTTP_PORT=3010
+    -e AUTH_API_MICROSERVICE_PORT=4010
+    -e AUTH_API_MICROSERVICE_HOSTNAME=localhost
+    --publish 3010:3010
+    --publish 4010:4010
+    -i -t auth-api /bin/bash
 ```
+
+Or shorter, from the repo root folder, using the `.env` file:
+
+```
+docker run --env-file=.env  --publish 3010:3010 --publish 4010:4010 -i -t auth-api /bin/bash
+```
+
+Notice that the Auth API sever requires the User API to run, in order to fully function.
 
 ## Docker Compose
 
-SQL scripts must be in a folder; in this case 'mysql-dump'. This folder is linked as a volume into the mysql container. Only at very first startup this script is read. Prune your images until it is read.
-
-```
-docker system prune -a
-docker-compose up --build
-```
-
-## RabbitMq - not in current repo
-
-For a local Docker instance of RabbitMQ 3.9, the latest series, see
-[https://www.rabbitmq.com/download.html](https://www.rabbitmq.com/download.html).
-
-```
-docker run -it --rm --name rabbitmq -e RABBITMQ_DEFAULT_USER=rmq_user -e RABBITMQ_DEFAULT_PASS=secret -p 5672:5672 -p 15672:15672 rabbitmq:3.9-management
-```
+To start all required services and frontend applications at once, run the `docker compose up` command from the root of the repo.
