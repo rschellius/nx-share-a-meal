@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { MealController } from './meal.controller'
 import { MealService } from './meal.service'
 import { MealRepository } from './meal.repository'
-import { ConfigService } from '@nestjs/config'
+import { ConfigModule, ConfigService } from '@nestjs/config'
 import {
   ClientProxyFactory,
   ClientsModule,
@@ -12,18 +12,24 @@ import {
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([MealRepository]),
+    ConfigModule.forRoot({ envFilePath: './.env', isGlobal: true }),
 
-    ClientsModule.register([
+    ClientsModule.registerAsync([
       {
         name: 'AUTH_CLIENT',
-        transport: Transport.TCP,
-        options: {
-          host: 'localhost',
-          port: 4010
-        }
+        imports: [ConfigModule],
+        useFactory: async (configService: ConfigService) => ({
+          transport: Transport.TCP,
+          options: {
+            host: configService.get<string>('AUTH_API_MICROSERVICE_HOSTNAME'),
+            port: configService.get<number>('AUTH_API_MICROSERVICE_PORT')
+          }
+        }),
+        inject: [ConfigService]
       }
-    ])
+    ]),
+
+    TypeOrmModule.forFeature([MealRepository])
   ],
   controllers: [MealController],
   providers: [

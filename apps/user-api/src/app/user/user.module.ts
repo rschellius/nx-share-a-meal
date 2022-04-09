@@ -1,5 +1,6 @@
 import { UserEntity } from '@cswp/api-interfaces'
 import { Module } from '@nestjs/common'
+import { ConfigModule, ConfigService } from '@nestjs/config'
 import { ClientsModule, Transport } from '@nestjs/microservices'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { UserController } from './api/user.controller'
@@ -10,14 +11,20 @@ import { UserService } from './persistence/user.service'
   imports: [
     TypeOrmModule.forFeature([UserEntity]),
 
-    ClientsModule.register([
+    ConfigModule.forRoot({ envFilePath: './.env', isGlobal: true }),
+
+    ClientsModule.registerAsync([
       {
         name: 'AUTH_CLIENT',
-        transport: Transport.TCP,
-        options: {
-          host: 'localhost',
-          port: 4010
-        }
+        imports: [ConfigModule],
+        useFactory: async (configService: ConfigService) => ({
+          transport: Transport.TCP,
+          options: {
+            host: configService.get<string>('AUTH_API_MICROSERVICE_HOSTNAME'),
+            port: configService.get<number>('AUTH_API_MICROSERVICE_PORT')
+          }
+        }),
+        inject: [ConfigService]
       }
     ])
   ],

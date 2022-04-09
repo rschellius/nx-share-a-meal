@@ -5,20 +5,24 @@ import { AuthService } from './auth.service'
 import { LocalStrategy } from './local.strategy'
 import { JwtStrategy } from './jwt.strategy'
 import { AuthController } from './auth.controller'
-import { ConfigModule } from '@nestjs/config'
+import { ConfigModule, ConfigService } from '@nestjs/config'
 
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: './.env', isGlobal: true }),
 
-    ClientsModule.register([
+    ClientsModule.registerAsync([
       {
         name: 'USER_CLIENT',
-        transport: Transport.TCP,
-        options: {
-          host: 'localhost',
-          port: 4020
-        }
+        imports: [ConfigModule],
+        useFactory: async (configService: ConfigService) => ({
+          transport: Transport.TCP,
+          options: {
+            host: configService.get<string>('USER_API_MICROSERVICE_HOSTNAME'),
+            port: configService.get<number>('USER_API_MICROSERVICE_PORT')
+          }
+        }),
+        inject: [ConfigService]
       }
     ]),
 
