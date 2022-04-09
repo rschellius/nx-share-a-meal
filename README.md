@@ -15,9 +15,10 @@ This project was generated using [Nx](https://nx.dev).
 Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
 ```
-nx s movies-ui
+nx s auth-api
+nx s meal-api
+nx s user-api
 nx s share-a-meal-ui
-nx s api
 ```
 
 ## Build
@@ -25,9 +26,10 @@ nx s api
 Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
 ```
-nx b movies-ui
+nx b auth-api
+nx b meal-api
+nx b user-api
 nx b share-a-meal-ui
-nx b api
 ```
 
 ## Docker
@@ -45,10 +47,15 @@ docker build . -t my-base-image:nx-base
 Then:
 
 ```
-// API
-docker build . --file .\apps\api\Dockerfile.web --tag share-a-meal-api
-docker run -i -t share-a-meal-api
+// AuthAPI
+docker build . --file .\apps\auth-api\Dockerfile.web --tag auth-api
+docker run -i -t auth-api
+```
 
+To run the container and open a shell, so you can browse the file system, run
+`docker run -i -t auth-api /bin/bash`.
+
+```
 // UI
 docker build . --file .\apps\share-a-meal-ui\Dockerfile.web --tag share-a-meal-ui
 docker run -p 4200:4200 -i -t share-a-meal-ui
