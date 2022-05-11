@@ -10,8 +10,8 @@ WORKDIR /app/builder
 RUN npx nx build api ${BUILD_FLAG}
 
 # Start a new empty layer and copy only the requires folders onto it. 
-# FROM my-base-image:nx-base
-FROM node:16-alpine
+# FROM node:16-alpine
+FROM node:16
 
 WORKDIR /app/builder
 COPY --from=base-image /app/builder/dist ./dist
@@ -24,7 +24,7 @@ COPY --from=base-image /app/builder/node_modules ./node_modules
 ENV NODE_ENV=${NODE_ENV}
 
 # Run the image as a non-root user
-RUN adduser -D myuser
+RUN adduser myuser
 USER myuser
 
 # Run the app.  CMD is required to run on Heroku

@@ -7,7 +7,6 @@ COPY . .
 RUN npx nx build share-a-meal-ui ${BUILD_FLAG}
 
 # Start a new empty layer and copy only the requires folders onto it. 
-# FROM my-base-image:nx-base
 FROM node:16-alpine
 
 WORKDIR /app

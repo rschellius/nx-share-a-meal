@@ -12,7 +12,7 @@
 #
 # docker run -i -t my-base-image:nx-base /bin/bash 
 #
-FROM node:16-alpine as base-image
+FROM node:16 as base-image
 
 ARG NODE_ENV
 ARG BUILD_FLAG

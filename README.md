@@ -47,7 +47,7 @@ Then:
 ```
 // API
 docker build . --file .\apps\api\Dockerfile.web --tag share-a-meal-api
-docker run -i -t share-a-meal-api
+docker run -i -t share-a-meal-api /bin/bash
 
 // UI
 docker build . --file .\apps\share-a-meal-ui\Dockerfile.web --tag share-a-meal-ui
